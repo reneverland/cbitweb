@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  cbitweb:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: cbit-official-web
+    ports:
+      - "3000:80"
+    restart: unless-stopped
+    networks:
+      - cbit-network
+    labels:
+      - "com.cbitweb.description=CBIT Official Website"
+      - "com.cbitweb.version=1.0.0"
+
+networks:
+  cbit-network:
+    driver: bridge
+

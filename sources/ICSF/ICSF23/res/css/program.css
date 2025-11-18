@@ -1,0 +1,128 @@
+/* content title  */
+#title
+{
+	margin: 0 auto;
+	margin-top: 30px;
+	margin-bottom: 30px;
+	text-align: center;
+}
+
+/* content */
+.agenda-content
+{
+	margin: 0 100px;
+	padding: 0 100px;
+    margin-bottom: 50px;
+    line-height: 25px;
+    font-size: 16px;
+}
+
+.agenda-content > .content-detail > .venue
+{
+	text-align: center;
+	line-height: 35px;
+}
+
+.agenda-content > .content-detail > .schedule-title
+{
+	margin: 25px 0;
+	text-align: center;
+	font-size: 20px;
+	line-height: 25px;
+}
+
+.agenda-content > .content-detail > .table-responsive > table .tr-even 
+{
+
+}
+
+.agenda-content > .content-detail > .table-responsive > table td
+{
+	font-size: 16px;
+	line-height: 24px;
+	height: 46px;
+	padding: 10px;
+}
+
+.agenda-content > .content-detail > .table-responsive > table td.time
+{
+	width: 120px;
+}
+
+.agenda-content > .content-detail > .table-responsive > table td.event
+{
+	width: 90px;
+}
+
+.agenda-content > .content-detail > .table-responsive > table td.shecule-item
+{
+	
+}
+
+.agenda-content > .content-detail > .table-responsive > table td.location
+{
+	width: 120px;
+	
+}
+
+.agenda-content > .content-detail > .table-responsive > table td.schedule-item > .keynote
+{
+	margin: 10px 0;
+}
+
+.agenda-content > .content-detail > .table-responsive > table td.shecule-item li
+{
+	padding: 4px 0px;
+	font-size: 16px;
+}
+
+
+/* responsive css */
+/* 大屏幕（大桌面显示器，大于等于 1200px） */
+/* 默认样式为大屏幕 */
+
+/* 中等屏幕（桌面显示器，大于等于 992px，小于1200px） */
+@media (max-width: 1200px) { 
+	.agenda-content
+	{
+		margin-left: 60px;
+		margin-right: 60px;
+		padding: 0 50px;
+	}
+}
+
+/* 小屏幕（平板，大于等于 768px，小于等于992px） */
+@media (max-width: 992px) {
+	.agenda-content
+	{
+		margin-left: 40px;
+		margin-right: 40px;
+		padding: 0 30px;
+	}
+}
+
+/* 	超小屏幕（手机，小于 768px） */
+@media (max-width: 768px) {
+	#title
+	{
+		margin-top: 15px;
+		margin-bottom: 15px;
+		font-size: 25px;
+	}
+
+	.row h2,
+	.row h3,
+	.agenda-content > .content-detail > .venue
+	{
+		margin-top: 10px;
+		margin-bottom: 10px;
+		font-size: 20px;
+	}
+
+	.agenda-content
+	{
+		margin-left: 10px;
+		margin-right: 10px;
+		padding: 0 10px;
+	}
+}

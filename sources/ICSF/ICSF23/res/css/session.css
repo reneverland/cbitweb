@@ -1,0 +1,169 @@
+/* content title  */
+#title
+{
+	margin: 0 auto;
+	margin-top: 30px;
+	margin-bottom: 30px;
+	text-align: center;
+}
+
+/* tab menu */
+.nav-tabs
+{
+	margin: 0 auto;
+	text-align: center;
+}
+
+.nav-tabs > li
+{
+	display: inline-block;
+	float: none;
+	padding: 0;
+	font-size: 18px;
+	font-weight: 600;
+}
+
+.nav-tabs > li.active
+{
+	border-bottom: 3px solid #23a8f5;
+}
+
+.nav-tabs > li > a,
+.nav-tabs > li > a:hover,
+.nav-tabs > li > a:focus,
+.nav-tabs > li.active > a, 
+.nav-tabs > li.active > a:hover, 
+.nav-tabs > li.active > a:focus
+{
+	display: block;
+	width: 100%;
+	border: none;
+	background: #ffffff;
+}
+
+/* content */
+.tab-content
+{
+	margin: 0 150px;
+	min-height: 500px;
+	font-size: 16px;
+}
+
+
+.tab-content > .tab-pane
+{
+	padding: 20px 10px;
+}
+
+
+
+/* map view begin */
+.map-view
+{
+	padding: 0 100px;
+  	margin-bottom: 30px;
+	line-height: 25px;
+  	font-size: 16px;
+}
+
+.map-view > .tips > .focus
+{
+	font-weight: 600;
+}
+
+.map-view > .map-img
+{
+	margin: 0 auto;
+}
+
+/* map view end */
+
+/* hotel view begin */
+.hotel-view
+{
+	padding: 0 100px;
+  	margin-bottom: 30px;
+	line-height: 25px;
+  	font-size: 16px;
+}
+
+.hotel-view .focus
+{
+	font-weight: 600;
+}
+
+.hotel-view img
+{
+	margin-top: 20px;
+	margin-bottom: 50px;
+}
+/* hotel view end */
+
+
+/* responsive css */
+/* 大屏幕（大桌面显示器，大于等于 1200px） */
+/* 默认样式为大屏幕 */
+
+/* 中等屏幕（桌面显示器，大于等于 992px，小于1200px） */
+@media (max-width: 1200px) { 
+	.tab-content
+	{
+		margin: 0 50px;
+	}
+
+	.map-view,
+	.hotel-view
+	{
+		padding: 0 40px;
+	}
+}
+
+/* 小屏幕（平板，大于等于 768px，小于等于992px） */
+@media (max-width: 992px) {
+	.tab-content
+	{
+		margin: 0 20px;
+	}
+
+	.map-view,
+	.hotel-view
+	{
+		padding: 0 25px;
+	}
+
+}
+
+/* 	超小屏幕（手机，小于 768px） */
+@media (max-width: 768px) {
+	#title
+	{
+		margin-top: 15px;
+		margin-bottom: 15px;
+		font-size: 25px;
+	}
+
+	.nav-tabs > li
+	{
+		font-size: 14px;
+	}
+
+	.tab-content
+	{
+		margin: 0 5px;
+	}
+
+	.map-view,
+	.hotel-view
+	{
+		padding: 0 5px;
+	}
+
+	.map-view > .address > h3,
+	.map-view > .zip > h3,
+	.map-view > .tips > h3,
+	.hotel-view > h3
+	{
+		font-size: 20px;
+	}
+
+}

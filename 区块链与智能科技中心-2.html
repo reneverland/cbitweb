@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>链智科技研究中心 - Blockchain and Intelligent Technology Research Center</title>
+<script src="https://cdn.tailwindcss.com/3.4.16"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" rel="stylesheet">
+<style>
+:where([class^="ri-"])::before { content: "\f3c2"; }
+.blockchain-grid {
+background-image:
+linear-gradient(rgba(59, 130, 246, 0.1) 1px, transparent 1px),
+linear-gradient(90deg, rgba(59, 130, 246, 0.1) 1px, transparent 1px);
+background-size: 50px 50px;
+animation: gridMove 20s linear infinite;
+}
+@keyframes gridMove {
+0% { background-position: 0 0; }
+100% { background-position: 50px 50px; }
+}
+.particle {
+position: absolute;
+width: 4px;
+height: 4px;
+background: #3b82f6;
+border-radius: 50%;
+animation: float 6s ease-in-out infinite;
+}
+@keyframes float {
+0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0; }
+50% { transform: translateY(-20px) rotate(180deg); opacity: 1; }
+}
+.chat-bubble {
+animation: slideIn 0.5s ease-out;
+}
+@keyframes slideIn {
+from { opacity: 0; transform: translateY(20px); }
+to { opacity: 1; transform: translateY(0); }
+}
+.glow-effect {
+box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+}
+.dark-mode {
+background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+}
+.dark-mode .blockchain-grid {
+background-image:
+linear-gradient(rgba(59, 130, 246, 0.3) 1px, transparent 1px),
+linear-gradient(90deg, rgba(59, 130, 246, 0.3) 1px, transparent 1px);
+}
+.typing-indicator {
+display: inline-flex;
+align-items: center;
+gap: 4px;
+}
+.typing-dot {
+width: 8px;
+height: 8px;
+background: #3b82f6;
+border-radius: 50%;
+animation: typing 1.4s infinite;
+}
+.typing-dot:nth-child(2) { animation-delay: 0.2s; }
+.typing-dot:nth-child(3) { animation-delay: 0.4s; }
+@keyframes typing {
+0%, 60%, 100% { transform: scale(1); opacity: 0.7; }
+30% { transform: scale(1.2); opacity: 1; }
+}
+</style>
+<script>
+tailwind.config = {
+theme: {
+extend: {
+colors: {
+primary: '#3b82f6',
+secondary: '#1e40af'
+},
+borderRadius: {
+'none': '0px',
+'sm': '4px',
+DEFAULT: '8px',
+'md': '12px',
+'lg': '16px',
+'xl': '20px',
+'2xl': '24px',
+'3xl': '32px',
+'full': '9999px',
+'button': '8px'
+}
+}
+}
+}
+</script>
+</head>
+<body class="min-h-screen transition-all duration-500 blockchain-grid">
+<div class="particles-container fixed inset-0 pointer-events-none overflow-hidden">
+<div class="particle" style="left: 10%; animation-delay: 0s;"></div>
+<div class="particle" style="left: 20%; animation-delay: 1s;"></div>
+<div class="particle" style="left: 30%; animation-delay: 2s;"></div>
+<div class="particle" style="left: 40%; animation-delay: 3s;"></div>
+<div class="particle" style="left: 50%; animation-delay: 4s;"></div>
+<div class="particle" style="left: 60%; animation-delay: 5s;"></div>
+<div class="particle" style="left: 70%; animation-delay: 0.5s;"></div>
+<div class="particle" style="left: 80%; animation-delay: 1.5s;"></div>
+<div class="particle" style="left: 90%; animation-delay: 2.5s;"></div>
+</div>
+<div class="relative z-10 max-w-4xl mx-auto px-6 py-8">
+<header class="flex items-center justify-between mb-12">
+<div class="flex items-center gap-4">
+<div class="w-16 h-16 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center glow-effect">
+<div class="w-6 h-6 flex items-center justify-center">
+<i class="ri-robot-2-line text-white text-xl"></i>
+</div>
+</div>
+<div>
+<h1 class="text-xl font-bold text-gray-900 dark:text-white">香港中文大学(深圳)区块链与智能科技研究中心</h1>
+<p class="text-sm text-gray-600 dark:text-gray-300">CUHK-Shenzhen Blockchain and Intelligent Technology Research Center</p>
+</div>
+</div>
+<button id="themeToggle" class="w-12 h-12 bg-white dark:bg-gray-800 rounded-full shadow-lg flex items-center justify-center transition-all duration-300 hover:scale-105">
+<div class="w-6 h-6 flex items-center justify-center">
+<i class="ri-sun-line text-yellow-500 dark:hidden"></i>
+<i class="ri-moon-line text-blue-400 hidden dark:block"></i>
+</div>
+</button>
+</header>
+<div class="chat-container space-y-6">
+<div class="chat-bubble bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg border border-gray-200 dark:border-gray-700">
+<div class="flex items-start gap-4">
+<div class="w-10 h-10 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center flex-shrink-0">
+<div class="w-5 h-5 flex items-center justify-center">
+<i class="ri-robot-2-line text-white"></i>
+</div>
+</div>
+<div class="flex-1">
+<div class="mb-2">
+<span class="text-sm font-medium text-gray-900 dark:text-white">链智 AI</span>
+<span class="text-xs text-gray-500 ml-2">刚刚</span>
+</div>
+<div class="prose dark:prose-invert">
+<p class="text-gray-800 dark:text-gray-200 leading-relaxed">
+欢迎来到<strong>区块链与智能科技研究中心</strong>！我是您的专属 AI 助手。
+</p>
+<p class="text-gray-600 dark:text-gray-300 text-sm mt-2">
+Welcome to the <strong>Blockchain and Intelligent Technology Research Center</strong>! I'm your dedicated AI assistant.
+</p>
+</div>
+</div>
+</div>
+</div>
+<div class="chat-bubble bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg border border-gray-200 dark:border-gray-700">
+<div class="flex items-start gap-4">
+<div class="w-10 h-10 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center flex-shrink-0">
+<div class="w-5 h-5 flex items-center justify-center">
+<i class="ri-robot-2-line text-white"></i>
+</div>
+</div>
+<div class="flex-1">
+<div class="mb-2">
+<span class="text-sm font-medium text-gray-900 dark:text-white">链智 AI</span>
+<span class="text-xs text-gray-500 ml-2">刚刚</span>
+</div>
+<div class="prose dark:prose-invert">
+<p class="text-gray-800 dark:text-gray-200 leading-relaxed">
+让我为您介绍一下<strong>"链智"</strong>的概念：链智是"基于区块链的人工智能"的简称，它是一个新兴科技，其基本功能是为金融与其他应用领域提供可信的智能。
+</p>
+<p class="text-gray-600 dark:text-gray-300 text-sm mt-2">
+Let me introduce the concept of <strong>"ChainIntel"</strong>: ChainIntel is short for "Blockchain-based Artificial Intelligence", an emerging technology that provides trusted intelligence for finance and other application fields.
+</p>
+</div>
+</div>
+</div>
+</div>
+<div class="chat-bubble bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg border border-gray-200 dark:border-gray-700">
+<div class="flex items-start gap-4">
+<div class="w-10 h-10 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center flex-shrink-0">
+<div class="w-5 h-5 flex items-center justify-center">
+<i class="ri-robot-2-line text-white"></i>
+</div>
+</div>
+<div class="flex-1">
+<div class="mb-2">
+<span class="text-sm font-medium text-gray-900 dark:text-white">链智 AI</span>
+<span class="text-xs text-gray-500 ml-2">刚刚</span>
+</div>
+<div class="prose dark:prose-invert">
+<p class="text-gray-800 dark:text-gray-200 leading-relaxed">
+我们的组织架构包括：<strong>链智科技研究室</strong>、<strong>链智科技教育室</strong>、<strong>链智科技实验室</strong>三个核心部门。
+</p>
+<p class="text-gray-600 dark:text-gray-300 text-sm mt-2">
+Our organizational structure includes three core departments: <strong>ChainIntel Technology Research Lab</strong>, <strong>ChainIntel Technology Education Center</strong>, and <strong>ChainIntel Technology Laboratory</strong>.
+</p>
+</div>
+</div>
+</div>
+</div>
+<div class="chat-bubble bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg border border-gray-200 dark:border-gray-700">
+<div class="flex items-start gap-4">
+<div class="w-10 h-10 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center flex-shrink-0">
+<div class="w-5 h-5 flex items-center justify-center">
+<i class="ri-robot-2-line text-white"></i>
+</div>
+</div>
+<div class="flex-1">
+<div class="mb-2">
+<span class="text-sm font-medium text-gray-900 dark:text-white">链智 AI</span>
+<span class="text-xs text-gray-500 ml-2">刚刚</span>
+</div>
+<div class="prose dark:prose-invert">
+<p class="text-gray-800 dark:text-gray-200 leading-relaxed">
+中心将重点研究区块链 + 人工智能在金融等领域的创新应用，通过搭建各类资源平台，从多个维度对国内外链智科技的模式进行解析，探讨国内外链智科技的创新和应用机会并对行业的未来趋势做出指引。
+</p>
+<p class="text-gray-600 dark:text-gray-300 text-sm mt-2">
+The center focuses on innovative applications of blockchain + AI in finance and other fields, building various resource platforms to analyze ChainIntel technology models from multiple dimensions, exploring innovation and application opportunities, and providing guidance for future industry trends.
+</p>
+</div>
+</div>
+</div>
+</div>
+<div class="chat-bubble bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg border border-gray-200 dark:border-gray-700">
+<div class="flex items-start gap-4">
+<div class="w-10 h-10 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center flex-shrink-0">
+<div class="w-5 h-5 flex items-center justify-center">
+<i class="ri-robot-2-line text-white"></i>
+</div>
+</div>
+<div class="flex-1">
+<div class="mb-2">
+<span class="text-sm font-medium text-gray-900 dark:text-white">链智 AI</span>
+<span class="text-xs text-gray-500 ml-2">刚刚</span>
+</div>
+<div class="prose dark:prose-invert">
+<p class="text-gray-800 dark:text-gray-200 leading-relaxed mb-4">
+想了解我们的团队成员吗？以下是我们中心的核心研究团队：
+</p>
+<p class="text-gray-600 dark:text-gray-300 text-sm mb-6">
+Would you like to meet our team members? Here are the core research team members of our center:
+</p>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
+<div class="bg-gray-50 dark:bg-gray-700 rounded-xl p-4 hover:shadow-md transition-all duration-300">
+<div class="flex flex-col items-center text-center">
+<img src="https://readdy.ai/api/search-image?query=professional%20asian%20male%20researcher%20in%20blockchain%20technology%2C%20clean%20white%20background%2C%20portrait%20style%2C%20modern%20business%20attire%2C%20confident%20expression%2C%20high%20quality%20photography&width=120&height=120&seq=team1&orientation=squarish"
+alt="Dr. Zhang Wei" class="w-16 h-16 rounded-full object-cover mb-3">
+<h3 class="font-semibold text-gray-900 dark:text-white">张伟博士</h3>
+<p class="text-sm text-gray-600 dark:text-gray-300 mb-1">Dr. Zhang Wei</p>
+<p class="text-xs text-primary font-medium">中心主任 / Director</p>
+<p class="text-xs text-gray-500 dark:text-gray-400 mt-2">区块链架构专家</p>
+</div>
+</div>
+<div class="bg-gray-50 dark:bg-gray-700 rounded-xl p-4 hover:shadow-md transition-all duration-300">
+<div class="flex flex-col items-center text-center">
+<img src="https://readdy.ai/api/search-image?query=professional%20asian%20female%20AI%20researcher%2C%20clean%20white%20background%2C%20portrait%20style%2C%20modern%20business%20attire%2C%20intelligent%20expression%2C%20high%20quality%20photography&width=120&height=120&seq=team2&orientation=squarish"
+alt="Dr. Li Mei" class="w-16 h-16 rounded-full object-cover mb-3">
+<h3 class="font-semibold text-gray-900 dark:text-white">李梅教授</h3>
+<p class="text-sm text-gray-600 dark:text-gray-300 mb-1">Prof. Li Mei</p>
+<p class="text-xs text-primary font-medium">AI 研究负责人</p>
+<p class="text-xs text-gray-500 dark:text-gray-400 mt-2">机器学习算法专家</p>
+</div>
+</div>
+<div class="bg-gray-50 dark:bg-gray-700 rounded-xl p-4 hover:shadow-md transition-all duration-300">
+<div class="flex flex-col items-center text-center">
+<img src="https://readdy.ai/api/search-image?query=professional%20young%20asian%20male%20fintech%20researcher%2C%20clean%20white%20background%2C%20portrait%20style%2C%20modern%20casual%20attire%2C%20innovative%20expression%2C%20high%20quality%20photography&width=120&height=120&seq=team3&orientation=squarish"
+alt="Dr. Wang Jun" class="w-16 h-16 rounded-full object-cover mb-3">
+<h3 class="font-semibold text-gray-900 dark:text-white">王俊博士</h3>
+<p class="text-sm text-gray-600 dark:text-gray-300 mb-1">Dr. Wang Jun</p>
+<p class="text-xs text-primary font-medium">金融科技研究员</p>
+<p class="text-xs text-gray-500 dark:text-gray-400 mt-2">数字金融创新专家</p>
+</div>
+</div>
+<div class="bg-gray-50 dark:bg-gray-700 rounded-xl p-4 hover:shadow-md transition-all duration-300">
+<div class="flex flex-col items-center text-center">
+<img src="https://readdy.ai/api/search-image?query=professional%20asian%20female%20blockchain%20developer%2C%20clean%20white%20background%2C%20portrait%20style%2C%20modern%20tech%20attire%2C%20focused%20expression%2C%20high%20quality%20photography&width=120&height=120&seq=team4&orientation=squarish"
+alt="Chen Xiao" class="w-16 h-16 rounded-full object-cover mb-3">
+<h3 class="font-semibold text-gray-900 dark:text-white">陈晓</h3>
+<p class="text-sm text-gray-600 dark:text-gray-300 mb-1">Chen Xiao</p>
+<p class="text-xs text-primary font-medium">技术开发主管</p>
+<p class="text-xs text-gray-500 dark:text-gray-400 mt-2">智能合约开发专家</p>
+</div>
+</div>
+<div class="bg-gray-50 dark:bg-gray-700 rounded-xl p-4 hover:shadow-md transition-all duration-300">
+<div class="flex flex-col items-center text-center">
+<img src="https://readdy.ai/api/search-image?query=professional%20middle-aged%20asian%20male%20academic%20researcher%2C%20clean%20white%20background%2C%20portrait%20style%2C%20formal%20academic%20attire%2C%20scholarly%20expression%2C%20high%20quality%20photography&width=120&height=120&seq=team5&orientation=squarish"
+alt="Prof. Liu Gang" class="w-16 h-16 rounded-full object-cover mb-3">
+<h3 class="font-semibold text-gray-900 dark:text-white">刘刚教授</h3>
+<p class="text-sm text-gray-600 dark:text-gray-300 mb-1">Prof. Liu Gang</p>
+<p class="text-xs text-primary font-medium">教育部门负责人</p>
+<p class="text-xs text-gray-500 dark:text-gray-400 mt-2">区块链教育专家</p>
+</div>
+</div>
+<div class="bg-gray-50 dark:bg-gray-700 rounded-xl p-4 hover:shadow-md transition-all duration-300">
+<div class="flex flex-col items-center text-center">
+<img src="https://readdy.ai/api/search-image?query=professional%20young%20asian%20female%20data%20scientist%2C%20clean%20white%20background%2C%20portrait%20style%2C%20modern%20tech%20attire%2C%20analytical%20expression%2C%20high%20quality%20photography&width=120&height=120&seq=team6&orientation=squarish"
+alt="Zhao Lin" class="w-16 h-16 rounded-full object-cover mb-3">
+<h3 class="font-semibold text-gray-900 dark:text-white">赵琳</h3>
+<p class="text-sm text-gray-600 dark:text-gray-300 mb-1">Zhao Lin</p>
+<p class="text-xs text-primary font-medium">数据科学家</p>
+<p class="text-xs text-gray-500 dark:text-gray-400 mt-2">大数据分析专家</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="chat-bubble bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg border border-gray-200 dark:border-gray-700">
+<div class="flex items-start gap-4">
+<div class="w-10 h-10 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center flex-shrink-0">
+<div class="w-5 h-5 flex items-center justify-center">
+<i class="ri-robot-2-line text-white"></i>
+</div>
+</div>
+<div class="flex-1">
+<div class="mb-2">
+<span class="text-sm font-medium text-gray-900 dark:text-white">链智 AI</span>
+<span class="text-xs text-gray-500 ml-2">刚刚</span>
+</div>
+<div class="prose dark:prose-invert">
+<p class="text-gray-800 dark:text-gray-200 leading-relaxed mb-4">
+以下是我们近期的重要会议和学术活动：
+</p>
+<p class="text-gray-600 dark:text-gray-300 text-sm mb-6">
+Here are our recent important conferences and academic activities:
+</p>
+<div class="space-y-4">
+<div class="border-l-4 border-primary pl-4 py-2">
+<div class="flex items-center gap-2 mb-2">
+<div class="w-4 h-4 flex items-center justify-center">
+<i class="ri-calendar-event-line text-primary"></i>
+</div>
+<span class="text-sm font-medium text-gray-900 dark:text-white">2024 年 12 月 15 日</span>
+</div>
+<h4 class="font-semibold text-gray-900 dark:text-white mb-1">区块链金融创新国际研讨会</h4>
+<p class="text-sm text-gray-600 dark:text-gray-300 mb-2">International Symposium on Blockchain Financial Innovation</p>
+<p class="text-xs text-gray-500 dark:text-gray-400">北京国际会议中心 | 参会人员：200+ 国际专家</p>
+</div>
+<div class="border-l-4 border-secondary pl-4 py-2">
+<div class="flex items-center gap-2 mb-2">
+<div class="w-4 h-4 flex items-center justify-center">
+<i class="ri-calendar-event-line text-secondary"></i>
+</div>
+<span class="text-sm font-medium text-gray-900 dark:text-white">2024 年 11 月 28 日</span>
+</div>
+<h4 class="font-semibold text-gray-900 dark:text-white mb-1">AI + 区块链技术融合论坛</h4>
+<p class="text-sm text-gray-600 dark:text-gray-300 mb-2">AI + Blockchain Technology Integration Forum</p>
+<p class="text-xs text-gray-500 dark:text-gray-400">上海科技大学 | 发表论文：15 篇核心期刊</p>
+</div>
+<div class="border-l-4 border-primary pl-4 py-2">
+<div class="flex items-center gap-2 mb-2">
+<div class="w-4 h-4 flex items-center justify-center">
+<i class="ri-calendar-event-line text-primary"></i>
+</div>
+<span class="text-sm font-medium text-gray-900 dark:text-white">2024 年 10 月 20 日</span>
+</div>
+<h4 class="font-semibold text-gray-900 dark:text-white mb-1">数字货币与智能合约学术会议</h4>
+<p class="text-sm text-gray-600 dark:text-gray-300 mb-2">Academic Conference on Digital Currency and Smart Contracts</p>
+<p class="text-xs text-gray-500 dark:text-gray-400">深圳大学 | 合作机构：10+ 国际知名高校</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="project-tabs bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg border border-gray-200 dark:border-gray-700">
+<div class="mb-6">
+<h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">研究项目分类</h3>
+<p class="text-sm text-gray-600 dark:text-gray-300">Research Project Categories</p>
+</div>
+<div class="flex flex-wrap gap-3 mb-6">
+<button class="project-tab active px-4 py-2 rounded-full bg-primary text-white font-medium text-sm whitespace-nowrap !rounded-button transition-all duration-300" data-tab="finance">
+金融应用 Financial Applications
+</button>
+<button class="project-tab px-4 py-2 rounded-full bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 font-medium text-sm whitespace-nowrap !rounded-button transition-all duration-300" data-tab="research">
+技术研究 Technical Research
+</button>
+<button class="project-tab px-4 py-2 rounded-full bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 font-medium text-sm whitespace-nowrap !rounded-button transition-all duration-300" data-tab="education">
+教育培训 Education & Training
+</button>
+<button class="project-tab px-4 py-2 rounded-full bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 font-medium text-sm whitespace-nowrap !rounded-button transition-all duration-300" data-tab="platform">
+实验平台 Experimental Platform
+</button>
+</div>
+<div id="project-content" class="project-content">
+<div class="tab-content active" data-content="finance">
+<div class="space-y-4">
+<div class="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-gray-700 dark:to-gray-600 rounded-xl p-4">
+<h4 class="font-semibold text-gray-900 dark:text-white mb-2">智能风控系统 Intelligent Risk Control System</h4>
+<p class="text-sm text-gray-600 dark:text-gray-300 mb-2">基于区块链的分布式风险评估与智能决策平台</p>
+<div class="flex items-center gap-4 text-xs text-gray-500 dark:text-gray-400">
+<span>进度：85%</span>
+<span>合作银行：5 家</span>
+<span>专利申请：3 项</span>
+</div>
+</div>
+<div class="bg-gradient-to-r from-green-50 to-emerald-50 dark:from-gray-700 dark:to-gray-600 rounded-xl p-4">
+<h4 class="font-semibold text-gray-900 dark:text-white mb-2">数字资产交易平台 Digital Asset Trading Platform</h4>
+<p class="text-sm text-gray-600 dark:text-gray-300 mb-2">去中心化智能交易与资产管理解决方案</p>
+<div class="flex items-center gap-4 text-xs text-gray-500 dark:text-gray-400">
+<span>进度：72%</span>
+<span>日交易量：$2.5M</span>
+<span>用户数：10,000+</span>
+</div>
+</div>
+</div>
+</div>
+<div class="tab-content" data-content="research">
+<div class="space-y-4">
+<div class="bg-gradient-to-r from-purple-50 to-pink-50 dark:from-gray-700 dark:to-gray-600 rounded-xl p-4">
+<h4 class="font-semibold text-gray-900 dark:text-white mb-2">共识算法优化 Consensus Algorithm Optimization</h4>
+<p class="text-sm text-gray-600 dark:text-gray-300 mb-2">面向高并发场景的新型共识机制研究</p>
+<div class="flex items-center gap-4 text-xs text-gray-500 dark:text-gray-400">
+<span>论文发表：8 篇</span>
+<span>引用次数：150+</span>
+<span>国际合作：3 所大学</span>
+</div>
+</div>
+<div class="bg-gradient-to-r from-orange-50 to-red-50 dark:from-gray-700 dark:to-gray-600 rounded-xl p-4">
+<h4 class="font-semibold text-gray-900 dark:text-white mb-2">隐私保护技术 Privacy Protection Technology</h4>
+<p class="text-sm text-gray-600 dark:text-gray-300 mb-2">零知识证明与同态加密在区块链中的应用</p>
+<div class="flex items-center gap-4 text-xs text-gray-500 dark:text-gray-400">
+<span>研究周期：24 个月</span>
+<span>资金投入：￥500 万</span>
+<span>预期专利：5 项</span>
+</div>
+</div>
+</div>
+</div>
+<div class="tab-content" data-content="education">
+<div class="space-y-4">
+<div class="bg-gradient-to-r from-teal-50 to-cyan-50 dark:from-gray-700 dark:to-gray-600 rounded-xl p-4">
+<h4 class="font-semibold text-gray-900 dark:text-white mb-2">区块链开发者认证 Blockchain Developer Certification</h4>
+<p class="text-sm text-gray-600 dark:text-gray-300 mb-2">面向企业和个人的专业技能培训与认证体系</p>
+<div class="flex items-center gap-4 text-xs text-gray-500 dark:text-gray-400">
+<span>已培训：1,200+ 人</span>
+<span>认证通过率：89%</span>
+<span>合作企业：50+ 家</span>
+</div>
+</div>
+<div class="bg-gradient-to-r from-yellow-50 to-amber-50 dark:from-gray-700 dark:to-gray-600 rounded-xl p-4">
+<h4 class="font-semibold text-gray-900 dark:text-white mb-2">在线课程平台 Online Course Platform</h4>
+<p class="text-sm text-gray-600 dark:text-gray-300 mb-2">链智科技系列课程与实践项目</p>
+<div class="flex items-center gap-4 text-xs text-gray-500 dark:text-gray-400">
+<span>课程数量：25 门</span>
+<span>学员总数：5,000+</span>
+<span>完成率：76%</span>
+</div>
+</div>
+</div>
+</div>
+<div class="tab-content" data-content="platform">
+<div class="space-y-4">
+<div class="bg-gradient-to-r from-indigo-50 to-blue-50 dark:from-gray-700 dark:to-gray-600 rounded-xl p-4">
+<h4 class="font-semibold text-gray-900 dark:text-white mb-2">链智测试网络 ChainIntel Testnet</h4>
+<p class="text-sm text-gray-600 dark:text-gray-300 mb-2">为研究者提供的高性能区块链测试环境</p>
+<div class="flex items-center gap-4 text-xs text-gray-500 dark:text-gray-400">
+<span>节点数量：100+</span>
+<span>TPS：10,000+</span>
+<span>开发者：500+</span>
+</div>
+</div>
+<div class="bg-gradient-to-r from-rose-50 to-pink-50 dark:from-gray-700 dark:to-gray-600 rounded-xl p-4">
+<h4 class="font-semibold text-gray-900 dark:text-white mb-2">AI 模型训练平台 AI Model Training Platform</h4>
+<p class="text-sm text-gray-600 dark:text-gray-300 mb-2">分布式机器学习与联邦学习实验环境</p>
+<div class="flex items-center gap-4 text-xs text-gray-500 dark:text-gray-400">
+<span>GPU 集群：200 卡</span>
+<span>模型数量：50+</span>
+<span>数据集：TB 级</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="fixed bottom-6 left-1/2 transform -translate-x-1/2 w-full max-w-2xl px-6">
+<div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 p-4">
+<div class="flex items-center gap-3">
+<input type="text"
+placeholder="向 AI 助手提问关于链智科技中心的任何问题..."
+class="flex-1 bg-transparent border-none outline-none text-gray-800 dark:text-gray-200 placeholder-gray-500 text-sm">
+<div class="flex items-center gap-2">
+<button class="quick-question px-3 py-1 text-xs bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 rounded-full hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors whitespace-nowrap !rounded-button">
+研究方向
+</button>
+<button class="quick-question px-3 py-1 text-xs bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 rounded-full hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors whitespace-nowrap !rounded-button">
+合作机会
+</button>
+<button class="quick-question px-3 py-1 text-xs bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 rounded-full hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors whitespace-nowrap !rounded-button">
+联系方式
+</button>
+<button class="w-10 h-10 bg-primary rounded-full flex items-center justify-center hover:bg-secondary transition-colors !rounded-button">
+<div class="w-5 h-5 flex items-center justify-center">
+<i class="ri-send-plane-line text-white"></i>
+</div>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script id="theme-toggle">
+document.addEventListener('DOMContentLoaded', function() {
+const themeToggle = document.getElementById('themeToggle');
+const body = document.body;
+themeToggle.addEventListener('click', function() {
+body.classList.toggle('dark');
+body.classList.toggle('dark-mode');
+});
+});
+</script>
+<script id="project-tabs">
+document.addEventListener('DOMContentLoaded', function() {
+const tabs = document.querySelectorAll('.project-tab');
+const contents = document.querySelectorAll('.tab-content');
+tabs.forEach(tab => {
+tab.addEventListener('click', function() {
+const targetTab = this.dataset.tab;
+tabs.forEach(t => {
+t.classList.remove('active', 'bg-primary', 'text-white');
+t.classList.add('bg-gray-100', 'dark:bg-gray-700', 'text-gray-700', 'dark:text-gray-300');
+});
+this.classList.add('active', 'bg-primary', 'text-white');
+this.classList.remove('bg-gray-100', 'dark:bg-gray-700', 'text-gray-700', 'dark:text-gray-300');
+contents.forEach(content => {
+content.classList.remove('active');
+if (content.dataset.content === targetTab) {
+content.classList.add('active');
+}
+});
+});
+});
+});
+</script>
+<script id="quick-questions">
+document.addEventListener('DOMContentLoaded', function() {
+const quickQuestions = document.querySelectorAll('.quick-question');
+const chatContainer = document.querySelector('.chat-container');
+quickQuestions.forEach(button => {
+button.addEventListener('click', function() {
+const question = this.textContent;
+const userBubble = document.createElement('div');
+userBubble.className = 'chat-bubble bg-primary text-white rounded-2xl p-4 ml-12 shadow-lg';
+userBubble.innerHTML = `
+<div class="flex items-start gap-4 justify-end">
+<div class="flex-1 text-right">
+<div class="mb-2">
+<span class="text-sm font-medium">您</span>
+<span class="text-xs opacity-75 ml-2">刚刚</span>
+</div>
+<p class="leading-relaxed">${question}</p>
+</div>
+<div class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center flex-shrink-0">
+<div class="w-5 h-5 flex items-center justify-center">
+<i class="ri-user-line text-white"></i>
+</div>
+</div>
+</div>
+`;
+chatContainer.appendChild(userBubble);
+setTimeout(() => {
+const typingBubble = document.createElement('div');
+typingBubble.className = 'chat-bubble bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg border border-gray-200 dark:border-gray-700';
+typingBubble.innerHTML = `
+<div class="flex items-start gap-4">
+<div class="w-10 h-10 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center flex-shrink-0">
+<div class="w-5 h-5 flex items-center justify-center">
+<i class="ri-robot-2-line text-white"></i>
+</div>
+</div>
+<div class="flex-1">
+<div class="mb-2">
+<span class="text-sm font-medium text-gray-900 dark:text-white">链智 AI</span>
+<span class="text-xs text-gray-500 ml-2">正在输入...</span>
+</div>
+<div class="typing-indicator">
+<div class="typing-dot"></div>
+<div class="typing-dot"></div>
+<div class="typing-dot"></div>
+</div>
+</div>
+</div>
+`;
+chatContainer.appendChild(typingBubble);
+setTimeout(() => {
+let response = '';
+if (question === '研究方向') {
+response = '我们的主要研究方向包括：1) 区块链共识算法优化 2) AI 驱动的智能合约 3) 去中心化金融创新 4) 隐私保护技术 5) 跨链互操作性。目前正在进行 15 个重点项目，涵盖理论研究、技术开发和产业应用三个层面。';
+} else if (question === '合作机会') {
+response = '我们欢迎多种形式的合作：1) 学术研究合作 - 联合申请科研项目 2) 技术开发合作 - 共同开发创新产品 3) 人才培养合作 - 联合培养研究生 4) 产业应用合作 - 技术转化与落地。如有合作意向，请联系我们的合作发展部。';
+} else if (question === '联系方式') {
+response = '联系我们：📧 邮箱：contact@chaintel-research.org 📞 电话：+86-10-8888-9999 🏢 地址：北京市海淀区中关村科技园区创新大厦 15 层 🌐 官网：www.chaintel-research.org 工作时间：周一至周五 9:00-18:00';
+}
+typingBubble.innerHTML = `
+<div class="flex items-start gap-4">
+<div class="w-10 h-10 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center flex-shrink-0">
+<div class="w-5 h-5 flex items-center justify-center">
+<i class="ri-robot-2-line text-white"></i>
+</div>
+</div>
+<div class="flex-1">
+<div class="mb-2">
+<span class="text-sm font-medium text-gray-900 dark:text-white">链智 AI</span>
+<span class="text-xs text-gray-500 ml-2">刚刚</span>
+</div>
+<p class="text-gray-800 dark:text-gray-200 leading-relaxed">${response}</p>
+</div>
+</div>
+`;
+}, 2000);
+}, 500);
+setTimeout(() => {
+chatContainer.scrollTop = chatContainer.scrollHeight;
+}, 100);
+});
+});
+});
+</script>
+</body>
+</html>
