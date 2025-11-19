@@ -1,9 +1,10 @@
 import axios from 'axios'
 
-// 使用相对路径，通过Nginx反向代理避免CORS问题
+// 使用相对路径，通过Nginx反向代理避免CORS和Mixed Content问题
 // 生产环境：/api/ 会被Nginx代理到 http://113.106.62.42:9300/
-// 开发环境：直接访问API服务器
-const API_BASE_URL = import.meta.env.DEV ? 'http://113.106.62.42:9300' : '/api'
+// 开发环境：直接访问API服务器（仅在 localhost:3000 开发时）
+const isDevelopment = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+const API_BASE_URL = isDevelopment ? 'http://113.106.62.42:9300' : '/api'
 const API_KEY = 'app_WZCqYKovpijz2CO4T5RyiOkuAsP5qlKe'
 
 export const chatAPI = {
@@ -24,12 +25,18 @@ export const chatAPI = {
         files: []
       }
       
+      const fullURL = `${API_BASE_URL}/api/apps/cbit-official/chat/completions`
+      
       console.log('=== 发送API请求 ===')
+      console.log('当前域名:', window.location.hostname)
+      console.log('环境:', isDevelopment ? '开发环境' : '生产环境')
+      console.log('API Base URL:', API_BASE_URL)
+      console.log('完整URL:', fullURL)
       console.log('消息历史:', formattedMessages)
       console.log('请求体:', requestBody)
       
       const response = await axios.post(
-        `${API_BASE_URL}/api/apps/cbit-official/chat/completions`,
+        fullURL,
         requestBody,
         {
           headers: {
