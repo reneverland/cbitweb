@@ -15,10 +15,11 @@
           <!-- ICSF会议系列按钮 -->
           <button 
             @click="toggleICSFMenu" 
-            class="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full shadow-lg flex items-center justify-center transition-all duration-300 hover:scale-105 relative"
+            class="px-4 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full shadow-lg flex items-center gap-2 transition-all duration-300 hover:scale-105 hover:shadow-xl relative"
             :title="locale === 'zh' ? 'ICSF会议系列' : 'ICSF Conference Series'"
           >
-            <i class="ri-calendar-event-line text-white text-xl"></i>
+            <i class="ri-calendar-event-line text-white text-lg"></i>
+            <span class="text-sm font-bold text-white">ICSF</span>
             <!-- 红点提示 -->
             <span class="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full animate-pulse"></span>
           </button>
