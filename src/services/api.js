@@ -1,6 +1,9 @@
 import axios from 'axios'
 
-const API_BASE_URL = 'http://113.106.62.42:9300'
+// 使用相对路径，通过Nginx反向代理避免CORS问题
+// 生产环境：/api/ 会被Nginx代理到 http://113.106.62.42:9300/
+// 开发环境：直接访问API服务器
+const API_BASE_URL = import.meta.env.DEV ? 'http://113.106.62.42:9300' : '/api'
 const API_KEY = 'app_WZCqYKovpijz2CO4T5RyiOkuAsP5qlKe'
 
 export const chatAPI = {
@@ -32,7 +35,8 @@ export const chatAPI = {
           headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${API_KEY}`
-          }
+          },
+          timeout: 60000 // 60秒超时
         }
       )
       
