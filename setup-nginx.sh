@@ -144,8 +144,16 @@ server {
 }
 EOF
 
-# 根据系统类型和nginx配置目录复制配置文件
-if [ -d "/etc/nginx/sites-available" ]; then
+# 检测Nginx安装类型并复制配置文件
+if [ -d "/www/server/nginx/conf/vhost" ]; then
+    # 宝塔面板 (BT Panel)
+    echo "✅ 检测到宝塔面板安装的Nginx"
+    DEST_PATH="/www/server/nginx/conf/vhost/cbitweb.conf"
+    cp $NGINX_CONF $DEST_PATH
+    echo "✅ 配置文件已安装: $DEST_PATH"
+    NGINX_TYPE="bt"
+    
+elif [ -d "/etc/nginx/sites-available" ]; then
     # Ubuntu/Debian style
     DEST_PATH="/etc/nginx/sites-available/cbitweb"
     LINK_PATH="/etc/nginx/sites-enabled/cbitweb"
@@ -162,12 +170,14 @@ if [ -d "/etc/nginx/sites-available" ]; then
     
     echo "✅ 配置文件已安装: $DEST_PATH"
     echo "✅ 符号链接已创建: $LINK_PATH"
+    NGINX_TYPE="debian"
     
 elif [ -d "/etc/nginx/conf.d" ]; then
     # CentOS/RHEL style
     DEST_PATH="/etc/nginx/conf.d/cbitweb.conf"
     cp $NGINX_CONF $DEST_PATH
     echo "✅ 配置文件已安装: $DEST_PATH"
+    NGINX_TYPE="centos"
     
 else
     # 创建conf.d目录（如果不存在）
@@ -176,6 +186,7 @@ else
     DEST_PATH="/etc/nginx/conf.d/cbitweb.conf"
     cp $NGINX_CONF $DEST_PATH
     echo "✅ 配置文件已安装: $DEST_PATH"
+    NGINX_TYPE="generic"
 fi
 
 echo ""
@@ -192,10 +203,39 @@ fi
 
 echo ""
 
-# 重启Nginx
+# 重启Nginx（根据安装类型使用不同的方法）
 echo "🔄 重启Nginx..."
-systemctl reload nginx || systemctl restart nginx
-echo "✅ Nginx已重启"
+
+if [ "$NGINX_TYPE" = "bt" ]; then
+    # 宝塔面板：使用nginx -s reload
+    echo "使用宝塔面板重启方式..."
+    if nginx -s reload 2>/dev/null; then
+        echo "✅ Nginx已重启（nginx -s reload）"
+    elif [ -f "/etc/init.d/nginx" ]; then
+        /etc/init.d/nginx reload
+        echo "✅ Nginx已重启（init.d）"
+    else
+        # 如果以上方法都失败，尝试直接kill并重启
+        echo "⚠️  尝试直接重启nginx进程..."
+        pkill -HUP nginx || true
+        echo "✅ Nginx已重载"
+    fi
+else
+    # 标准系统：使用systemctl
+    if systemctl reload nginx 2>/dev/null; then
+        echo "✅ Nginx已重启（systemctl reload）"
+    elif systemctl restart nginx 2>/dev/null; then
+        echo "✅ Nginx已重启（systemctl restart）"
+    elif service nginx reload 2>/dev/null; then
+        echo "✅ Nginx已重启（service reload）"
+    elif nginx -s reload 2>/dev/null; then
+        echo "✅ Nginx已重启（nginx -s reload）"
+    else
+        echo "⚠️  无法自动重启Nginx，请手动重启"
+        echo "   宝塔面板: 在面板中重启Nginx"
+        echo "   命令行: nginx -s reload"
+    fi
+fi
 echo ""
 
 # 验证服务
@@ -216,7 +256,13 @@ echo "   错误日志: sudo tail -f /var/log/nginx/cbitweb_error.log"
 echo "   容器日志: docker logs -f cbit-official-web"
 echo ""
 echo "🔧 管理命令："
-echo "   重启Nginx: sudo systemctl reload nginx"
+if [ "$NGINX_TYPE" = "bt" ]; then
+    echo "   重启Nginx: nginx -s reload （或在宝塔面板中重启）"
+    echo "   配置文件: /www/server/nginx/conf/vhost/cbitweb.conf"
+else
+    echo "   重启Nginx: sudo systemctl reload nginx"
+    echo "   配置文件: $DEST_PATH"
+fi
 echo "   重启容器: docker restart cbit-official-web"
 echo "   查看状态: docker ps | grep cbit"
 echo ""
