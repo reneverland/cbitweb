@@ -139,8 +139,9 @@ server {
 }
 EOF
 
-# 根据系统类型复制配置文件
-if [ "$OS" = "ubuntu" ] || [ "$OS" = "debian" ]; then
+# 根据系统类型和nginx配置目录复制配置文件
+if [ -d "/etc/nginx/sites-available" ]; then
+    # Ubuntu/Debian style
     DEST_PATH="/etc/nginx/sites-available/cbitweb"
     LINK_PATH="/etc/nginx/sites-enabled/cbitweb"
     
@@ -157,7 +158,16 @@ if [ "$OS" = "ubuntu" ] || [ "$OS" = "debian" ]; then
     echo "✅ 配置文件已安装: $DEST_PATH"
     echo "✅ 符号链接已创建: $LINK_PATH"
     
-elif [ "$OS" = "centos" ] || [ "$OS" = "rhel" ]; then
+elif [ -d "/etc/nginx/conf.d" ]; then
+    # CentOS/RHEL style
+    DEST_PATH="/etc/nginx/conf.d/cbitweb.conf"
+    cp $NGINX_CONF $DEST_PATH
+    echo "✅ 配置文件已安装: $DEST_PATH"
+    
+else
+    # 创建conf.d目录（如果不存在）
+    echo "⚠️  标准nginx配置目录不存在，创建 /etc/nginx/conf.d/"
+    mkdir -p /etc/nginx/conf.d
     DEST_PATH="/etc/nginx/conf.d/cbitweb.conf"
     cp $NGINX_CONF $DEST_PATH
     echo "✅ 配置文件已安装: $DEST_PATH"

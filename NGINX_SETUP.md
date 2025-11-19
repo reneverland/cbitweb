@@ -160,18 +160,32 @@ curl http://127.0.0.1:8080
 docker port cbit-official-web
 ```
 
-### 问题4：profile.html跳转到主页
+### 问题4：profile.html访问问题
 
-这是正常的SPA行为，因为：
-- 容器内的nginx配置了 `try_files $uri $uri/ /index.html;`
-- 所有路由都由Vue Router处理
-- `/profile.html` 路径应该存在于Vue应用中
+**症状**：点击石仁达的链接跳转到外部域名（如 `https://cbit.cuhk.edu.cn/profile.html`）
 
-如果需要静态的profile.html：
+**原因**：
+- `profile.html` 是独立的多页面应用
+- 链接使用相对路径 `/profile.html`
+- 在当前域名下访问是正常的（如 `http://10.20.217.43/profile.html`）
+
+**解决方案**：
+1. 确保Vite配置支持多页面（已配置）
+2. 重新构建Docker镜像以包含profile.html
+3. 在正确的域名下访问
+
+**验证**：
 ```bash
-# 确保文件在Docker容器中
+# 检查Docker容器中是否有profile.html
 docker exec cbit-official-web ls -la /usr/share/nginx/html/ | grep profile
+
+# 直接访问profile页面
+curl http://10.20.217.43/profile.html
+
+# 应该看到HTML内容，而不是404
 ```
+
+**注意**：如果您在 `https://cbit.cuhk.edu.cn` 访问网站，点击链接会跳转到 `https://cbit.cuhk.edu.cn/profile.html`，这是正常的。只需确保该域名下也部署了最新版本的代码。
 
 ## 📊 性能优化建议
 
