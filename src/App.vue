@@ -12,6 +12,16 @@
           <img :src="isDark ? '/sources/logonight.png' : '/sources/logo3@2x.png'" alt="Logo" class="h-12">
         </div>
         <div class="flex items-center gap-3">
+          <!-- ICSF会议系列按钮 -->
+          <button 
+            @click="toggleICSFMenu" 
+            class="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full shadow-lg flex items-center justify-center transition-all duration-300 hover:scale-105 relative"
+            :title="locale === 'zh' ? 'ICSF会议系列' : 'ICSF Conference Series'"
+          >
+            <i class="ri-calendar-event-line text-white text-xl"></i>
+            <!-- 红点提示 -->
+            <span class="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full animate-pulse"></span>
+          </button>
           <button 
             @click="toggleTheme" 
             class="w-10 h-10 bg-white dark:bg-gray-800 rounded-full shadow-lg flex items-center justify-center transition-all duration-300 hover:scale-105"
@@ -42,6 +52,64 @@
       </div>
     </div>
   </div>
+
+  <!-- ICSF会议系列下拉菜单 -->
+  <Teleport to="body">
+    <div 
+      v-if="showICSFMenu" 
+      class="fixed inset-0 z-[9998] bg-black bg-opacity-30 backdrop-blur-sm"
+      @click="showICSFMenu = false"
+    >
+      <div 
+        class="absolute top-16 right-6 bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-6 w-80 max-h-[70vh] overflow-y-auto"
+        @click.stop
+      >
+        <div class="flex items-center justify-between mb-4">
+          <h3 class="text-lg font-bold text-gray-900 dark:text-white flex items-center gap-2">
+            <i class="ri-calendar-event-line text-blue-500"></i>
+            {{ locale === 'zh' ? 'ICSF会议系列' : 'ICSF Conference Series' }}
+          </h3>
+          <button 
+            @click="showICSFMenu = false"
+            class="w-8 h-8 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center justify-center transition-colors"
+          >
+            <i class="ri-close-line text-gray-500 dark:text-gray-400"></i>
+          </button>
+        </div>
+        
+        <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">
+          {{ locale === 'zh' ? 'International Conference on Smart Finance（智能金融国际会议）' : 'International Conference on Smart Finance' }}
+        </p>
+
+        <div class="space-y-2">
+          <a 
+            v-for="year in icsfYears" 
+            :key="year.year"
+            :href="year.link" 
+            target="_blank"
+            class="block p-3 rounded-xl bg-gradient-to-r from-blue-50 to-purple-50 dark:from-gray-700 dark:to-gray-600 hover:shadow-md transition-all duration-300 group"
+          >
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white font-bold text-sm">
+                  {{ year.year }}
+                </div>
+                <div>
+                  <div class="font-semibold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                    ICSF {{ year.year }}
+                  </div>
+                  <div class="text-xs text-gray-500 dark:text-gray-400">
+                    {{ year.location }}
+                  </div>
+                </div>
+              </div>
+              <i class="ri-arrow-right-line text-gray-400 group-hover:text-blue-600 group-hover:translate-x-1 transition-all"></i>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </Teleport>
 
   <!-- 使用 Teleport 将输入框挂载到 body，避免受到 #app 的 transform 影响 -->
   <Teleport to="body">
@@ -96,6 +164,20 @@ const messages = ref([])
 const isLoading = ref(false)
 const chatContainer = ref(null)
 const selectedMember = ref(null)
+const showICSFMenu = ref(false)
+
+// ICSF会议系列数据
+const icsfYears = ref([
+  { year: '2024', location: 'Hong Kong', link: '/sources/ICSF/ICSF24/index.html' },
+  { year: '2023', location: 'Hong Kong', link: '/sources/ICSF/ICSF23/index.html' },
+  { year: '2022', location: 'Hong Kong (Online)', link: '/sources/ICSF/ICSF22/index.html' },
+  { year: '2021', location: 'Hong Kong (Online)', link: '/sources/ICSF/ICSF21/index.html' },
+  { year: '2020', location: 'Hong Kong (Online)', link: '/sources/ICSF/ICSF20/index.html' },
+  { year: '2019', location: 'Hong Kong', link: '/sources/ICSF/ICSF19/index.html' },
+  { year: '2018', location: 'Hong Kong', link: '/sources/ICSF/ICSF18/index.html' },
+  { year: '2017', location: 'Hong Kong', link: '/sources/ICSF/ICSF17/index.html' },
+  { year: '2016', location: 'Hong Kong', link: '/sources/ICSF/ICSF16/index.html' },
+])
 
 const toggleTheme = () => {
   isDark.value = !isDark.value
@@ -103,6 +185,10 @@ const toggleTheme = () => {
 
 const toggleLocale = () => {
   locale.value = locale.value === 'zh' ? 'en' : 'zh'
+}
+
+const toggleICSFMenu = () => {
+  showICSFMenu.value = !showICSFMenu.value
 }
 
 const handleViewMemberAvatar = (memberInfo) => {
