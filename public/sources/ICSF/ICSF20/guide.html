@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="Internatinal Conference on Smart Finance 2020 | ICSF 2020">
+		<meta name="keywords" content="ICSF 2020|ICSF|Internatinal Conference on Smart Finance">
+		<title>International Conference on Smart Finance 2020|Guide</title>
+		
+		<!-- common style -->
+		<link rel="icon" href="res/images/favicon.ico" type="image/x-icon">
+		<link rel="shortcut icon" href="res/images/favicon.ico" type="image/x-icon">
+		<link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.min.css">
+		<link rel="stylesheet" href="lib/font-awesome/css/font-awesome.min.css">
+		
+		<!-- module style -->
+		<link rel="stylesheet" href="res/css/common.css">
+		<link rel="stylesheet" href="res/css/guide.css">
+		
+		<!-- common lib -->
+		<script src="lib/jquery/dist/jquery.min.js"></script>
+		<script src="lib/bootstrap/dist/js/bootstrap.min.js"></script>
+	</head>
+	<body>
+		<!-- navigator -->
+		<nav class="navbar navbar-default" role="navigation"></nav>
+
+		<!-- main body -->
+		<div class="container">
+			<!-- content title -->
+			<div class="row">
+				<h1 id="title">Virtual Conferencing</h1>
+			</div>
+
+			
+
+			<!-- tab menu -->
+			<!--<ul class="row nav nav-tabs" role="tablist">
+				<li role="presentation" class="col-md-3 col-sm-4 col-xs-4 active">
+					<a id="map_title" href="#map" aria-controls="map" role="tab" data-toggle="tab">Map</a> 
+				</li>
+
+			</ul> -->
+
+			<!-- tab content -->
+			
+			<div class="row tab-content">
+				<div role="tabpanel" class="tab-pane fade in active" id="map">
+					<div class="map-view">
+						<div class="address">
+							<p>1. Online Conference Tool: <a href="https://meeting.tencent.com">Tencent meeting</a> or <a href="https://voovmeeting.com">VooV meeting</a></p>
+							<p>2. Meeting IDs for different sessions can be found in the <a href= "program.html">program</a>.</p>
+							<p><u>Important Notes</u>: The time slots assigned in the schedule are only tentative. Presenters are recommended to stay for the whole session in case of any absence.</p>
+							
+						</div>
+					</div>
+				</div>
+		</div>
+
+		
+
+</div>
+	
+		
+		<!-- footer -->
+		<div id="footer" class="footer"></div>
+		
+		<!-- module js -->
+		<script src="module/common.js"></script>
+		<script>
+			var hash = location.hash || location.search;
+	    	var questionMark = hash.indexOf('#');
+	    	if(questionMark !== -1) {
+	    		var subpage = hash.substring(questionMark + 1);
+	    		$('.nav-tabs > li').removeClass('active');
+	    		$('.tab-content > .tab-pane').removeClass('in active');
+
+	    		console.log(subpage);
+
+	    		if(subpage == 'hotel') {
+					$($('.nav-tabs > li')[1]).addClass('active');
+	    			$('#hotel').addClass('in active');
+	    		}else{
+	    			$($('.nav-tabs > li')[0]).addClass('active');
+	    			$('#map').addClass('in active');
+	    		}
+	    	}
+	    	
+		</script>
+	</body>
+</html>

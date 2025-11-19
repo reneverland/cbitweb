@@ -1,0 +1,173 @@
+/* content title  */
+#title
+{
+	margin: 0 auto;
+	margin-top: 30px;
+	margin-bottom: 30px;
+	text-align: center;
+}
+
+/* content list  */
+.speakers-content
+{
+	margin: 0 130px;
+	padding: 0 150px;
+    margin-bottom: 30px;
+    line-height: 25px;
+    font-size: 16px;
+}
+
+.speakers-content > .speaker
+{
+	padding: 4px 0px;
+	font-size: 16px;
+}
+
+.speakers-content > .speaker > a
+{
+	font-size: 18px;
+	font-weight: 600;
+}
+
+.speakers-continue
+{
+	margin: 0 130px;
+	padding: 0 150px;
+    margin-bottom: 120px;
+    line-height: 25px;
+    font-size: 16px;
+}
+
+/* speaker introduction */
+.speaker-intro
+{
+	margin: 0 130px;
+	padding: 0 100px;
+    margin-bottom: 30px;
+    line-height: 25px;
+    font-size: 16px;
+}
+
+.speaker-intro > .speaker-photo > img
+{
+	margin: 0 auto;
+}
+
+.speaker-intro > .speaker-title
+{
+	margin: 0 auto;
+	margin-top: 30px;
+	margin-bottom: 50px;
+	text-align: center;
+}
+
+.speaker-intro > .intro-en,
+.speaker-intro > .intro-zh
+{
+	margin-bottom: 60px;
+}
+
+.speaker-intro > .intro-en > p,
+.speaker-intro > .intro-zh > p
+{
+	padding: 4px 0px;
+	font-size: 16px;
+	text-align: justify;
+	text-justify: inter-ideograph;
+}
+
+.speaker-intro > .intro-en li,
+.speaker-intro > .intro-zh li
+{
+	padding: 4px 0px;
+	text-align: justify;
+	text-justify: inter-ideograph;
+}
+
+.speaker-intro > .close-panel
+{
+	text-align: center;
+	margin-bottom: 60px;
+}
+
+.speaker-intro > .close-panel > a
+{
+	width: 200px;
+}
+
+/* responsive css */
+/* 大屏幕（大桌面显示器，大于等于 1200px） */
+/* 默认样式为大屏幕 */
+
+/* 中等屏幕（桌面显示器，大于等于 992px，小于1200px） */
+@media (max-width: 1200px) { 
+	.speakers-content,
+	.speakers-continue
+	{
+		margin: 0 50px;
+		padding: 0 60px;
+	    margin-bottom: 30px;
+	    line-height: 25px;
+	    font-size: 16px;
+	}
+
+	.speakers-continue
+	{
+		margin-bottom: 50px;
+	}
+
+	.speaker-intro
+	{
+		margin: 0 50px;
+		padding: 0 60px;
+	}
+}
+
+/* 小屏幕（平板，大于等于 768px，小于等于992px） */
+@media (max-width: 992px) {
+	.speakers-content,
+	.speakers-continue
+	{
+		margin: 0 30px;
+		padding: 0 30px;
+	}
+
+	.speakers-continue
+	{
+		margin-bottom: 50px;
+	}
+
+	.speaker-intro
+	{
+		margin: 0 30px;
+		padding: 0 30px;
+	}
+}
+
+/* 	超小屏幕（手机，小于 768px） */
+@media (max-width: 768px) {
+	#title
+	{
+		margin-top: 15px;
+		margin-bottom: 15px;
+		font-size: 25px;
+	}
+
+	.speakers-content,
+	.speakers-continue
+	{
+		margin: 0 20px;
+		padding: 0 20px;
+	}
+
+	.speakers-continue
+	{
+		margin-bottom: 30px;
+	}
+
+	.speaker-intro
+	{
+		margin: 0 20px;
+		padding: 0 20px;
+	}
+}

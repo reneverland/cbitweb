@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="International Conference on Smart Finance 2018 | ICSF 2018">
+		<meta name="keywords" content="ICSF 2018|International Conference on Smart Finance|SUST ICSF|ICSF CityU| ICSF Cityu">
+		<title>International Conference on Smart Finance (ICSF)| Guide</title>
+		
+		<!-- common style -->
+		<link rel="icon" href="res/images/favicon.ico" type="image/x-icon">
+		<link rel="shortcut icon" href="res/images/favicon.ico" type="image/x-icon">
+		<link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.min.css">
+		<link rel="stylesheet" href="lib/font-awesome/css/font-awesome.min.css">
+		
+		<!-- module style -->
+		<link rel="stylesheet" href="res/css/common.css">
+		<link rel="stylesheet" href="res/css/guide.css">
+		
+		<!-- common lib -->
+		<script src="lib/jquery/dist/jquery.min.js"></script>
+		<script src="lib/bootstrap/dist/js/bootstrap.min.js"></script>
+	</head>
+	<body>
+		<!-- navigator -->
+		<nav class="navbar navbar-default" role="navigation"></nav>
+
+		<!-- main body -->
+		<div class="container">
+			<!-- content title -->
+			<div class="row">
+				<h1 id="title">Guide</h1>
+			</div>
+
+			<!-- tab menu -->
+			<ul class="row nav nav-tabs" role="tablist">
+				<li role="presentation" class="col-md-3 col-sm-4 col-xs-4 active">
+					<a id="map_title" href="#map" aria-controls="map" role="tab" data-toggle="tab">Map</a> 
+				</li>
+
+			</ul>
+
+			<!-- tab content -->
+			<div class="row tab-content">
+				<div role="tabpanel" class="tab-pane fade in active" id="map">
+					<div class="map-view">
+						<div class="address">
+							<h3>Address:</h3> 南方科技大学第一科研楼一号报告厅
+						</div>
+				
+						<div class="tips">
+							<h3>Tips for visitors:</h3>							
+							<div class="focus">1.地铁:</div>
+							塘朗站，环中线（塘朗地铁站C出口出，步行500米到南方科技大学正门）<br/><br/>
+							
+
+							<div class="focus">2.公交车: </div>
+							站点：南方科技大学站<br/>
+							线路：M369， 43， 74， 81<br/><br/>
+							
+							<div class="focus">3. 自驾车: </div>
+							(1) 福龙路-留仙大道-学苑大道<br/>
+							(2) 沙河西路-留仙大道-丽水路-学苑大道<br/><br/>
+							
+
+		</div>
+		
+		<!-- footer -->
+		<div id="footer" class="footer"></div>
+		
+		<!-- module js -->
+		<script src="module/common.js"></script>
+		<script>
+			var hash = location.hash || location.search;
+	    	var questionMark = hash.indexOf('#');
+	    	if(questionMark !== -1) {
+	    		var subpage = hash.substring(questionMark + 1);
+	    		$('.nav-tabs > li').removeClass('active');
+	    		$('.tab-content > .tab-pane').removeClass('in active');
+
+	    		console.log(subpage);
+
+	    		if(subpage == 'hotel') {
+					$($('.nav-tabs > li')[1]).addClass('active');
+	    			$('#hotel').addClass('in active');
+	    		}else{
+	    			$($('.nav-tabs > li')[0]).addClass('active');
+	    			$('#map').addClass('in active');
+	    		}
+	    	}
+	    	
+		</script>
+	</body>
+</html>

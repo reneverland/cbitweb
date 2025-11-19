@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="Internatinal Conference on Smart Finance 2020 | ICSF 2020">
+		<meta name="keywords" content="ICSF 2020|ICSF|Internatinal Conference on Smart Finance">
+		<title>International Conference on Smart Finance 2020| Speakers</title>
+		
+		<!-- common style -->
+		<link rel="icon" href="res/images/favicon.ico" type="image/x-icon">
+		<link rel="shortcut icon" href="res/images/favicon.ico" type="image/x-icon">
+		<link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.min.css">
+		<link rel="stylesheet" href="lib/font-awesome/css/font-awesome.min.css">
+		
+		<!-- module style -->
+		<link rel="stylesheet" href="res/css/common.css">
+		<link rel="stylesheet" href="res/css/speakers.css">
+		
+		<!-- common lib -->
+		<script src="lib/jquery/dist/jquery.min.js"></script>
+		<script src="lib/bootstrap/dist/js/bootstrap.min.js"></script>
+	</head>
+	<body>
+		<!-- navigator -->
+		<nav class="navbar navbar-default" role="navigation"></nav>
+
+		<!-- main body -->
+		<div class="container">
+			<!-- content title -->
+			<div class="row">
+				<h1 id="title">Invited Speakers</h1>
+			</div>
+
+			<!-- tab content--> 
+			<div class="row">
+				<ul class="speakers-content">
+				
+					<!--
+					<li class="speaker">
+						<a href="speakers/weizhang.html" target="_blank">Dr. Wei Zhang (张维)</a>,  Dean and Professor at College of Management and Economics, Tianjin University
+					</li>
+					-->
+					<li class="speaker">
+						Dr. J. Leon Zhao (赵建良)</a>, Chair Professor of Information Systems, City University of Hong Kong
+					</li>
+					<li class="speaker">
+						Dr. Donglei Du (杜冬雷)</a>, Professor at Faculty of Business Administration, University of New Brunswick
+					</li>
+					<li class="speaker">
+						Dr. Juan Feng (冯娟)</a>,  Professor of Information Systems, City University of Hong Kong
+					</li>
+					<li class="speaker">
+						Dr. Lean Yu (余乐安)</a>,  Professor at School of Economics and Management, Beijing University of Chemical Technology
+					</li>
+					<li class="speaker">
+						Dr. S. Alex Yang (杨颂)</a>,  Associate Professor at Faculty of Business and Economics, The University of Hong Kong
+					</li>
+					<li class="speaker">
+						Dr. Xiaole Wu (吴肖乐)</a>,  Professor of Management Science, Fudan University
+					</li>
+					<li class="speaker">
+						Mr. Michael Leung, Group Chief Executive Officer at BOA International Financial Group</a>
+					</li>	
+					
+					<li class="speaker">
+						Dr. Liang Xu  (徐亮)</a>, Professor at School of Business Administration, Southwestern University of Finance and Economics
+
+					</li>	
+
+					<li class="speaker">
+						Dr. George Yuan (袁先智)</a>, Professor at Finance Engineering Research Center, Suzhou University of China; Advanced Finance Research Institute, School of Management, Sun Yat-sen University; Data Finance College, Guiyang University
+
+					</li>	
+			
+				</ul>
+			
+			</div>
+
+		</div>
+
+		
+		<!-- footer -->
+		<div id="footer" class="footer"></div>
+		
+		<!-- module js -->
+		<script src="module/common.js"></script>
+
+	</body>
+</html>

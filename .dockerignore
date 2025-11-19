@@ -46,4 +46,7 @@ docker-compose.yml
 
 # 文档
 README.md
+DEPLOYMENT.md
+
+# 注意：public目录和其中的sources会被保留用于构建
 

@@ -9,13 +9,19 @@ services:
     ports:
       - "3000:80"
     restart: unless-stopped
-    networks:
-      - cbit-network
+    # 使用host网络模式确保可以访问外部API（或使用默认bridge）
+    network_mode: bridge
+    # DNS配置，确保可以正常解析域名
+    dns:
+      - 8.8.8.8
+      - 8.8.4.4
     labels:
       - "com.cbitweb.description=CBIT Official Website"
       - "com.cbitweb.version=1.0.0"
-
-networks:
-  cbit-network:
-    driver: bridge
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 5s
 

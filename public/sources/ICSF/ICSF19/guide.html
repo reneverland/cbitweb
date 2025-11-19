@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="Internatinal Conference on Smart Finance 2019 | ICSF 2019">
+		<meta name="keywords" content="ICSF 2019|ICSF|Internatinal Conference on Smart Finance">
+		<title>International Conference on Smart Finance 2019| Guide</title>
+		
+		<!-- common style -->
+		<link rel="icon" href="res/images/favicon.ico" type="image/x-icon">
+		<link rel="shortcut icon" href="res/images/favicon.ico" type="image/x-icon">
+		<link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.min.css">
+		<link rel="stylesheet" href="lib/font-awesome/css/font-awesome.min.css">
+		
+		<!-- module style -->
+		<link rel="stylesheet" href="res/css/common.css">
+		<link rel="stylesheet" href="res/css/guide.css">
+		
+		<!-- common lib -->
+		<script src="lib/jquery/dist/jquery.min.js"></script>
+		<script src="lib/bootstrap/dist/js/bootstrap.min.js"></script>
+	</head>
+	<body>
+		<!-- navigator -->
+		<nav class="navbar navbar-default" role="navigation"></nav>
+
+		<!-- main body -->
+		<div class="container">
+			<!-- content title -->
+			<div class="row">
+				<h1 id="title">Guide</h1>
+			</div>
+
+			
+
+			<!-- tab menu -->
+			<ul class="row nav nav-tabs" role="tablist">
+				<li role="presentation" class="col-md-3 col-sm-4 col-xs-4 active">
+					<a id="map_title" href="#map" aria-controls="map" role="tab" data-toggle="tab">Map</a> 
+				</li>
+
+			</ul>
+
+			<!-- tab content -->
+			
+			<div class="row tab-content">
+				<div role="tabpanel" class="tab-pane fade in active" id="map">
+					<div class="map-view">
+						<div class="address">
+							<h3>Meeting Address:</h3>北京市朝阳区平乐园100号 北京工业大学工大建国饭店<br></br>
+							<img class="img-responsive" src="res/images/BJUT-map.png" alt="BJUT-map" />
+						</div>
+
+						<div class="tips">
+							<h3>Tips for visitors:</h3>							
+							<div class="focus">A: BEIGONGDA XIMEN Station:</div>
+
+							<div class="focus">1. From airport: </div> take subway airport line to SANYUANQIAO station ;take subway line 10 to SHILIHE station; take subway line 14 to BEIGONGDA XIMEN Station.<br/><br/>
+
+							<div class="focus">2. From Beijing West Railway Station: </div> take subway line 7 to JIULONGSHAN station; take subway line 14 to BEIGONGDA XIMEN Station. <br/><br/>
+
+							<div class="focus">3. From Beijing South Railway Station: </div> take subway line 14 to BEIGONGDA XIMEN Station. <br/><br/>
+			
+
+		</div>
+						<div class="tips">
+							<h3>Conference Check-in and Accommodation</h3>		
+							<div class="focus">Check-in: July 26th at Grand Gongda Jianguo Hotel (first floor) <br/><br/>
+							<div class="focus">Accommodation: Participants of the Conference ICSF 2019 are advised to book rooms at the Grand Gongda Jianguo Hotel 工大建国饭店 (010-59102045, 010-59102046), Hanting Hotel 汉庭酒店(010-87376362), 7 days inn 7天连锁酒店-北京工业大学店(010-87324188)<br/><br/>
+
+		</div>
+	</div>
+</div>
+
+	
+		
+		<!-- footer -->
+		<div id="footer" class="footer"></div>
+		
+		<!-- module js -->
+		<script src="module/common.js"></script>
+		<script>
+			var hash = location.hash || location.search;
+	    	var questionMark = hash.indexOf('#');
+	    	if(questionMark !== -1) {
+	    		var subpage = hash.substring(questionMark + 1);
+	    		$('.nav-tabs > li').removeClass('active');
+	    		$('.tab-content > .tab-pane').removeClass('in active');
+
+	    		console.log(subpage);
+
+	    		if(subpage == 'hotel') {
+					$($('.nav-tabs > li')[1]).addClass('active');
+	    			$('#hotel').addClass('in active');
+	    		}else{
+	    			$($('.nav-tabs > li')[0]).addClass('active');
+	    			$('#map').addClass('in active');
+	    		}
+	    	}
+	    	
+		</script>
+	</body>
+</html>

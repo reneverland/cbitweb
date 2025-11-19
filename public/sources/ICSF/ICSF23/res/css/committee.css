@@ -1,0 +1,141 @@
+/* content title  */
+#title
+{
+	margin: 0 auto;
+	margin-top: 30px;
+	margin-bottom: 30px;
+	text-align: center;
+}
+
+/* tab menu */
+.nav-tabs
+{
+	margin: 0 auto;
+	text-align: center;
+}
+
+.nav-tabs > li
+{
+	display: inline-block;
+	float: none;
+	padding: 0;
+	font-size: 18px;
+	font-weight: 600;
+}
+
+.nav-tabs > li.active
+{
+	border-bottom: 3px solid #23a8f5;
+}
+
+.nav-tabs > li > a,
+.nav-tabs > li > a:hover,
+.nav-tabs > li > a:focus,
+.nav-tabs > li.active > a, 
+.nav-tabs > li.active > a:hover, 
+.nav-tabs > li.active > a:focus
+{
+	display: block;
+	width: 100%;
+	border: none;
+	background: #ffffff;
+}
+
+/* tab content */
+.committee-content
+{
+	margin: 0 130px;
+	min-height: 500px;
+}
+
+.committee-content > .tab-pane
+{
+	padding: 20px 10px;
+}
+
+.committee-content > .tab-pane > .group
+{
+	padding: 0 115px;
+	margin-bottom: 30px;
+}
+
+.committee-content > .tab-pane > .group > .title
+{
+	margin-bottom: 5px;
+	font-size: 20px;
+	font-weight: 600;
+}
+
+.committee-content > .tab-pane > .group > .person
+{
+	margin: 3px 0;
+	padding-left: 20px;
+	font-size: 16px;
+}
+
+/* responsive css */
+/* 大屏幕（大桌面显示器，大于等于 1200px） */
+/* 默认样式为大屏幕 */
+
+/* 中等屏幕（桌面显示器，大于等于 992px，小于1200px） */
+@media (max-width: 1200px) { 
+	.committee-content
+	{
+		margin: 0 70px;
+		min-height: 500px;
+	}
+}
+
+/* 小屏幕（平板，大于等于 768px，小于等于992px） */
+@media (max-width: 992px) {
+	.committee-content
+	{
+		margin: 0 20px;
+		min-height: 500px;
+	}
+
+	.committee-content > .tab-pane > .group
+	{
+		padding: 5px;
+		margin-bottom: 30px;
+	}
+}
+
+/* 	超小屏幕（手机，小于 768px） */
+@media (max-width: 768px) {
+	#title
+	{
+		margin-top: 15px;
+		margin-bottom: 15px;
+		font-size: 25px;
+	}
+
+	.nav-tabs > li
+	{
+		font-size: 14px;
+	}
+
+	.committee-content
+	{
+		margin: 0 10px;
+		min-height: 500px;
+	}
+
+	.committee-content > .tab-pane > .group
+	{
+		padding: 0px;
+		margin-bottom: 30px;
+	}
+
+	.committee-content > .tab-pane > .group > .title
+	{
+		font-size: 16px;
+	}
+
+	.committee-content > .tab-pane > .group > .person
+	{
+		margin: 3px 0;
+		padding-left: 0px;
+		font-size: 14px;
+	}
+}
