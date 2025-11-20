@@ -40,7 +40,7 @@
       </header>
 
       <!-- 聊天容器 -->
-      <div ref="chatContainer" class="chat-container space-y-6 pb-32">
+      <div ref="chatContainer" class="chat-container space-y-6 pb-32 scroll-mt-24">
         <ChatBubble 
           v-for="(message, index) in messages" 
           :key="index"
@@ -261,6 +261,9 @@ const handleSelectQA = async (qa) => {
   console.log('QA对象完整内容:', JSON.stringify(qa, null, 2))
   console.log('QA对象keys:', Object.keys(qa))
   
+  // 确保对话区域可见
+  scrollToChatView()
+  
   // 添加用户选择的问题
   const questionText = qa.question || qa.text || qa.title || qa.query || '选中的问题'
   messages.value.push({
@@ -389,8 +392,19 @@ const scrollToBottom = () => {
   })
 }
 
+const scrollToChatView = () => {
+  nextTick(() => {
+    if (chatContainer.value) {
+      chatContainer.value.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
+  })
+}
+
 const handleSendMessage = async (userMessage) => {
   console.log('=== 用户发送消息 ===', userMessage)
+  
+  // 确保对话区域可见
+  scrollToChatView()
   
   // 添加用户消息
   messages.value.push({

@@ -121,6 +121,17 @@ const teamMembers = ref([
     expertise: '应用机器学习，知识图谱，自然语言处理',
     avatar: '/sources/lilitao.jpeg',
     email: 'litaoli@link.cuhk.edu.cn'
+  },
+  {
+    name: '刁玉钦',
+    nameEn: 'Diao Yuqin',
+    title: '研究助理 / Research Assistant',
+    expertise: '人工智能，多智能体协同优化，运筹优化',
+    avatar: '/sources/yuqin.png',
+    email: 'diaoyuqin@cuhk.edu.cn',
+    links: {
+      website: '/yuqinprofile'
+    }
   }
 ])
 </script>

@@ -462,12 +462,6 @@ tail -f /var/log/nginx/cbitweb_error.log
 
 ---
 
-## 🌟 Star History
-
-[![Star History Chart](https://api.star-history.com/svg?repos=reneverland/cbitweb&type=Date)](https://star-history.com/#reneverland/cbitweb&Date)
-
----
-
 <div align="center">
 
 **[⬆ 返回顶部](#cbit-official-website)**

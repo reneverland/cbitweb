@@ -15,7 +15,8 @@ export default defineConfig({
       // 配置多页面应用
       input: {
         main: resolve(__dirname, 'index.html'),
-        profile: resolve(__dirname, 'profile.html')
+        profile: resolve(__dirname, 'profile.html'),
+        yuqinprofile: resolve(__dirname, 'yuqinprofile.html')
       },
       output: {
         // 优化输出
