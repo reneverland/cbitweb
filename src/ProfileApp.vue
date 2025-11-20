@@ -102,7 +102,7 @@
 import { ref, onMounted, nextTick, computed, watch } from 'vue'
 import ChatBubble from './components/ChatBubble.vue'
 import InputBox from './components/InputBox.vue'
-import { chatAPI } from './services/api.js'
+import { renProfileAPI } from './services/renprofile-api.js'
 import { i18n } from './locales/index.js'
 
 const isDark = ref(true) // 默认夜间模式
@@ -161,9 +161,11 @@ const clearChat = () => {
 
 const scrollToBottom = () => {
   nextTick(() => {
-    if (chatContainer.value) {
-      chatContainer.value.scrollTop = chatContainer.value.scrollHeight
-    }
+    // 使用 window.scrollTo 滚动整个页面到底部
+    window.scrollTo({ 
+      top: document.documentElement.scrollHeight, 
+      behavior: 'smooth' 
+    })
   })
 }
 
@@ -255,7 +257,7 @@ const handleSendMessage = async (userMessage) => {
       }))
 
     // 调用API
-    const response = await chatAPI.sendMessage(chatHistory)
+    const response = await renProfileAPI.sendMessage(chatHistory)
     
     // 移除加载消息
     messages.value = messages.value.filter(m => m.content !== 'typing')
@@ -302,27 +304,18 @@ const handleSendMessage = async (userMessage) => {
               console.log('⚠️ 检测到不完整的前缀回复，重新请求完整答案')
               // 重新发送请求，强制要求生成完整答案
               try {
-                const retryResponse = await fetch('/api/apps/renprofile/chat/completions', {
-                  method: 'POST',
-                  headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer app_oupWMoNmY4CuMWxKzdzpluD30kjjJ65O'
-                  },
-                  body: JSON.stringify({
-                    messages: [{
-                      role: 'user',
-                      content: userMessage
-                    }],
-                    inputs: {},
-                    response_mode: 'blocking',
-                    conversation_id: '',
-                    user: 'web-user',
-                    files: [],
-                    force_answer: true  // 强制要求完整答案
-                  })
+                const retryData = await renProfileAPI.sendCustomRequest({
+                  messages: [{
+                    role: 'user',
+                    content: userMessage
+                  }],
+                  inputs: {},
+                  response_mode: 'blocking',
+                  conversation_id: '',
+                  user: 'web-user',
+                  files: [],
+                  force_answer: true  // 强制要求完整答案
                 })
-                
-                const retryData = await retryResponse.json()
                 console.log('重试响应:', retryData)
                 
                 // 提取重试后的答案
@@ -352,27 +345,18 @@ const handleSendMessage = async (userMessage) => {
               
               // 发送确认请求获取答案
               try {
-                const confirmResponse = await fetch('/api/apps/renprofile/chat/completions', {
-                  method: 'POST',
-                  headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer app_oupWMoNmY4CuMWxKzdzpluD30kjjJ65O'
-                  },
-                  body: JSON.stringify({
-                    messages: [{
-                      role: 'user',
-                      content: userMessage
-                    }],
-                    inputs: {},
-                    response_mode: 'blocking',
-                    conversation_id: '',
-                    user: 'web-user',
-                    files: [],
-                    selected_qa_id: firstSuggestion.qa_id
-                  })
+                const confirmData = await renProfileAPI.sendCustomRequest({
+                  messages: [{
+                    role: 'user',
+                    content: userMessage
+                  }],
+                  inputs: {},
+                  response_mode: 'blocking',
+                  conversation_id: '',
+                  user: 'web-user',
+                  files: [],
+                  selected_qa_id: firstSuggestion.qa_id
                 })
-                
-                const confirmData = await confirmResponse.json()
                 console.log('===== 确认响应完整数据 =====')
                 console.log('完整JSON:', JSON.stringify(confirmData, null, 2))
                 console.log('所有keys:', Object.keys(confirmData))
