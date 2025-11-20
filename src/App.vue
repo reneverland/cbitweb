@@ -261,9 +261,6 @@ const handleSelectQA = async (qa) => {
   console.log('QA对象完整内容:', JSON.stringify(qa, null, 2))
   console.log('QA对象keys:', Object.keys(qa))
   
-  // 确保对话区域可见
-  scrollToChatView()
-  
   // 添加用户选择的问题
   const questionText = qa.question || qa.text || qa.title || qa.query || '选中的问题'
   messages.value.push({
@@ -271,6 +268,7 @@ const handleSelectQA = async (qa) => {
     content: questionText,
     time: '刚刚'
   })
+  scrollToBottom()
   
   // 尝试从多个可能的字段提取答案
   let answerText = null
@@ -337,16 +335,7 @@ const handleSelectQA = async (qa) => {
         
         console.log('发送确认请求:', confirmBody)
         
-        const response = await fetch('/api/apps/cbit-official/chat/completions', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer app_WZCqYKovpijz2CO4T5RyiOkuAsP5qlKe'
-          },
-          body: JSON.stringify(confirmBody)
-        })
-        
-        const data = await response.json()
+        const data = await chatAPI.sendCustomRequest(confirmBody)
         console.log('确认响应:', data)
         
         // 移除loading
@@ -386,25 +375,16 @@ const handleSelectQA = async (qa) => {
 
 const scrollToBottom = () => {
   nextTick(() => {
-    if (chatContainer.value) {
-      chatContainer.value.scrollTop = chatContainer.value.scrollHeight
-    }
-  })
-}
-
-const scrollToChatView = () => {
-  nextTick(() => {
-    if (chatContainer.value) {
-      chatContainer.value.scrollIntoView({ behavior: 'smooth', block: 'start' })
-    }
+    // 使用 window.scrollTo 滚动整个页面到底部
+    window.scrollTo({ 
+      top: document.documentElement.scrollHeight, 
+      behavior: 'smooth' 
+    })
   })
 }
 
 const handleSendMessage = async (userMessage) => {
   console.log('=== 用户发送消息 ===', userMessage)
-  
-  // 确保对话区域可见
-  scrollToChatView()
   
   // 添加用户消息
   messages.value.push({
@@ -493,27 +473,18 @@ const handleSendMessage = async (userMessage) => {
                 console.log('⚠️ 检测到不完整的前缀回复，重新请求完整答案')
                 // 重新发送请求，强制要求生成完整答案
                 try {
-                  const retryResponse = await fetch('/api/apps/cbit-official/chat/completions', {
-                    method: 'POST',
-                    headers: {
-                      'Content-Type': 'application/json',
-                      'Authorization': 'Bearer app_WZCqYKovpijz2CO4T5RyiOkuAsP5qlKe'
-                    },
-                    body: JSON.stringify({
-                      messages: [{
-                        role: 'user',
-                        content: userMessage
-                      }],
-                      inputs: {},
-                      response_mode: 'blocking',
-                      conversation_id: '',
-                      user: 'web-user',
-                      files: [],
-                      force_answer: true  // 强制要求完整答案
-                    })
+                  const retryData = await chatAPI.sendCustomRequest({
+                    messages: [{
+                      role: 'user',
+                      content: userMessage
+                    }],
+                    inputs: {},
+                    response_mode: 'blocking',
+                    conversation_id: '',
+                    user: 'web-user',
+                    files: [],
+                    force_answer: true  // 强制要求完整答案
                   })
-                  
-                  const retryData = await retryResponse.json()
                   console.log('重试响应:', retryData)
                   
                   // 提取重试后的答案
@@ -543,27 +514,18 @@ const handleSendMessage = async (userMessage) => {
                 
                 // 发送确认请求获取答案
                 try {
-                  const confirmResponse = await fetch('/api/apps/cbit-official/chat/completions', {
-                    method: 'POST',
-                    headers: {
-                      'Content-Type': 'application/json',
-                      'Authorization': 'Bearer app_WZCqYKovpijz2CO4T5RyiOkuAsP5qlKe'
-                    },
-                    body: JSON.stringify({
-                      messages: [{
-                        role: 'user',
-                        content: userMessage
-                      }],
-                      inputs: {},
-                      response_mode: 'blocking',
-                      conversation_id: '',
-                      user: 'web-user',
-                      files: [],
-                      selected_qa_id: firstSuggestion.qa_id
-                    })
+                  const confirmData = await chatAPI.sendCustomRequest({
+                    messages: [{
+                      role: 'user',
+                      content: userMessage
+                    }],
+                    inputs: {},
+                    response_mode: 'blocking',
+                    conversation_id: '',
+                    user: 'web-user',
+                    files: [],
+                    selected_qa_id: firstSuggestion.qa_id
                   })
-                  
-                  const confirmData = await confirmResponse.json()
                   console.log('===== 确认响应完整数据 =====')
                   console.log('完整JSON:', JSON.stringify(confirmData, null, 2))
                   console.log('所有keys:', Object.keys(confirmData))

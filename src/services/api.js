@@ -65,6 +65,49 @@ export const chatAPI = {
       
       throw error
     }
+  },
+
+  // 发送带有额外参数的自定义请求（如selected_qa_id, force_answer等）
+  async sendCustomRequest(requestBody) {
+    try {
+      const fullURL = `${API_BASE_URL}/api/apps/cbit-official/chat/completions`
+      
+      console.log('=== 发送自定义API请求 ===')
+      console.log('当前域名:', window.location.hostname)
+      console.log('环境:', isDevelopment ? '开发环境' : '生产环境')
+      console.log('API Base URL:', API_BASE_URL)
+      console.log('完整URL:', fullURL)
+      console.log('请求体:', requestBody)
+      
+      const response = await axios.post(
+        fullURL,
+        requestBody,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${API_KEY}`
+          },
+          timeout: 60000 // 60秒超时
+        }
+      )
+      
+      console.log('=== 自定义API响应成功 ===')
+      console.log('响应数据:', response.data)
+      return response.data
+    } catch (error) {
+      console.error('自定义API调用错误 - 完整信息:', {
+        status: error.response?.status,
+        statusText: error.response?.statusText,
+        data: error.response?.data,
+        detail: error.response?.data?.detail
+      })
+      
+      if (error.response?.data?.detail) {
+        console.error('错误详情 (detail):', JSON.stringify(error.response.data.detail, null, 2))
+      }
+      
+      throw error
+    }
   }
 }
 
