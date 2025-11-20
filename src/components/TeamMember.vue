@@ -130,7 +130,7 @@ const teamMembers = ref([
     avatar: '/sources/yuqin.png',
     email: 'diaoyuqin@cuhk.edu.cn',
     links: {
-      website: '/yuqinprofile'
+      website: '/yuqinprofile.html'
     }
   }
 ])
