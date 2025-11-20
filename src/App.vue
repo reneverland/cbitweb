@@ -169,15 +169,16 @@ const showICSFMenu = ref(false)
 
 // ICSF会议系列数据
 const icsfYears = ref([
-  { year: '2024', location: 'Hong Kong', link: '/sources/ICSF/ICSF24/index.html' },
-  { year: '2023', location: 'Hong Kong', link: '/sources/ICSF/ICSF23/index.html' },
+  { year: '2025', location: 'Shanghai, China', link: 'https://sem.tongji.edu.cn/ICSF2025/' },
+  { year: '2024', location: 'Hefei, China', link: '/sources/ICSF/ICSF24/index.html' },
+  { year: '2023', location: 'Dubai, UAE', link: '/sources/ICSF/ICSF23/index.html' },
   { year: '2022', location: 'Hong Kong (Online)', link: '/sources/ICSF/ICSF22/index.html' },
-  { year: '2021', location: 'Hong Kong (Online)', link: '/sources/ICSF/ICSF21/index.html' },
-  { year: '2020', location: 'Hong Kong (Online)', link: '/sources/ICSF/ICSF20/index.html' },
-  { year: '2019', location: 'Hong Kong', link: '/sources/ICSF/ICSF19/index.html' },
-  { year: '2018', location: 'Hong Kong', link: '/sources/ICSF/ICSF18/index.html' },
-  { year: '2017', location: 'Hong Kong', link: '/sources/ICSF/ICSF17/index.html' },
-  { year: '2016', location: 'Hong Kong', link: '/sources/ICSF/ICSF16/index.html' },
+  { year: '2021', location: 'Shenzhen, China (Online)', link: '/sources/ICSF/ICSF21/index.html' },
+  { year: '2020', location: 'Beidaihe, China (Online)', link: '/sources/ICSF/ICSF20/index.html' },
+  { year: '2019', location: 'Beijing, China', link: '/sources/ICSF/ICSF19/index.html' },
+  { year: '2018', location: 'Shenzhen, China', link: '/sources/ICSF/ICSF18/index.html' },
+  { year: '2017', location: 'Guangzhou, China', link: '/sources/ICSF/ICSF17/index.html' },
+  { year: '2016', location: 'Shenzhen, China', link: '/sources/ICSF/ICSF16/index.html' },
 ])
 
 const toggleTheme = () => {
