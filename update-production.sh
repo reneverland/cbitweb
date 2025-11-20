@@ -66,6 +66,9 @@ fi
 if [ ! -f "yuqinprofile.html" ]; then
     MISSING_FILES+=("yuqinprofile.html")
 fi
+if [ ! -f "shaoyiprofile.html" ]; then
+    MISSING_FILES+=("shaoyiprofile.html")
+fi
 if [ ! -f "vite.config.js" ]; then
     MISSING_FILES+=("vite.config.js")
 fi
@@ -166,6 +169,15 @@ else
     echo -e "${RED}❌ yuqinprofile.html${NC}"
 fi
 
+# 检查 shaoyiprofile.html
+CHECKS=$((CHECKS+1))
+if docker exec cbit-official-web test -f /usr/share/nginx/html/shaoyiprofile.html; then
+    echo -e "${GREEN}✅ shaoyiprofile.html${NC}"
+    PASSED=$((PASSED+1))
+else
+    echo -e "${RED}❌ shaoyiprofile.html${NC}"
+fi
+
 # 检查 sources 目录
 CHECKS=$((CHECKS+1))
 if docker exec cbit-official-web test -d /usr/share/nginx/html/sources; then
@@ -182,6 +194,15 @@ if docker exec cbit-official-web test -f /usr/share/nginx/html/sources/yuqin.png
     PASSED=$((PASSED+1))
 else
     echo -e "${RED}❌ sources/yuqin.png${NC}"
+fi
+
+# 检查 shaoyi.jpg
+CHECKS=$((CHECKS+1))
+if docker exec cbit-official-web test -f /usr/share/nginx/html/sources/shaoyi.jpg; then
+    echo -e "${GREEN}✅ sources/shaoyi.jpg${NC}"
+    PASSED=$((PASSED+1))
+else
+    echo -e "${RED}❌ sources/shaoyi.jpg${NC}"
 fi
 
 echo ""
@@ -211,13 +232,15 @@ echo ""
 echo "🌐 访问地址:"
 SERVER_IP=$(hostname -I | awk '{print $1}')
 echo "   主页: https://cbit.cuhk.edu.cn"
-echo "   Ren 达: https://cbit.cuhk.edu.cn/profile.html"
+echo "   石仁达: https://cbit.cuhk.edu.cn/profile.html"
 echo "   刁玉钦: https://cbit.cuhk.edu.cn/yuqinprofile.html"
+echo "   龚少一: https://cbit.cuhk.edu.cn/shaoyiprofile.html"
 echo ""
 echo "   或通过 IP 访问:"
 echo "   http://$SERVER_IP:8080"
 echo "   http://$SERVER_IP:8080/profile.html"
 echo "   http://$SERVER_IP:8080/yuqinprofile.html"
+echo "   http://$SERVER_IP:8080/shaoyiprofile.html"
 echo ""
 
 # 下一步建议
