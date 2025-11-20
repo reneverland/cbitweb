@@ -16,7 +16,8 @@ export default defineConfig({
       input: {
         main: resolve(__dirname, 'index.html'),
         profile: resolve(__dirname, 'profile.html'),
-        yuqinprofile: resolve(__dirname, 'yuqinprofile.html')
+        yuqinprofile: resolve(__dirname, 'yuqinprofile.html'),
+        shaoyiprofile: resolve(__dirname, 'shaoyiprofile.html')
       },
       output: {
         // 优化输出

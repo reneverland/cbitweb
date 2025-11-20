@@ -132,6 +132,17 @@ const teamMembers = ref([
     links: {
       website: '/yuqinprofile.html'
     }
+  },
+  {
+    name: '龚少一',
+    nameEn: 'Gong Shaoyi',
+    title: '研究助理 / Research Assistant',
+    expertise: '人工智能，医学AI，智能医疗',
+    avatar: '/sources/shaoyi.jpg',
+    email: '12518440@zju.edu.cn',
+    links: {
+      website: '/shaoyiprofile.html'
+    }
   }
 ])
 </script>
