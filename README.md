@@ -456,12 +456,6 @@ tail -f /var/log/nginx/cbitweb_error.log
 
 ---
 
-## 📊 项目统计
-
-![Alt](https://repobeats.axiom.co/api/embed/your-repo-id.svg "Repobeats analytics image")
-
----
-
 <div align="center">
 
 **[⬆ 返回顶部](#cbit-official-website)**
