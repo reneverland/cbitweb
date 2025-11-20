@@ -302,7 +302,7 @@ const handleSendMessage = async (userMessage) => {
               console.log('⚠️ 检测到不完整的前缀回复，重新请求完整答案')
               // 重新发送请求，强制要求生成完整答案
               try {
-                const retryResponse = await fetch('http://113.106.62.42:9300/api/apps/renprofile/chat/completions', {
+                const retryResponse = await fetch('/api/apps/renprofile/chat/completions', {
                   method: 'POST',
                   headers: {
                     'Content-Type': 'application/json',
@@ -352,7 +352,7 @@ const handleSendMessage = async (userMessage) => {
               
               // 发送确认请求获取答案
               try {
-                const confirmResponse = await fetch('http://113.106.62.42:9300/api/apps/renprofile/chat/completions', {
+                const confirmResponse = await fetch('/api/apps/renprofile/chat/completions', {
                   method: 'POST',
                   headers: {
                     'Content-Type': 'application/json',

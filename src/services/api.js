@@ -1,10 +1,10 @@
 import axios from 'axios'
 
 // 使用相对路径，通过Nginx反向代理避免CORS和Mixed Content问题
-// 生产环境：/api/ 会被Nginx代理到 http://113.106.62.42:9300/
+// 生产环境：直接使用 /api/apps/... 路径，Nginx会代理到后端
 // 开发环境：直接访问API服务器（仅在 localhost:3000 开发时）
 const isDevelopment = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
-const API_BASE_URL = isDevelopment ? 'http://113.106.62.42:9300' : '/api'
+const API_BASE_URL = isDevelopment ? 'http://113.106.62.42:9300' : ''
 const API_KEY = 'app_WZCqYKovpijz2CO4T5RyiOkuAsP5qlKe'
 
 export const chatAPI = {
