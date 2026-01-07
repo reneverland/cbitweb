@@ -1,28 +1,25 @@
 import axios from 'axios'
 
 // ========== API配置 ==========
-// 强制使用完整API URL（设置为true确保始终连接到后端服务器）
-const FORCE_DIRECT_API = true
-
 // 检测当前环境
 const isDevelopment = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
 
 // 后端API服务器地址
-// FORCE_DIRECT_API=true: 始终使用完整URL连接到API服务器
-// FORCE_DIRECT_API=false: 生产环境使用相对路径（需要Nginx代理）
-const API_BASE_URL = (FORCE_DIRECT_API || isDevelopment) ? 'http://113.106.62.42:9300' : ''
+// 开发环境：直接访问API服务器
+// 生产环境：使用相对路径，通过Nginx反向代理到后端（避免HTTPS->HTTP的Mixed Content问题）
+const API_BASE_URL = isDevelopment ? 'http://113.106.62.42:9300' : ''
 
 // API密钥（必须与后端配置一致）
 const API_KEY = 'app_WZCqYKovpijz2CO4T5RyiOkuAsP5qlKe'
 
 // 日志输出当前配置
-console.log('========== API配置 ==========')
-console.log('🔧 强制直连API:', FORCE_DIRECT_API)
+console.log('========== CBIT API配置 ==========')
 console.log('🌐 当前访问域名:', window.location.hostname)
-console.log('📍 环境判断:', isDevelopment ? '开发环境' : '生产环境')
-console.log('🔗 API_BASE_URL:', API_BASE_URL || '(使用相对路径)')
-console.log('🔑 API_KEY:', API_KEY.substring(0, 15) + '...')
-console.log('================================')
+console.log('📍 环境:', isDevelopment ? '开发环境 (localhost)' : '生产环境')
+console.log('🔗 API Base URL:', API_BASE_URL || '(相对路径，使用Nginx代理)')
+console.log('🎯 完整端点:', (API_BASE_URL || '') + '/api/apps/cbit-official/chat/completions')
+console.log('🔑 API Key:', API_KEY.substring(0, 20) + '...')
+console.log('==================================')
 
 export const chatAPI = {
   async sendMessage(messages) {
