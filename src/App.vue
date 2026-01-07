@@ -47,7 +47,6 @@
           :message="message"
           :is-dark="isDark"
           :locale="locale"
-          @select-qa="handleSelectQA"
           @view-member-avatar="handleViewMemberAvatar"
         />
       </div>
@@ -256,124 +255,7 @@ const clearChat = () => {
   }
 }
 
-// 处理用户选择QA建议
-const handleSelectQA = async (qa) => {
-  console.log('=== 用户选择了QA ===')
-  console.log('QA对象完整内容:', JSON.stringify(qa, null, 2))
-  console.log('QA对象keys:', Object.keys(qa))
-  
-  // 添加用户选择的问题
-  const questionText = qa.question || qa.text || qa.title || qa.query || '选中的问题'
-  messages.value.push({
-    type: 'user',
-    content: questionText,
-    time: '刚刚'
-  })
-  scrollToBottom()
-  
-  // 尝试从多个可能的字段提取答案
-  let answerText = null
-  
-  if (qa.answer) {
-    console.log('✓ 找到 qa.answer:', qa.answer)
-    answerText = qa.answer
-  } else if (qa.content) {
-    console.log('✓ 找到 qa.content:', qa.content)
-    answerText = qa.content
-  } else if (qa.response) {
-    console.log('✓ 找到 qa.response:', qa.response)
-    answerText = qa.response
-  } else if (qa.text && qa.text !== questionText) {
-    console.log('✓ 找到 qa.text (不同于问题):', qa.text)
-    answerText = qa.text
-  } else if (qa.data?.answer) {
-    console.log('✓ 找到 qa.data.answer:', qa.data.answer)
-    answerText = qa.data.answer
-  } else if (qa.metadata?.answer) {
-    console.log('✓ 找到 qa.metadata.answer:', qa.metadata.answer)
-    answerText = qa.metadata.answer
-  } else {
-    console.error('❌ 未找到答案字段')
-    console.error('尝试过的字段: answer, content, response, text, data.answer, metadata.answer')
-  }
-  
-  // 如果有答案，直接显示；否则向后端请求
-  if (answerText) {
-    messages.value.push({
-      type: 'ai',
-      content: answerText,
-      time: '刚刚'
-    })
-    scrollToBottom()
-  } else {
-    // 没有答案，需要向后端发送确认请求
-    console.log('没有本地答案，向后端请求...')
-    
-    // 如果有qa_id，发送确认请求
-    if (qa.id || qa.qa_id) {
-      isLoading.value = true
-      messages.value.push({
-        type: 'ai',
-        content: 'typing',
-        time: '正在输入...'
-      })
-      scrollToBottom()
-      
-      try {
-        // 发送确认选择的请求
-        const confirmBody = {
-          messages: [{
-            role: 'user',
-            content: questionText
-          }],
-          inputs: {},
-          response_mode: 'blocking',
-          conversation_id: '',
-          user: 'web-user',
-          files: [],
-          selected_qa_id: qa.id || qa.qa_id
-        }
-        
-        console.log('发送确认请求:', confirmBody)
-        
-        const data = await chatAPI.sendCustomRequest(confirmBody)
-        console.log('确认响应:', data)
-        
-        // 移除loading
-        messages.value = messages.value.filter(m => m.content !== 'typing')
-        
-        // 提取答案
-        const answer = data.choices?.[0]?.message?.content || data.answer || '抱歉，未找到答案。'
-        messages.value.push({
-          type: 'ai',
-          content: answer,
-          time: '刚刚'
-        })
-      } catch (error) {
-        console.error('确认请求失败:', error)
-        messages.value = messages.value.filter(m => m.content !== 'typing')
-        messages.value.push({
-          type: 'ai',
-          content: '抱歉，获取答案时出现问题。',
-          time: '刚刚'
-        })
-      } finally {
-        isLoading.value = false
-        scrollToBottom()
-      }
-    } else {
-      // 既没有答案也没有ID，显示错误
-      messages.value.push({
-        type: 'ai',
-        content: '抱歉，未找到答案。',
-        time: '刚刚'
-      })
-      scrollToBottom()
-    }
-  }
-}
-
-
+// 处理用户跳过建议，继续AI回答
 const scrollToBottom = () => {
   nextTick(() => {
     // 使用 window.scrollTo 滚动整个页面到底部
@@ -427,19 +309,23 @@ const handleSendMessage = async (userMessage) => {
         }))
 
       // 调用API
+      console.log('📤 发送请求，消息历史条数:', chatHistory.length)
       const response = await chatAPI.sendMessage(chatHistory)
+      console.log('📥 收到API响应')
       
       // 移除加载消息
       messages.value = messages.value.filter(m => m.content !== 'typing')
       
       // 添加AI回复 - 支持多种响应格式
-      console.log('=== 解析API响应 ===')
+      console.log('=== 开始解析API响应 ===')
       console.log('完整响应对象:', JSON.stringify(response, null, 2))
-      console.log('响应结构 keys:', Object.keys(response))
+      console.log('响应顶级 keys:', Object.keys(response))
       
       // 检查是否有cbit_metadata
       if (response.cbit_metadata) {
-        console.log('发现 cbit_metadata:', JSON.stringify(response.cbit_metadata, null, 2))
+        console.log('📋 发现 cbit_metadata:', JSON.stringify(response.cbit_metadata, null, 2))
+      } else {
+        console.log('⚠️ 没有 cbit_metadata')
       }
       
       let aiResponse = '抱歉，我没能理解您的问题。'
@@ -505,74 +391,102 @@ const handleSendMessage = async (userMessage) => {
                 aiResponse = content
               }
             } else if (firstChoice.message.metadata?.needs_confirmation) {
-              // 检测到建议问题模式，自动选择第一个建议并获取答案
-              console.log('✓ 检测到建议问题，自动获取答案')
+              // 检测到建议问题模式，需要判断相似度
+              console.log('✓ 检测到建议问题模式 (needs_confirmation)')
               const suggestedQuestions = response.cbit_metadata?.suggested_questions || []
               
               if (suggestedQuestions.length > 0) {
                 const firstSuggestion = suggestedQuestions[0]
-                console.log('自动选择第一个建议:', firstSuggestion)
+                const similarity = firstSuggestion.similarity || 0
+                console.log('第一个建议:', firstSuggestion)
+                console.log('相似度:', similarity)
                 
-                // 发送确认请求获取答案
-                try {
-                  const confirmData = await chatAPI.sendCustomRequest({
-                    messages: [{
-                      role: 'user',
-                      content: userMessage
-                    }],
-                    inputs: {},
-                    response_mode: 'blocking',
-                    conversation_id: '',
-                    user: 'web-user',
-                    files: [],
-                    selected_qa_id: firstSuggestion.qa_id
-                  })
-                  console.log('===== 确认响应完整数据 =====')
-                  console.log('完整JSON:', JSON.stringify(confirmData, null, 2))
-                  console.log('所有keys:', Object.keys(confirmData))
+                // 只有相似度足够高（≥0.7）时才自动选择QA答案
+                if (similarity >= 0.7) {
+                  console.log('✓ 相似度高（≥0.7），自动选择QA答案')
                   
-                  // 尝试多种方式提取答案
-                  let extractedAnswer = null
+                  // 发送确认请求获取答案
+                  try {
+                    const confirmData = await chatAPI.sendCustomRequest({
+                      messages: [{
+                        role: 'user',
+                        content: userMessage
+                      }],
+                      inputs: {},
+                      response_mode: 'blocking',
+                      conversation_id: '',
+                      user: 'web-user',
+                      files: [],
+                      selected_qa_id: firstSuggestion.qa_id
+                    })
+                    console.log('===== QA确认响应 =====')
+                    console.log('完整JSON:', JSON.stringify(confirmData, null, 2))
+                    
+                    // 尝试多种方式提取答案
+                    let extractedAnswer = null
+                    
+                    if (confirmData.choices?.[0]?.message?.content) {
+                      extractedAnswer = confirmData.choices[0].message.content
+                      console.log('✓ 从 choices[0].message.content 提取:', extractedAnswer)
+                    } else if (confirmData.answer) {
+                      extractedAnswer = confirmData.answer
+                      console.log('✓ 从 answer 提取:', extractedAnswer)
+                    } else if (confirmData.message?.content) {
+                      extractedAnswer = confirmData.message.content
+                      console.log('✓ 从 message.content 提取:', extractedAnswer)
+                    } else if (confirmData.data?.answer) {
+                      extractedAnswer = confirmData.data.answer
+                      console.log('✓ 从 data.answer 提取:', extractedAnswer)
+                    } else if (confirmData.result) {
+                      extractedAnswer = confirmData.result
+                      console.log('✓ 从 result 提取:', extractedAnswer)
+                    }
+                    
+                    if (!extractedAnswer || extractedAnswer.trim() === '') {
+                      console.error('❌ 未能从QA确认响应中提取答案')
+                      aiResponse = '抱歉，未能获取答案。'
+                    } else {
+                      aiResponse = extractedAnswer
+                      console.log('✓ 使用QA答案:', aiResponse)
+                    }
+                  } catch (error) {
+                    console.error('QA确认请求失败:', error)
+                    aiResponse = '抱歉，获取答案时出现问题。'
+                  }
+                } else {
+                  // 相似度太低（<0.7），强制让LLM生成回答而不是使用QA
+                  console.log('⚠️ 相似度低（<0.7），强制LLM生成回答')
                   
-                  // 方式1: choices[0].message.content
-                  if (confirmData.choices?.[0]?.message?.content) {
-                    extractedAnswer = confirmData.choices[0].message.content
-                    console.log('✓ 从 choices[0].message.content 提取:', extractedAnswer)
+                  try {
+                    const forceData = await chatAPI.sendCustomRequest({
+                      messages: [{
+                        role: 'user',
+                        content: userMessage
+                      }],
+                      inputs: {},
+                      response_mode: 'blocking',
+                      conversation_id: '',
+                      user: 'web-user',
+                      files: [],
+                      force_answer: true  // 强制LLM回答
+                    })
+                    console.log('===== 强制LLM响应 =====')
+                    console.log('完整JSON:', JSON.stringify(forceData, null, 2))
+                    
+                    const llmAnswer = forceData.choices?.[0]?.message?.content || forceData.answer
+                    if (llmAnswer && llmAnswer.trim()) {
+                      aiResponse = llmAnswer
+                      console.log('✓ 使用LLM生成的回答:', aiResponse)
+                    } else {
+                      aiResponse = '您好！我是区块链与智能科技中心的AI助手。我主要可以回答关于中心研究方向、团队成员、项目成果等相关问题。请问有什么可以帮到您的吗？😊'
+                    }
+                  } catch (error) {
+                    console.error('强制LLM回答失败:', error)
+                    aiResponse = '您好！我是区块链与智能科技中心的AI助手。我主要可以回答关于中心研究方向、团队成员、项目成果等相关问题。请问有什么可以帮到您的吗？😊'
                   }
-                  // 方式2: answer 字段
-                  else if (confirmData.answer) {
-                    extractedAnswer = confirmData.answer
-                    console.log('✓ 从 answer 提取:', extractedAnswer)
-                  }
-                  // 方式3: message.content
-                  else if (confirmData.message?.content) {
-                    extractedAnswer = confirmData.message.content
-                    console.log('✓ 从 message.content 提取:', extractedAnswer)
-                  }
-                  // 方式4: data.answer
-                  else if (confirmData.data?.answer) {
-                    extractedAnswer = confirmData.data.answer
-                    console.log('✓ 从 data.answer 提取:', extractedAnswer)
-                  }
-                  // 方式5: result
-                  else if (confirmData.result) {
-                    extractedAnswer = confirmData.result
-                    console.log('✓ 从 result 提取:', extractedAnswer)
-                  }
-                  
-                  if (!extractedAnswer || extractedAnswer.trim() === '') {
-                    console.error('❌ 未能从确认响应中提取答案')
-                    console.error('响应结构:', confirmData)
-                    aiResponse = '抱歉，未能获取答案。'
-                  } else {
-                    aiResponse = extractedAnswer
-                    console.log('✓ 最终使用的答案:', aiResponse)
-                  }
-                } catch (error) {
-                  console.error('自动确认请求失败:', error)
-                  aiResponse = '抱歉，获取答案时出现问题。'
                 }
               } else {
+                console.log('⚠️ needs_confirmation但没有建议问题')
                 aiResponse = '抱歉，未找到相关答案。'
               }
             } else if (firstChoice.message.text) {

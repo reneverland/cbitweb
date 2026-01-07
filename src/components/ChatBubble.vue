@@ -140,6 +140,24 @@
     </div>
   </div>
 
+  <!-- QA建议问题展示 -->
+  <div v-else-if="message.type === 'qa-suggestions'" class="chat-bubble">
+    <div class="flex items-start gap-4">
+      <div class="w-10 h-10 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center flex-shrink-0">
+        <i class="ri-robot-2-line text-white text-lg"></i>
+      </div>
+      <div class="flex-1">
+        <QASuggestions 
+          :suggestions="message.suggestions"
+          :originalQuery="message.originalQuery"
+          :locale="locale"
+          @select-qa="$emit('select-qa', $event)"
+          @skip-suggestions="$emit('skip-suggestions', $event)"
+        />
+      </div>
+    </div>
+  </div>
+
 </template>
 
 <script setup>
@@ -150,6 +168,7 @@ import CenterProjects from './CenterProjects.vue'
 import CenterNews from './CenterNews.vue'
 import ProjectsCard from './ProjectsCard.vue'
 import EducationSchools from './EducationSchools.vue'
+import QASuggestions from './QASuggestions.vue'
 import { i18n } from '../locales/index.js'
 
 const props = defineProps({
@@ -167,7 +186,7 @@ const props = defineProps({
   }
 })
 
-defineEmits(['select-qa', 'view-avatar', 'view-member-avatar'])
+defineEmits(['select-qa', 'view-avatar', 'view-member-avatar', 'skip-suggestions'])
 
 const t = computed(() => (key) => {
   const keys = key.split('.')

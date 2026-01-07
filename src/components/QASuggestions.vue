@@ -10,7 +10,7 @@
     <div class="space-y-2 mb-3">
       <div 
         v-for="(qa, index) in suggestions" 
-        :key="qa.id || index"
+        :key="qa.qa_id || qa.id || index"
         class="suggestion-card bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-gray-700 dark:to-gray-600 rounded-lg p-3 cursor-pointer hover:shadow-md transition-all duration-300 border-2 border-transparent hover:border-primary"
         @click="selectQA(qa)"
       >
