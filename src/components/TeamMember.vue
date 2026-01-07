@@ -123,15 +123,12 @@ const teamMembers = ref([
     email: 'litaoli@link.cuhk.edu.cn'
   },
   {
-    name: '刁玉钦',
-    nameEn: 'Diao Yuqin',
-    title: '研究助理 / Research Assistant',
-    expertise: '人工智能，多智能体协同优化，运筹优化',
-    avatar: '/sources/yuqin.png',
-    email: 'diaoyuqin@cuhk.edu.cn',
-    links: {
-      website: '/yuqinprofile.html'
-    }
+    name: '沈宇阳',
+    nameEn: 'Shen Yuyang',
+    title: '开发工程师 / Development Engineer',
+    expertise: '序列决策学习，表征学习，生成式智能体',
+    avatar: '/sources/yuyan.png',
+    email: 'yuyangshen@link.cuhk.edu.cn'
   },
   {
     name: '龚少一',
@@ -142,6 +139,17 @@ const teamMembers = ref([
     email: '12518440@zju.edu.cn',
     links: {
       website: '/shaoyiprofile.html'
+    }
+  },
+  {
+    name: '刁玉钦',
+    nameEn: 'Diao Yuqin',
+    title: '研究助理 / Research Assistant',
+    expertise: '人工智能，多智能体协同优化，运筹优化',
+    avatar: '/sources/yuqin.png',
+    email: 'diaoyuqin@cuhk.edu.cn',
+    links: {
+      website: '/yuqinprofile.html'
     }
   }
 ])
