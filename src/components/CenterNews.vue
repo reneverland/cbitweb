@@ -29,17 +29,18 @@
           </div>
           <div class="flex-1">
             <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">
-              {{ locale === 'zh' ? '研究 | 从"技术冰河"到"黄金时代"，赵建良教授发文解码生成式AI的范式迭代' : 'Research | From "Tech Winter" to "Golden Age": Prof. Zhao Decodes Generative AI Paradigm Shifts' }}
+              {{ locale === 'zh' ? 'ICSF2026 | 第11届国际智慧金融峰会征稿通知 · 2026年6月深圳大学' : 'ICSF2026 | Call for Papers – 11th International Conference on Smart Finance, June 2026' }}
             </h3>
             <p class="text-sm text-gray-500 dark:text-gray-400 mb-3 flex items-center gap-2">
               <i class="ri-calendar-line"></i>
-              March 28th, 2025
+              April 1st, 2026
             </p>
             <p class="text-sm text-gray-700 dark:text-gray-300 mb-4 line-clamp-2">
-              {{ locale === 'zh' ? '港中大（深圳）经管学院赵建良教授的合作研究在国际信息系统前沿期刊《Information Systems Frontiers》线上发表' : 'Prof. Zhao Jianliang\'s collaborative research published online in Information Systems Frontiers' }}
+              {{ locale === 'zh' ? 'ICSF2026 将于2026年6月25-26日在深圳大学丽湖校区举办，征稿截止2026年5月31日，诚邀学术界与业界人士投稿参会。' : 'ICSF 2026 will be held on June 25–26 at Shenzhen University. Paper submission deadline: May 31, 2026.' }}
             </p>
             <a 
-              href="#" 
+              href="/sources/ICSF/ICSF26/index.html" 
+              target="_blank"
               class="inline-flex items-center gap-1 text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 text-sm font-medium group"
             >
               {{ locale === 'zh' ? '阅读更多' : 'Read more' }}
@@ -102,6 +103,16 @@ const props = defineProps({
 const isExpanded = ref(false)
 
 const newsList = ref([
+  {
+    title: props.locale === 'zh'
+      ? 'ICSF2026 | 第11届国际智慧金融峰会征稿通知 · 2026年6月深圳大学'
+      : 'ICSF2026 | Call for Papers – 11th International Conference on Smart Finance, June 2026',
+    date: 'April 1st, 2026',
+    description: props.locale === 'zh'
+      ? 'ICSF2026 将于2026年6月25-26日在深圳大学丽湖校区举办，征稿截止2026年5月31日，诚邀学术界与业界人士投稿参会。'
+      : 'ICSF 2026 will be held on June 25–26 at Shenzhen University. Paper submission deadline: May 31, 2026.',
+    link: '/sources/ICSF/ICSF26/index.html'
+  },
   {
     title: props.locale === 'zh' 
       ? '研究 | 从"技术冰河"到"黄金时代"，赵建良教授发文解码生成式AI的范式迭代' 

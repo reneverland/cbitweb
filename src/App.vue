@@ -168,6 +168,7 @@ const showICSFMenu = ref(false)
 
 // ICSF会议系列数据
 const icsfYears = ref([
+  { year: '2026', location: 'Shenzhen, China', link: '/sources/ICSF/ICSF26/index.html' },
   { year: '2025', location: 'Shanghai, China', link: 'https://sem.tongji.edu.cn/ICSF2025/' },
   { year: '2024', location: 'Hefei, China', link: '/sources/ICSF/ICSF24/index.html' },
   { year: '2023', location: 'Dubai, UAE', link: '/sources/ICSF/ICSF23/index.html' },

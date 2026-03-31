@@ -1,0 +1,1325 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ICSF 2026 - The 11th International Conference on Smart Finance</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a365d;
+            --primary-light: #2c5282;
+            --accent: #c9a227;
+            --accent-light: #d4af37;
+            --text: #2d3748;
+            --text-light: #718096;
+            --bg: #ffffff;
+            --bg-light: #f7fafc;
+            --border: #e2e8f0;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--text);
+            line-height: 1.7;
+            background: var(--bg);
+        }
+        
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(26, 54, 93, 0.98);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 0 5%;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+        
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+        
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent);
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: rgba(255,255,255,0.9);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+        
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 50%, #1a365d 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            padding: 100px 5% 60px;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.5;
+        }
+        
+        .hero-content {
+            text-align: center;
+            color: white;
+            max-width: 900px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero-badge {
+            display: inline-block;
+            background: rgba(201, 162, 39, 0.2);
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 2rem;
+            letter-spacing: 2px;
+        }
+        
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.8rem;
+            font-weight: 300;
+            margin-bottom: 1.5rem;
+            opacity: 0.95;
+        }
+        
+        .hero-theme {
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            opacity: 0.9;
+            line-height: 1.8;
+        }
+        
+        .hero-info {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 2.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .hero-info-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1rem;
+        }
+        
+        .hero-info-item svg {
+            width: 24px;
+            height: 24px;
+            color: var(--accent);
+        }
+        
+        .hero-cta {
+            margin-top: 3rem;
+        }
+        
+        .btn-primary {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--primary);
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(201, 162, 39, 0.3);
+        }
+        
+        .btn-primary:hover {
+            background: var(--accent-light);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(201, 162, 39, 0.4);
+        }
+        
+        .btn-secondary {
+            display: inline-block;
+            background: transparent;
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            border: 2px solid rgba(255,255,255,0.3);
+            margin-left: 1rem;
+            transition: all 0.3s;
+        }
+        
+        .btn-secondary:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+        
+        /* Section Styles */
+        section {
+            padding: 80px 5%;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        
+        .section-label {
+            display: inline-block;
+            color: var(--accent);
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+        
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .section-subtitle {
+            color: var(--text-light);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Introduction */
+        .intro {
+            background: var(--bg-light);
+        }
+        
+        .intro-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+        
+        .intro-text {
+            font-size: 1.05rem;
+            line-height: 1.9;
+        }
+        
+        .intro-text p {
+            margin-bottom: 1.5rem;
+        }
+        
+        .intro-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        }
+        
+        .stat-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--accent);
+            font-weight: 700;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-top: 0.5rem;
+        }
+        
+        /* Organization */
+        .org-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .org-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 4px 25px rgba(0,0,0,0.06);
+            border: 1px solid var(--border);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .org-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 35px rgba(0,0,0,0.1);
+        }
+        
+        .org-card h3 {
+            color: var(--primary);
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid var(--accent);
+            display: inline-block;
+        }
+        
+        .org-list {
+            list-style: none;
+        }
+        
+        .org-list li {
+            padding: 0.6rem 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.95rem;
+        }
+        
+        .org-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .org-list .name {
+            font-weight: 600;
+            color: var(--text);
+        }
+        
+        .org-list .affiliation {
+            color: var(--text-light);
+            font-size: 0.85rem;
+            margin-left: 0.5rem;
+        }
+        
+        /* Call for Papers */
+        .cfp {
+            background: linear-gradient(180deg, var(--bg-light) 0%, white 100%);
+        }
+        
+        .topics-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+        
+        .topic-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1.25rem;
+            background: white;
+            border-radius: 10px;
+            border-left: 4px solid var(--accent);
+            box-shadow: 0 2px 15px rgba(0,0,0,0.04);
+        }
+        
+        .topic-item svg {
+            width: 20px;
+            height: 20px;
+            color: var(--accent);
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+        
+        .topic-text {
+            font-size: 0.95rem;
+        }
+        
+        .topic-text .zh {
+            color: var(--text);
+            font-weight: 500;
+        }
+        
+        .topic-text .en {
+            color: var(--text-light);
+            font-size: 0.85rem;
+            margin-top: 0.25rem;
+        }
+        
+        .cfp-info {
+            background: var(--primary);
+            color: white;
+            padding: 2.5rem;
+            border-radius: 16px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+        
+        .cfp-info-item h4 {
+            color: var(--accent);
+            font-size: 0.9rem;
+            margin-bottom: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .cfp-info-item p {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+        
+        .cfp-info-item a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+        
+        .cfp-info-item a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Keynotes */
+        .keynotes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+        
+        .keynote-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 25px rgba(0,0,0,0.08);
+            border: 1px solid var(--border);
+            transition: transform 0.3s;
+        }
+        
+        .keynote-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .keynote-image-wrap {
+            display: flex;
+            justify-content: center;
+            padding: 2rem 2rem 0;
+        }
+        
+        .keynote-image {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            object-fit: cover;
+            object-position: center 15%;
+            border: 4px solid var(--accent);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+            flex-shrink: 0;
+        }
+        
+        .keynote-content {
+            padding: 1.5rem 2rem 2rem;
+        }
+        
+        .keynote-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .keynote-bio {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            line-height: 1.7;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        
+        /* Registration */
+        .registration {
+            background: var(--bg-light);
+        }
+        
+        .reg-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+        
+        .reg-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 25px rgba(0,0,0,0.06);
+        }
+        
+        .reg-card h3 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+        }
+        
+        .fee-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .fee-item:last-child {
+            border-bottom: none;
+        }
+        
+        .fee-type {
+            font-size: 1rem;
+        }
+        
+        .fee-type span {
+            color: var(--text-light);
+            font-size: 0.85rem;
+        }
+        
+        .fee-amount {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--accent);
+            font-weight: 700;
+        }
+        
+        .bank-info {
+            background: var(--primary);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-top: 1.5rem;
+        }
+        
+        .bank-info h4 {
+            color: var(--accent);
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+        
+        .bank-info p {
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+            opacity: 0.9;
+        }
+        
+        /* Hotel */
+        .hotel-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+        
+        .hotel-gallery {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+        
+        .hotel-gallery img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 12px;
+            transition: transform 0.3s;
+        }
+        
+        .hotel-gallery img:hover {
+            transform: scale(1.03);
+        }
+        
+        .hotel-gallery img:first-child {
+            grid-column: span 2;
+            height: 240px;
+        }
+        
+        .hotel-info h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .hotel-info .en-name {
+            color: var(--text-light);
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .hotel-detail {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hotel-detail svg {
+            width: 20px;
+            height: 20px;
+            color: var(--accent);
+            flex-shrink: 0;
+            margin-top: 3px;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--primary);
+            color: white;
+            padding: 60px 5% 30px;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 3rem;
+        }
+        
+        .footer-brand h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+        
+        .footer-brand p {
+            opacity: 0.8;
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+        
+        .footer-links h4 {
+            color: var(--accent);
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer-links ul {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+        
+        .footer-links a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+        
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 3rem auto 0;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+            opacity: 0.6;
+            font-size: 0.85rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .intro-content,
+            .reg-content,
+            .hotel-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .topics-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .cfp-info {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background: var(--primary);
+                flex-direction: column;
+                padding: 1rem 5%;
+                gap: 1rem;
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .hero-info {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .btn-secondary {
+                margin-left: 0;
+                margin-top: 1rem;
+            }
+            
+            .intro-stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .keynotes-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Smooth scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Scroll animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s, transform 0.6s;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="logo">ICSF 2026</a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#about">会议简介</a></li>
+                <li><a href="#organization">会议组织</a></li>
+                <li><a href="#cfp">征稿信息</a></li>
+                <li><a href="#keynotes">特邀嘉宾</a></li>
+                <li><a href="#registration">注册信息</a></li>
+                <li><a href="#hotel">酒店信息</a></li>
+            </ul>
+            <button class="mobile-menu-btn" onclick="toggleMenu()">☰</button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">The 11th International Conference</div>
+            <h1>ICSF 2026</h1>
+            <p class="hero-subtitle">第11届国际智慧金融峰会</p>
+            <p class="hero-theme">
+                <strong>人工智能驱动的金融决策与市场监管</strong><br>
+                AI-Enabled Financial Decisions and the Future of Market Regulation
+            </p>
+            <div class="hero-info">
+                <div class="hero-info-item">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                    <span>2026年6月25-26日</span>
+                </div>
+                <div class="hero-info-item">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                    <span>深圳大学丽湖校区</span>
+                </div>
+                <div class="hero-info-item">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+                    <span>深圳，中国</span>
+                </div>
+            </div>
+            <div class="hero-cta">
+                <a href="https://www.paperfox.ai/conference/icsf2026/submission" class="btn-primary" target="_blank">立即投稿</a>
+                <a href="#about" class="btn-secondary">了解更多</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Introduction -->
+    <section class="intro" id="about">
+        <div class="container">
+            <div class="section-header fade-in">
+                <span class="section-label">About Conference</span>
+                <h2 class="section-title">会议简介</h2>
+                <p class="section-subtitle">Introduction</p>
+            </div>
+            <div class="intro-content">
+                <div class="intro-text fade-in">
+                    <p><strong>智慧金融国际会议（ICSF）</strong>创办于2016年，并隶属于信息系统协会（AIS）。多年来，ICSF 先后在香港城市大学（深圳）、中山大学、北京工业大学、香港中文大学（深圳）、香港大学、卧龙岗大学（迪拜）、中国科学技术大学、同济大学举办，推动研究人员与行业领袖之间围绕前沿议题展开深入交流与对话。</p>
+                    <p>智慧金融将金融科技与人工智能、区块链、大数据等数据驱动技术相结合，并融合数字货币、智能合约等新型金融模式。随着基础模型的快速演进，它们正推动智能金融的变革与升级，进一步拓展金融创新的边界。这些技术通过预测分析、个性化服务与风险管理等方式提升金融系统效能，但同时也带来伦理、隐私与监管等方面的挑战。</p>
+                    <p>ICSF2026 将通过主题演讲与论文分会等环节，搭建学术研究与产业实践之间的桥梁，聚焦并回应相关挑战，挖掘人工智能驱动金融创新和金融监管的机遇。</p>
+                </div>
+                <div class="intro-text fade-in">
+                    <p><strong>The International Conference on Smart Finance (ICSF)</strong> was founded in 2016 and is affiliated with the Association for Information Systems (AIS). Over the years, ICSF has been hosted by City University of Hong Kong (Shenzhen), Sun Yat-sen University, Beijing University of Technology, The Chinese University of Hong Kong (Shenzhen), The University of Hong Kong, the University of Wollongong (Dubai), the University of Science and Technology of China, and Tongji University, fostering in-depth exchanges and dialogue between researchers and industry leaders on cutting-edge topics.</p>
+                    <p>Smart finance integrates financial technology with data-driven technologies such as artificial intelligence, blockchain, and big data, while also incorporating emerging financial models including digital currencies and smart contracts. Through keynote speeches and paper sessions, ICSF 2026 will build a bridge between academic research and industry practice, focusing on and addressing these challenges while exploring opportunities for AI-driven financial innovation and market regulation.</p>
+                    <div class="intro-stats">
+                        <div class="stat-item">
+                            <div class="stat-number">11th</div>
+                            <div class="stat-label">届会议</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">8+</div>
+                            <div class="stat-label">举办城市</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">AIS</div>
+                            <div class="stat-label">隶属协会</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Organization -->
+    <section class="organization" id="organization">
+        <div class="container">
+            <div class="section-header fade-in">
+                <span class="section-label">Conference Organization</span>
+                <h2 class="section-title">会议组织</h2>
+                <p class="section-subtitle">Organizing Committee</p>
+            </div>
+            <div class="org-grid">
+                <div class="org-card fade-in">
+                    <h3>Conference Chairs 会议主席</h3>
+                    <ul class="org-list">
+                        <li><span class="name">Yulin FANG</span><span class="affiliation">The University of Hong Kong</span></li>
+                        <li><span class="name">Juan FENG</span><span class="affiliation">Tsinghua University</span></li>
+                        <li><span class="name">Weiguo ZHANG</span><span class="affiliation">Shenzhen University</span></li>
+                        <li><span class="name">J. Leon ZHAO</span><span class="affiliation">CUHK (Shenzhen)</span></li>
+                    </ul>
+                </div>
+                <div class="org-card fade-in">
+                    <h3>Program Chairs 程序主席</h3>
+                    <ul class="org-list">
+                        <li><span class="name">Kun CHEN</span><span class="affiliation">Shenzhen University</span></li>
+                        <li><span class="name">Wei DU</span><span class="affiliation">Renmin University of China</span></li>
+                        <li><span class="name">Chaoyue GAO</span><span class="affiliation">USTC</span></li>
+                    </ul>
+                </div>
+                <div class="org-card fade-in">
+                    <h3>Publicity Chairs 宣传主席</h3>
+                    <ul class="org-list">
+                        <li><span class="name">Zhao CAI</span><span class="affiliation">UNNC</span></li>
+                        <li><span class="name">Michael CHAU</span><span class="affiliation">HKU</span></li>
+                        <li><span class="name">Wei CHEN</span><span class="affiliation">UConn</span></li>
+                        <li><span class="name">Chunxiao LI</span><span class="affiliation">USTC</span></li>
+                        <li><span class="name">Zhepeng LI</span><span class="affiliation">HKU</span></li>
+                        <li><span class="name">Kristijan Mirkovski</span><span class="affiliation">Deakin</span></li>
+                        <li><span class="name">Karen XIE</span><span class="affiliation">UConn</span></li>
+                        <li><span class="name">Jiaqi YAN</span><span class="affiliation">Nanjing University</span></li>
+                        <li><span class="name">Jun ZHANG</span><span class="affiliation">Monash</span></li>
+                        <li><span class="name">Zhongyun ZHOU</span><span class="affiliation">Tongji</span></li>
+                    </ul>
+                </div>
+                <div class="org-card fade-in">
+                    <h3>Local Arrangement 本地安排</h3>
+                    <ul class="org-list">
+                        <li><span class="name">Rui CHEN</span><span class="affiliation">Shenzhen University</span></li>
+                        <li><span class="name">Shiqin CHEN</span><span class="affiliation">Shenzhen University</span></li>
+                        <li><span class="name">Kai YANG</span><span class="affiliation">Shenzhen University</span></li>
+                    </ul>
+                </div>
+                <div class="org-card fade-in" style="grid-column: span 2;">
+                    <h3>Advisory Committee 顾问委员会</h3>
+                    <ul class="org-list" style="columns: 2;">
+                        <li><span class="name">Bin GU</span><span class="affiliation">Boston University</span></li>
+                        <li><span class="name">Zhenhui JIANG</span><span class="affiliation">HKU</span></li>
+                        <li><span class="name">Gang KOU</span><span class="affiliation">SWUFE</span></li>
+                        <li><span class="name">Lingfang LI</span><span class="affiliation">Fudan</span></li>
+                        <li><span class="name">Li LIAO</span><span class="affiliation">Tsinghua</span></li>
+                        <li><span class="name">Hefu LIU</span><span class="affiliation">USTC</span></li>
+                        <li><span class="name">Shan LIU</span><span class="affiliation">XJTU</span></li>
+                        <li><span class="name">Yue MA</span><span class="affiliation">CityUHK</span></li>
+                        <li><span class="name">Chee-wee TAN</span><span class="affiliation">PolyU</span></li>
+                        <li><span class="name">Shouyang WANG</span><span class="affiliation">UCAS</span></li>
+                        <li><span class="name">Fan WANG</span><span class="affiliation">SYSU</span></li>
+                        <li><span class="name">Junjie WU</span><span class="affiliation">BUAA</span></li>
+                        <li><span class="name">Wei XU</span><span class="affiliation">RUC</span></li>
+                        <li><span class="name">Xiangbin YAN</span><span class="affiliation">GDUFS</span></li>
+                        <li><span class="name">Bohui ZHANG</span><span class="affiliation">CUHK-Shenzhen</span></li>
+                        <li><span class="name">Wei ZHANG</span><span class="affiliation">Tianjin University</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call for Papers -->
+    <section class="cfp" id="cfp">
+        <div class="container">
+            <div class="section-header fade-in">
+                <span class="section-label">Call for Papers</span>
+                <h2 class="section-title">征稿信息</h2>
+                <p class="section-subtitle">本届会议设有多种类型Tracks，征稿主题围绕人工智能驱动的金融决策与市场监管</p>
+            </div>
+            <div class="topics-grid">
+                <div class="topic-item fade-in">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    <div class="topic-text">
+                        <div class="zh">生成式人工智能、大语言模型与基础模型在金融领域的应用</div>
+                        <div class="en">Generative AI, LLMs, and fundamental models in finance.</div>
+                    </div>
+                </div>
+                <div class="topic-item fade-in">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    <div class="topic-text">
+                        <div class="zh">金融与商业经济学中AI/机器学习与基于主体的模型</div>
+                        <div class="en">AI/ML and agent-based models heterogeneity in financial and business economics.</div>
+                    </div>
+                </div>
+                <div class="topic-item fade-in">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    <div class="topic-text">
+                        <div class="zh">面向预测、因果推断与不确定性下决策的 AI/机器学习方法</div>
+                        <div class="en">AI/ML methods for forecasting, causal inference, and decision-making under uncertainty.</div>
+                    </div>
+                </div>
+                <div class="topic-item fade-in">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    <div class="topic-text">
+                        <div class="zh">用于稳健控制、动态规划与结构估计的深度学习方法（金融方向）</div>
+                        <div class="en">Deep learning for robust control, dynamic programming, and structural estimation in finance.</div>
+                    </div>
+                </div>
+                <div class="topic-item fade-in">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    <div class="topic-text">
+                        <div class="zh">金融 AI 系统中的算法透明性、可解释性、公平性与偏差问题</div>
+                        <div class="en">Algorithmic transparency, interpretability, fairness, and bias in financial AI systems.</div>
+                    </div>
+                </div>
+                <div class="topic-item fade-in">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    <div class="topic-text">
+                        <div class="zh">金融场景下以人为中心的 AI 与人机交互</div>
+                        <div class="en">Human-centered AI and human–machine interaction in financial contexts.</div>
+                    </div>
+                </div>
+                <div class="topic-item fade-in">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    <div class="topic-text">
+                        <div class="zh">金融 AI/机器学习带来的安全性、系统性风险与隐私挑战</div>
+                        <div class="en">Security, systemic risk, and privacy challenges in financial AI/ML.</div>
+                    </div>
+                </div>
+                <div class="topic-item fade-in">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    <div class="topic-text">
+                        <div class="zh">强化学习、联邦学习与迁移学习在金融应用中的研究与实践</div>
+                        <div class="en">Reinforcement, federated, and transfer learning in financial applications.</div>
+                    </div>
+                </div>
+                <div class="topic-item fade-in">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    <div class="topic-text">
+                        <div class="zh">用于欺诈检测与金融监管的 AI/机器学习方法</div>
+                        <div class="en">AI/ML for fraud detection and financial regulation.</div>
+                    </div>
+                </div>
+                <div class="topic-item fade-in">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    <div class="topic-text">
+                        <div class="zh">个性化金融建议与自动化投资服务</div>
+                        <div class="en">Personalized financial advice and automated investment services.</div>
+                    </div>
+                </div>
+                <div class="topic-item fade-in">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    <div class="topic-text">
+                        <div class="zh">面向金融决策的多模态 AI 系统</div>
+                        <div class="en">Multimodal AI systems for financial decision-making.</div>
+                    </div>
+                </div>
+                <div class="topic-item fade-in">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    <div class="topic-text">
+                        <div class="zh">实物资产通证化与跨市场风险传导机制研究</div>
+                        <div class="en">Real-World Asset Tokenization and Cross-Market Risk Transmission</div>
+                    </div>
+                </div>
+                <div class="topic-item fade-in">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    <div class="topic-text">
+                        <div class="zh">人工智能与去中心化金融交互下的系统性风险与监管协同研究</div>
+                        <div class="en">Systemic Risk and Supervisory Coordination in the Interaction between AI and Decentralized Finance</div>
+                    </div>
+                </div>
+            </div>
+            <div class="cfp-info fade-in">
+                <div class="cfp-info-item">
+                    <h4>投稿地址</h4>
+                    <p><a href="https://www.paperfox.ai/conference/icsf2026/submission" target="_blank">PaperFox Submission</a></p>
+                </div>
+                <div class="cfp-info-item">
+                    <h4>提交截止</h4>
+                    <p>2026年5月31日</p>
+                </div>
+                <div class="cfp-info-item">
+                    <h4>论文点评</h4>
+                    <p>会议将邀请资深教授和UTD期刊编辑对入选论文进行点评</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Keynotes -->
+    <section class="keynotes" id="keynotes">
+        <div class="container">
+            <div class="section-header fade-in">
+                <span class="section-label">Keynote Speakers</span>
+                <h2 class="section-title">拟邀请嘉宾</h2>
+                <p class="section-subtitle">Distinguished scholars from leading institutions worldwide</p>
+            </div>
+            <div class="keynotes-grid">
+                <div class="keynote-card fade-in">
+                    <div class="keynote-image-wrap">
+                        <img src="images/image1.png" alt="Leon J. Zhao" class="keynote-image">
+                    </div>
+                    <div class="keynote-content">
+                        <h3 class="keynote-name">Leon J. Zhao</h3>
+                        <p class="keynote-bio">Presidential Chair Professor at CUHK-Shenzhen, Co-Head of ISOM area, Director of MSc Programme in IM&amp;BA, and Director of CBIT. Internationally recognized scholar in information systems with research spanning Human-AI collaboration, FinTech, blockchain technology, and workflow management. Published in premier journals including MIS Quarterly, Information Systems Research, and Journal of MIS.</p>
+                    </div>
+                </div>
+                <div class="keynote-card fade-in">
+                    <div class="keynote-image-wrap">
+                        <img src="images/image2.png" alt="Jason Bennett Thatcher" class="keynote-image">
+                    </div>
+                    <div class="keynote-content">
+                        <h3 class="keynote-name">Jason Bennett Thatcher</h3>
+                        <p class="keynote-bio">Tandean Rustandy Esteemed Endowed Chair Professor at University of Colorado Boulder. Leading scholar in information systems research with work on individual decision-making, strategic alignment, cybersecurity, and digital leadership. Publications in MIS Quarterly, Information Systems Research, Journal of Applied Psychology, and other FT50/UTD journals with over 20,000 citations.</p>
+                    </div>
+                </div>
+                <div class="keynote-card fade-in">
+                    <div class="keynote-image-wrap">
+                        <img src="images/image3.jpeg" alt="Yulin Fang" class="keynote-image">
+                    </div>
+                    <div class="keynote-content">
+                        <h3 class="keynote-name">Yulin Fang</h3>
+                        <p class="keynote-bio">Professor of Innovation and Information Management at HKU Business School, Director of IDEI. Research focuses on digital innovation, digital transformation, platform ecosystems, and e-commerce dynamics. Over 80 articles in top-tier journals with 12,000+ citations and H-index of 45. Co-Editor-in-Chief of Information Technology &amp; People.</p>
+                    </div>
+                </div>
+                <div class="keynote-card fade-in">
+                    <div class="keynote-image-wrap">
+                        <img src="images/image4.png" alt="Huigang Liang" class="keynote-image">
+                    </div>
+                    <div class="keynote-content">
+                        <h3 class="keynote-name">Huigang Liang</h3>
+                        <p class="keynote-bio">Distinguished Professor at University of Memphis. Highly productive researcher in information systems with publications in MIS Quarterly, Information Systems Research, JAIS, and Journal of MIS. Research spans IT security, business-IT alignment, healthcare IT, and data analytics. Currently serves as Senior Editor for MIS Quarterly.</p>
+                    </div>
+                </div>
+                <div class="keynote-card fade-in">
+                    <div class="keynote-image-wrap">
+                        <img src="images/image5.jpeg" alt="Juan Feng" class="keynote-image">
+                    </div>
+                    <div class="keynote-content">
+                        <h3 class="keynote-name">Juan Feng</h3>
+                        <p class="keynote-bio">Hon Hai Chair Professor at Tsinghua University, Vice President of Region 3 of AIS (2022-2025). Published dozens of papers in UTD24-ranked journals. Research focuses on business and policy challenges posed by digital technologies. Senior Editor for Information Systems Research and Production and Operations Management.</p>
+                    </div>
+                </div>
+                <div class="keynote-card fade-in">
+                    <div class="keynote-image-wrap">
+                        <img src="images/image6.jpeg" alt="John Qi Dong" class="keynote-image">
+                    </div>
+                    <div class="keynote-content">
+                        <h3 class="keynote-name">John Qi Dong</h3>
+                        <p class="keynote-bio">Associate Professor with tenure and Assistant Dean at Nanyang Business School, NTU Singapore. Research on AI strategy, digital transformation, and business value of IT. Publications in Information Systems Research, Journal of Marketing, MIS Quarterly, Strategic Management Journal with 10,000+ citations. World's Top 1% Scientists (ranked #128 in IS scholars).</p>
+                    </div>
+                </div>
+                <div class="keynote-card fade-in">
+                    <div class="keynote-image-wrap">
+                        <img src="images/image8.jpeg" alt="Yong Ge" class="keynote-image">
+                    </div>
+                    <div class="keynote-content">
+                        <h3 class="keynote-name">Yong Ge</h3>
+                        <p class="keynote-bio">Associate Professor of Management Information Systems. Leading research in business analytics, data mining, machine learning, and recommender systems. Publications in MIS Quarterly, IEEE TKDE, and ACM SIGKDD. Recipient of the prestigious National Science Foundation (NSF) CAREER Award.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Registration -->
+    <section class="registration" id="registration">
+        <div class="container">
+            <div class="section-header fade-in">
+                <span class="section-label">Registration</span>
+                <h2 class="section-title">注册信息</h2>
+                <p class="section-subtitle">Conference Registration Fees</p>
+            </div>
+            <div class="reg-content">
+                <div class="reg-card fade-in">
+                    <h3>注册费用 Registration Fees</h3>
+                    <div class="fee-item">
+                        <div class="fee-type">学术人员 Academic/教师 <span>Faculty</span></div>
+                        <div class="fee-amount">¥1,500</div>
+                    </div>
+                    <div class="fee-item">
+                        <div class="fee-type">学生 Student <span>With valid ID</span></div>
+                        <div class="fee-amount">¥1,000</div>
+                    </div>
+                    <div class="bank-info">
+                        <h4>收款账户 Payment Information</h4>
+                        <p><strong>户名：</strong>深圳大学</p>
+                        <p><strong>账号：</strong>753675250026</p>
+                        <p><strong>开户行：</strong>中国银行深圳深大支行</p>
+                        <p style="margin-top: 1rem; color: var(--accent);"><strong>备注：</strong>姓名+单位+"ICSF2026"</p>
+                    </div>
+                </div>
+                <div class="reg-card fade-in">
+                    <h3>注册须知 Registration Notes</h3>
+                    <ul style="list-style: none; line-height: 2;">
+                        <li style="display: flex; align-items: flex-start; gap: 0.75rem;">
+                            <svg width="20" height="20" fill="none" stroke="var(--accent)" viewBox="0 0 24 24" style="flex-shrink: 0; margin-top: 4px;"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            <span>注册费包含会议资料、茶歇和午餐</span>
+                        </li>
+                        <li style="display: flex; align-items: flex-start; gap: 0.75rem;">
+                            <svg width="20" height="20" fill="none" stroke="var(--accent)" viewBox="0 0 24 24" style="flex-shrink: 0; margin-top: 4px;"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            <span>学生注册需提供有效学生证件</span>
+                        </li>
+                        <li style="display: flex; align-items: flex-start; gap: 0.75rem;">
+                            <svg width="20" height="20" fill="none" stroke="var(--accent)" viewBox="0 0 24 24" style="flex-shrink: 0; margin-top: 4px;"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            <span>转账时请务必注明姓名、单位和"ICSF2026"</span>
+                        </li>
+                        <li style="display: flex; align-items: flex-start; gap: 0.75rem;">
+                            <svg width="20" height="20" fill="none" stroke="var(--accent)" viewBox="0 0 24 24" style="flex-shrink: 0; margin-top: 4px;"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            <span>注册确认后我们将通过邮件发送参会凭证</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hotel -->
+    <section class="hotel" id="hotel">
+        <div class="container">
+            <div class="section-header fade-in">
+                <span class="section-label">Hotel Information</span>
+                <h2 class="section-title">酒店信息</h2>
+                <p class="section-subtitle">Recommended Accommodation</p>
+            </div>
+            <div class="hotel-content">
+                <div class="hotel-gallery fade-in">
+                    <img src="images/image9.jpeg" alt="Hotel Room">
+                    <img src="images/image10.jpeg" alt="Hotel Interior">
+                </div>
+                <div class="hotel-info fade-in">
+                    <h3>深圳南山塘朗城君璞酒店</h3>
+                    <p class="en-name">Shenzhen Nanshan Tanglang City Junlu Hotel</p>
+                    <div class="hotel-detail">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                        <div>
+                            <p>南山区留仙大道3333号塘朗城广场C座7层</p>
+                            <p style="color: var(--text-light); font-size: 0.9rem;">7th floor, C area, Tanglang City Square, 3333 Luxian Avenue, Nanshan District</p>
+                        </div>
+                    </div>
+                    <div class="hotel-detail">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                        <div>
+                            <p>0755-86639988</p>
+                        </div>
+                    </div>
+                    <p style="margin-top: 1.5rem; padding: 1rem; background: var(--bg-light); border-radius: 8px; font-size: 0.95rem;">
+                        <strong>温馨提示：</strong>会议期间酒店房间可能紧张，建议提前预订。预订时可说明参加ICSF2026会议，可能享受协议价格。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h3>ICSF 2026</h3>
+                <p>The 11th International Conference on Smart Finance<br>
+                第11届国际智慧金融峰会<br><br>
+                人工智能驱动的金融决策与市场监管<br>
+                AI-Enabled Financial Decisions and the Future of Market Regulation</p>
+            </div>
+            <div class="footer-links">
+                <h4>快速链接</h4>
+                <ul>
+                    <li><a href="#about">会议简介</a></li>
+                    <li><a href="#organization">会议组织</a></li>
+                    <li><a href="#cfp">征稿信息</a></li>
+                    <li><a href="#keynotes">特邀嘉宾</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>联系我们</h4>
+                <ul>
+                    <li><a href="#registration">注册信息</a></li>
+                    <li><a href="#hotel">酒店信息</a></li>
+                    <li><a href="https://www.paperfox.ai/conference/icsf2026/submission" target="_blank">在线投稿</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 ICSF - International Conference on Smart Finance. All rights reserved. | Affiliated with AIS</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        function toggleMenu() {
+            document.getElementById('navLinks').classList.toggle('active');
+        }
+        
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+        
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    // Close mobile menu if open
+                    document.getElementById('navLinks').classList.remove('active');
+                }
+            });
+        });
+        
+        // Navbar background on scroll
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.style.background = 'rgba(26, 54, 93, 0.98)';
+            } else {
+                nav.style.background = 'rgba(26, 54, 93, 0.98)';
+            }
+        });
+    </script>
+</body>
+</html>
