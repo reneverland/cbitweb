@@ -11,7 +11,7 @@
     >
       <div class="flex items-center justify-between h-14">
         <div class="flex items-center gap-3">
-          <img :src="isDark ? '/sources/logonight.png' : '/sources/logo3@2x.png'" alt="CBIT" class="h-10">
+          <img :src="isDark ? '/sources/logonight.png' : '/sources/logo3@2x.png'" alt="CBIT" class="h-7 sm:h-10">
         </div>
 
         <div class="hidden lg:flex items-center gap-1">
@@ -25,34 +25,34 @@
           </button>
         </div>
 
-        <div class="flex items-center gap-2">
+        <div class="flex items-center gap-1 sm:gap-2">
           <button
             @click="$emit('toggle-icsf')"
-            class="px-3 h-9 bg-gradient-brand rounded-full shadow-glow flex items-center gap-1.5 transition-all duration-300 hover:scale-105 hover:shadow-lg relative"
+            class="px-2 sm:px-3 h-8 sm:h-9 bg-gradient-brand rounded-full shadow-glow flex items-center gap-1 sm:gap-1.5 transition-all duration-300 hover:scale-105 hover:shadow-lg relative"
           >
-            <i class="ri-calendar-event-line text-white text-sm"></i>
-            <span class="text-xs font-bold text-white">ICSF</span>
-            <span class="absolute -top-1 -right-1 w-2.5 h-2.5 bg-red-500 rounded-full animate-pulse"></span>
+            <i class="ri-calendar-event-line text-white text-xs sm:text-sm"></i>
+            <span class="text-[10px] sm:text-xs font-bold text-white">ICSF</span>
+            <span class="absolute -top-1 -right-1 w-2 h-2 sm:w-2.5 sm:h-2.5 bg-red-500 rounded-full animate-pulse"></span>
           </button>
           <button
             @click="$emit('toggle-theme')"
-            class="w-9 h-9 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-105 hover:bg-gray-100 dark:hover:bg-gray-800"
+            class="w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-105 hover:bg-gray-100 dark:hover:bg-gray-800"
           >
-            <i class="ri-sun-line text-yellow-500 text-lg" v-if="!isDark"></i>
-            <i class="ri-moon-line text-blue-400 text-lg" v-else></i>
+            <i class="ri-sun-line text-yellow-500 text-base sm:text-lg" v-if="!isDark"></i>
+            <i class="ri-moon-line text-blue-400 text-base sm:text-lg" v-else></i>
           </button>
           <button
             @click="$emit('toggle-locale')"
-            class="px-3 h-9 rounded-full flex items-center gap-1.5 transition-all duration-300 hover:scale-105 hover:bg-gray-100 dark:hover:bg-gray-800"
+            class="px-2 sm:px-3 h-8 sm:h-9 rounded-full flex items-center gap-1 sm:gap-1.5 transition-all duration-300 hover:scale-105 hover:bg-gray-100 dark:hover:bg-gray-800"
           >
-            <i class="ri-translate-2 text-brand-purple text-lg"></i>
-            <span class="text-xs font-medium text-foreground">{{ locale === 'zh' ? '中/EN' : 'EN/中' }}</span>
+            <i class="ri-translate-2 text-brand-purple text-base sm:text-lg"></i>
+            <span class="text-[10px] sm:text-xs font-medium text-foreground">{{ locale === 'zh' ? '中/EN' : 'EN/中' }}</span>
           </button>
           <button
-            class="lg:hidden w-9 h-9 rounded-full flex items-center justify-center hover:bg-gray-100 dark:hover:bg-gray-800"
+            class="lg:hidden w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center hover:bg-gray-100 dark:hover:bg-gray-800"
             @click="isMobileMenuOpen = !isMobileMenuOpen"
           >
-            <i :class="isMobileMenuOpen ? 'ri-close-line' : 'ri-menu-line'" class="text-xl text-foreground"></i>
+            <i :class="isMobileMenuOpen ? 'ri-close-line' : 'ri-menu-line'" class="text-lg sm:text-xl text-foreground"></i>
           </button>
         </div>
       </div>

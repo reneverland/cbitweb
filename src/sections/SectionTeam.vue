@@ -170,7 +170,7 @@ const teamMembers = computed(() => [
   },
   {
     name: '徐睿沄', nameEn: 'Xu Ruiyun', title: '助理教授 / Assistant Professor',
-    role: props.locale === 'zh' ? '核心成员' : 'Core Member',
+    role: props.locale === 'zh' ? '助理教授' : 'Asst. Professor',
     expertise: '金融科技，人工智能，区块链，智能医疗',
     avatar: '/sources/xuruiyun.jpeg', email: 'ruiyunxu@cuhk.edu.cn', color: colors[2],
     education: [
@@ -222,11 +222,21 @@ const teamMembers = computed(() => [
     ],
   },
   {
+    name: '李沐子', nameEn: 'Li Muzi', title: '测试工程师 / Test Engineer',
+    role: props.locale === 'zh' ? '测试工程师' : 'Test Engineer',
+    expertise: props.locale === 'zh' ? '计算性城市设计，智慧城市，数字孪生' : 'Computational Urban Design, Smart City, Digital Twin',
+    avatar: '/sources/limuzi.jpg', email: '', color: colors[7 % colors.length],
+    education: [
+      { degree: 'MSc', field: props.locale === 'zh' ? '城市设计' : 'Urban Design', school: props.locale === 'zh' ? '香港中文大学' : 'CUHK' },
+      { degree: 'BS', field: props.locale === 'zh' ? '城乡规划' : 'Urban & Rural Planning', school: props.locale === 'zh' ? '海南大学' : 'Hainan University' },
+    ],
+  },
+  {
     name: '刁玉钦', nameEn: 'Diao Yuqin', title: '研究助理 / Research Assistant',
     role: props.locale === 'zh' ? '研究助理' : 'RA',
     expertise: '人工智能，多智能体协同优化，运筹优化',
     avatar: '/sources/yuqin.png', email: 'diaoyuqin@cuhk.edu.cn',
-    links: { website: '/yuqinprofile.html' }, color: colors[7],
+    links: { website: '/yuqinprofile.html' }, color: colors[0],
   },
 ])
 
