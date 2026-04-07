@@ -225,7 +225,7 @@ const teamMembers = computed(() => [
     name: '李沐子', nameEn: 'Li Muzi', title: '测试工程师 / Test Engineer',
     role: props.locale === 'zh' ? '测试工程师' : 'Test Engineer',
     expertise: props.locale === 'zh' ? '计算性城市设计，智慧城市，数字孪生' : 'Computational Urban Design, Smart City, Digital Twin',
-    avatar: '/sources/limuzi.jpg', email: '', color: colors[7 % colors.length],
+    avatar: '/sources/limuzi.jpg', email: 'limuzi@cuhk.edu.cn', color: colors[7 % colors.length],
     education: [
       { degree: 'MSc', field: props.locale === 'zh' ? '城市设计' : 'Urban Design', school: props.locale === 'zh' ? '香港中文大学' : 'CUHK' },
       { degree: 'BS', field: props.locale === 'zh' ? '城乡规划' : 'Urban & Rural Planning', school: props.locale === 'zh' ? '海南大学' : 'Hainan University' },

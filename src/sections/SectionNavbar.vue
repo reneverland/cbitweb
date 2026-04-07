@@ -11,7 +11,7 @@
     >
       <div class="flex items-center justify-between h-14">
         <div class="flex items-center gap-3">
-          <img :src="isDark ? '/sources/logonight.png' : '/sources/logo3@2x.png'" alt="CBIT" class="h-7 sm:h-10">
+          <img :src="isDark ? '/sources/logonight.png' : '/sources/logo3@2x.png'" alt="CBIT" class="h-6 sm:h-10 ml-1 sm:ml-0">
         </div>
 
         <div class="hidden lg:flex items-center gap-1">
