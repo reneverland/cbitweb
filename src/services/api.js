@@ -5,9 +5,9 @@ import axios from 'axios'
 const isDevelopment = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
 
 // 后端API服务器地址
-// 开发环境：直接访问API服务器
+// 开发环境：使用相对路径，通过Vite proxy代理到后端（避免CORS问题）
 // 生产环境：使用相对路径，通过Nginx反向代理到后端（避免HTTPS->HTTP的Mixed Content问题）
-const API_BASE_URL = isDevelopment ? 'http://113.106.62.42:9300' : ''
+const API_BASE_URL = ''
 
 // API密钥（必须与后端配置一致）
 const API_KEY = 'app_WZCqYKovpijz2CO4T5RyiOkuAsP5qlKe'

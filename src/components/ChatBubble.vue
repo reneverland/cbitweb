@@ -1,23 +1,24 @@
 <template>
   <!-- AI 消息气泡 -->
-  <div v-if="message.type === 'ai'" class="chat-bubble bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg border border-gray-200 dark:border-gray-700">
+  <div v-if="message.type === 'ai'" class="chat-bubble rounded-2xl p-6 shadow-lg border transition-all hover:shadow-xl"
+    :class="isProfilePage
+      ? 'bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl border-white/50 dark:border-gray-700/50 shadow-card'
+      : 'bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700'">
     <div class="flex items-start gap-4">
-      <!-- Profile页面使用个人头像，主页使用机器人图标 -->
       <img 
         v-if="isProfilePage" 
         src="/sources/rendashi.jpeg" 
         alt="Ren" 
-        class="w-14 h-14 rounded-xl object-cover flex-shrink-0 shadow-md cursor-pointer hover:scale-105 transition-transform duration-300"
+        class="w-11 h-11 rounded-full object-cover flex-shrink-0 shadow-glow cursor-pointer hover:scale-105 transition-transform duration-300 ring-2 ring-brand-purple/20"
         @click="$emit('view-avatar')"
-        title="点击查看大图"
       >
       <div v-else class="w-10 h-10 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center flex-shrink-0">
         <i class="ri-robot-2-line text-white text-lg"></i>
       </div>
       <div class="flex-1">
-        <div class="mb-2">
-          <span class="text-sm font-medium text-gray-900 dark:text-white">{{ isProfilePage ? t('profile.aiName') : t('aiName') }}</span>
-          <span class="text-xs text-gray-500 ml-2">{{ t('justNow') }}</span>
+        <div class="mb-2 flex items-center gap-2">
+          <span class="text-sm font-semibold" :class="isProfilePage ? 'font-display text-gradient' : 'text-gray-900 dark:text-white'">{{ isProfilePage ? t('profile.aiName') : t('aiName') }}</span>
+          <span class="text-xs text-muted-foreground">{{ t('justNow') }}</span>
         </div>
         <div v-if="message.content === 'typing'" class="typing-indicator">
           <div class="typing-dot"></div>
@@ -25,23 +26,24 @@
           <div class="typing-dot"></div>
         </div>
         <div v-else class="prose dark:prose-invert max-w-none">
-          <p class="text-sm text-gray-800 dark:text-gray-200 leading-relaxed whitespace-pre-line" v-html="formatContent(getMessageContent(message.content))"></p>
+          <p class="text-sm leading-relaxed whitespace-pre-line" :class="isProfilePage ? 'text-foreground/85' : 'text-gray-800 dark:text-gray-200'" v-html="formatContent(getMessageContent(message.content))"></p>
         </div>
       </div>
     </div>
   </div>
 
   <!-- 用户消息气泡 -->
-  <div v-else-if="message.type === 'user'" class="chat-bubble bg-primary text-white rounded-2xl p-6 shadow-lg">
+  <div v-else-if="message.type === 'user'" class="chat-bubble rounded-2xl p-6 shadow-lg text-white"
+    :class="isProfilePage ? 'bg-gradient-brand shadow-glow' : 'bg-primary'">
     <div class="flex items-start gap-4 justify-end">
       <div class="flex-1 text-right">
         <div class="mb-2">
-          <span class="text-sm font-medium">{{ t('you') }}</span>
+          <span class="text-sm font-semibold">{{ t('you') }}</span>
           <span class="text-xs opacity-75 ml-2">{{ t('justNow') }}</span>
         </div>
         <p class="text-sm leading-relaxed">{{ message.content }}</p>
       </div>
-      <div class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center flex-shrink-0">
+      <div class="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0" :class="isProfilePage ? 'bg-white/20 backdrop-blur-sm' : 'bg-white bg-opacity-20'">
         <i class="ri-user-line text-white text-lg"></i>
       </div>
     </div>
@@ -85,19 +87,18 @@
   </div>
 
   <!-- 个人AI项目展示 -->
-  <div v-else-if="message.type === 'profile-projects'" class="chat-bubble bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg border border-gray-200 dark:border-gray-700">
+  <div v-else-if="message.type === 'profile-projects'" class="chat-bubble rounded-2xl p-6 shadow-card border transition-all hover:shadow-xl bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl border-white/50 dark:border-gray-700/50">
     <div class="flex items-start gap-4">
       <img 
         src="/sources/rendashi.jpeg" 
         alt="Ren" 
-        class="w-14 h-14 rounded-xl object-cover flex-shrink-0 shadow-md cursor-pointer hover:scale-105 transition-transform duration-300"
+        class="w-11 h-11 rounded-full object-cover flex-shrink-0 shadow-glow cursor-pointer hover:scale-105 transition-transform duration-300 ring-2 ring-brand-purple/20"
         @click="$emit('view-avatar')"
-        title="点击查看大图"
       >
       <div class="flex-1">
-        <div class="mb-2">
-          <span class="text-sm font-medium text-gray-900 dark:text-white">{{ t('profile.aiName') }}</span>
-          <span class="text-xs text-gray-500 ml-2">{{ t('justNow') }}</span>
+        <div class="mb-2 flex items-center gap-2">
+          <span class="text-sm font-semibold font-display text-gradient">{{ t('profile.aiName') }}</span>
+          <span class="text-xs text-muted-foreground">{{ t('justNow') }}</span>
         </div>
         <ProjectsCard :locale="locale" />
       </div>
@@ -105,19 +106,18 @@
   </div>
 
   <!-- 个人教育背景展示 -->
-  <div v-else-if="message.type === 'education-schools'" class="chat-bubble bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg border border-gray-200 dark:border-gray-700">
+  <div v-else-if="message.type === 'education-schools'" class="chat-bubble rounded-2xl p-6 shadow-card border transition-all hover:shadow-xl bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl border-white/50 dark:border-gray-700/50">
     <div class="flex items-start gap-4">
       <img 
         src="/sources/rendashi.jpeg" 
         alt="Ren" 
-        class="w-14 h-14 rounded-xl object-cover flex-shrink-0 shadow-md cursor-pointer hover:scale-105 transition-transform duration-300"
+        class="w-11 h-11 rounded-full object-cover flex-shrink-0 shadow-glow cursor-pointer hover:scale-105 transition-transform duration-300 ring-2 ring-brand-purple/20"
         @click="$emit('view-avatar')"
-        title="点击查看大图"
       >
       <div class="flex-1">
-        <div class="mb-2">
-          <span class="text-sm font-medium text-gray-900 dark:text-white">{{ t('profile.aiName') }}</span>
-          <span class="text-xs text-gray-500 ml-2">{{ t('justNow') }}</span>
+        <div class="mb-2 flex items-center gap-2">
+          <span class="text-sm font-semibold font-display text-gradient">{{ t('profile.aiName') }}</span>
+          <span class="text-xs text-muted-foreground">{{ t('justNow') }}</span>
         </div>
         <EducationSchools :locale="locale" />
       </div>

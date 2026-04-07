@@ -1,1 +1,174 @@
-1234567
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ICSF - International Conference on Smart Finance</title>
+  <link rel="icon" type="image/png" href="/sources/logo33.png">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Poppins', 'Inter', 'sans-serif'],
+          },
+          colors: {
+            brand: { purple: '#6941C6', 'purple-dark': '#53389E', 'purple-light': '#E9E8FF', blue: '#0082f3' },
+          },
+        },
+      },
+    }
+  </script>
+  <style>
+    .text-gradient {
+      background: linear-gradient(135deg, #6941C6 0%, #0082f3 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .bg-gradient-brand {
+      background: linear-gradient(135deg, #6941C6 0%, #0082f3 100%);
+    }
+    html { scroll-behavior: smooth; }
+    .conf-card { transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+    .conf-card:hover { transform: translateY(-6px); box-shadow: 0 12px 40px rgba(105,65,198,0.15); }
+  </style>
+</head>
+<body class="bg-white text-gray-900 font-sans antialiased">
+  <div class="min-h-screen">
+    <!-- Header -->
+    <header class="relative overflow-hidden">
+      <div class="absolute inset-0 bg-gradient-to-br from-white via-brand-purple-light/30 to-blue-50/10" />
+      <div class="absolute inset-0 opacity-[0.03]" style="background-image: linear-gradient(#6941C6 1px, transparent 1px), linear-gradient(90deg, #6941C6 1px, transparent 1px); background-size: 60px 60px"></div>
+      <div class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <nav class="flex items-center justify-between mb-12">
+          <a href="/" class="flex items-center gap-3">
+            <img src="/sources/logo3@2x.png" alt="CBIT" class="h-12">
+            <div>
+              <h1 class="font-display font-semibold text-sm text-gray-900">CBIT Research Center</h1>
+              <p class="text-xs text-gray-500">CUHK-Shenzhen</p>
+            </div>
+          </a>
+          <div class="flex items-center gap-4">
+            <a href="/" class="text-sm text-gray-600 hover:text-brand-purple transition-colors">
+              <i class="ri-arrow-left-line"></i>
+              <span id="back-text">Back to Home</span>
+            </a>
+            <button onclick="toggleLang()" class="px-3 py-1.5 rounded-full text-sm font-medium text-gray-600 hover:text-brand-purple border border-gray-200 hover:border-brand-purple/30 transition-all">
+              <i class="ri-translate-2 mr-1"></i><span id="lang-toggle-text">中文</span>
+            </button>
+          </div>
+        </nav>
+
+        <div class="text-center max-w-3xl mx-auto pb-12">
+          <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-purple-light/50 border border-brand-purple/20 mb-6">
+            <i class="ri-calendar-event-line text-brand-purple"></i>
+            <span class="text-sm font-medium text-brand-purple-dark" id="badge-text">Annual Academic Conference</span>
+          </div>
+          <h1 class="font-display text-5xl sm:text-6xl font-bold mb-4">
+            <span class="text-gradient">ICSF</span>
+          </h1>
+          <h2 class="font-display text-2xl sm:text-3xl text-gray-700 mb-6" id="subtitle-text">
+            International Conference on Smart Finance
+          </h2>
+          <p class="text-lg text-gray-500 max-w-2xl mx-auto" id="desc-text">
+            An annual academic event hosted by CBIT Research Center, bringing together researchers, practitioners, and policymakers in smart finance, blockchain, and AI.
+          </p>
+        </div>
+      </div>
+    </header>
+
+    <!-- CTA Banner -->
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 -mt-6 relative z-20 mb-12">
+      <div class="bg-gradient-brand rounded-2xl p-6 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-lg">
+        <div class="flex items-center gap-4 text-white">
+          <div class="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center">
+            <i class="ri-megaphone-line text-2xl"></i>
+          </div>
+          <div>
+            <h3 class="font-display font-semibold text-lg" id="cta-title">ICSF2026 Call for Papers</h3>
+            <p class="text-sm text-white/80" id="cta-desc">Submission Deadline: May 31, 2026</p>
+          </div>
+        </div>
+        <a href="/sources/ICSF/ICSF26/index.html" class="px-6 py-3 bg-white text-brand-purple font-medium rounded-full hover:bg-white/90 transition-colors whitespace-nowrap flex items-center gap-2">
+          <i class="ri-file-text-line"></i>
+          <span id="cta-btn-text">Learn More</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Conference Timeline -->
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-24">
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6" id="conference-grid"></div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <p class="text-sm text-white/50">&copy; 2026 CBIT Research Center &middot; CUHK-Shenzhen</p>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    const conferences = [
+      { year: 2026, title: 'ICSF2026', location: 'Shenzhen University', locationZh: '深圳大学', date: 'June 25-26, 2026', dateZh: '2026年6月25-26日', link: '/sources/ICSF/ICSF26/index.html', status: 'upcoming', color: 'from-purple-500 to-blue-500' },
+      { year: 2025, title: 'ICSF2025', location: 'Tongji University, Shanghai', locationZh: '同济大学 · 上海', date: 'July 1-2, 2025', dateZh: '2025年7月1-2日', link: 'https://sem.tongji.edu.cn/ICSF2025/', color: 'from-blue-500 to-cyan-500' },
+      { year: 2024, title: 'ICSF2024', location: 'USTC, Anhui', locationZh: '中国科技大学 · 安徽', date: 'July 27-28, 2024', dateZh: '2024年7月27-28日', link: '/sources/ICSF/ICSF24/index.html', color: 'from-emerald-500 to-teal-500' },
+      { year: 2023, title: 'ICSF2023', location: 'UOWD, Dubai', locationZh: '迪拜', date: 'August 4-6, 2023', dateZh: '2023年8月4-6日', link: '/sources/ICSF/ICSF23/index.html', color: 'from-violet-500 to-purple-500' },
+      { year: 2022, title: 'ICSF2022', location: 'HKU, Hong Kong', locationZh: '香港大学 · 香港', date: 'August 19-20, 2022', dateZh: '2022年8月19-20日', link: '/sources/ICSF/ICSF22/index.html', color: 'from-orange-500 to-amber-500' },
+      { year: 2021, title: 'ICSF2021', location: 'CUHK-Shenzhen', locationZh: '港中大(深圳)', date: 'August 20-21, 2021', dateZh: '2021年8月20-21日', link: '/sources/ICSF/ICSF21/index.html', color: 'from-pink-500 to-rose-500' },
+      { year: 2020, title: 'ICSF2020', location: 'Beijing (Online)', locationZh: '北戴河（线上）', date: 'August 20-22, 2020', dateZh: '2020年8月20-22日', link: '/sources/ICSF/ICSF20/index.html', color: 'from-cyan-500 to-sky-500' },
+      { year: 2019, title: 'ICSF2019', location: 'Beijing', locationZh: '北京', date: 'July 26-28, 2019', dateZh: '2019年7月26-28日', link: '/sources/ICSF/ICSF19/index.html', color: 'from-indigo-500 to-blue-500' },
+      { year: 2018, title: 'ICSF2018', location: 'Shenzhen', locationZh: '深圳', date: 'July 7-8, 2018', dateZh: '2018年7月7-8日', link: '/sources/ICSF/ICSF18/index.html', color: 'from-purple-500 to-blue-500' },
+      { year: 2017, title: 'ICSF2017', location: 'Guangzhou', locationZh: '广州', date: 'July 16-17, 2017', dateZh: '2017年7月16-17日', link: '/sources/ICSF/ICSF17/index.html', color: 'from-emerald-500 to-teal-500' },
+      { year: 2016, title: 'ICSF2016', location: 'Shenzhen', locationZh: '深圳', date: 'May 20-21, 2016', dateZh: '2016年5月20-21日', link: '/sources/ICSF/ICSF16/index.html', color: 'from-blue-500 to-cyan-500' },
+    ];
+
+    let lang = 'en';
+
+    function renderConferences() {
+      const grid = document.getElementById('conference-grid');
+      grid.innerHTML = conferences.map(c => `
+        <a href="${c.link}" target="_blank" class="conf-card block rounded-2xl bg-white border border-gray-200 overflow-hidden group">
+          <div class="h-2 bg-gradient-to-r ${c.color}"></div>
+          <div class="p-6">
+            <div class="flex items-center justify-between mb-4">
+              <span class="font-display text-3xl font-bold text-gradient">${c.year}</span>
+              ${c.status === 'upcoming' ? `<span class="px-2 py-0.5 text-xs rounded-full bg-green-100 text-green-700 font-medium">${lang === 'zh' ? '即将举办' : 'Upcoming'}</span>` : ''}
+            </div>
+            <h3 class="font-display text-xl font-semibold text-gray-900 group-hover:text-brand-purple transition-colors mb-2">${c.title}</h3>
+            <div class="space-y-1.5 text-sm text-gray-500">
+              <div class="flex items-center gap-1.5"><i class="ri-calendar-line text-brand-purple"></i>${lang === 'zh' ? c.dateZh : c.date}</div>
+              <div class="flex items-center gap-1.5"><i class="ri-map-pin-line text-brand-purple"></i>${lang === 'zh' ? c.locationZh : c.location}</div>
+            </div>
+            <div class="mt-4 flex items-center gap-2 text-sm font-medium text-brand-purple group-hover:gap-3 transition-all">
+              <span>${lang === 'zh' ? '查看详情' : 'View Details'}</span>
+              <i class="ri-arrow-right-s-line"></i>
+            </div>
+          </div>
+        </a>
+      `).join('');
+    }
+
+    function toggleLang() {
+      lang = lang === 'en' ? 'zh' : 'en';
+      document.getElementById('lang-toggle-text').textContent = lang === 'zh' ? 'EN' : '中文';
+      document.getElementById('back-text').textContent = lang === 'zh' ? '返回首页' : 'Back to Home';
+      document.getElementById('badge-text').textContent = lang === 'zh' ? '年度学术会议' : 'Annual Academic Conference';
+      document.getElementById('subtitle-text').textContent = lang === 'zh' ? '国际智能金融研讨会' : 'International Conference on Smart Finance';
+      document.getElementById('desc-text').textContent = lang === 'zh' ? '由链智科技研究中心主办的年度学术盛会，汇聚智能金融、区块链与人工智能领域的研究者、从业者及决策者。' : 'An annual academic event hosted by CBIT Research Center, bringing together researchers, practitioners, and policymakers in smart finance, blockchain, and AI.';
+      document.getElementById('cta-title').textContent = lang === 'zh' ? 'ICSF2026 征稿中' : 'ICSF2026 Call for Papers';
+      document.getElementById('cta-desc').textContent = lang === 'zh' ? '截稿日期: 2026年5月31日' : 'Submission Deadline: May 31, 2026';
+      document.getElementById('cta-btn-text').textContent = lang === 'zh' ? '了解更多' : 'Learn More';
+      renderConferences();
+    }
+
+    renderConferences();
+  </script>
+</body>
+</html>

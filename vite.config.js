@@ -6,7 +6,13 @@ export default defineConfig({
   plugins: [vue()],
   server: {
     port: 3000,
-    host: true
+    host: true,
+    proxy: {
+      '/api': {
+        target: 'http://113.106.62.42:9300',
+        changeOrigin: true,
+      }
+    }
   },
   build: {
     // 确保所有静态资源都被复制

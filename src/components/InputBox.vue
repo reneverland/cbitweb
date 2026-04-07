@@ -153,37 +153,36 @@ const sendQuickQuestion = (question) => {
   transform: translateX(-50%) translateY(-2px);
 }
 
-/* Profile 页面特殊样式 - 融入背景 */
+/* Profile 页面特殊样式 */
 .input-box-container.profile-page {
-  z-index: 5 !important;
+  z-index: 50 !important;
 }
 
 .input-box-container.profile-page .input-box-inner {
-  background: rgba(249, 250, 251, 0.08) !important;
+  background: rgba(255, 255, 255, 0.85) !important;
   backdrop-filter: blur(20px) !important;
   -webkit-backdrop-filter: blur(20px) !important;
-  border: 1px solid rgba(209, 213, 219, 0.1) !important;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03) !important;
+  border: 1px solid rgba(105, 65, 198, 0.15) !important;
+  box-shadow: 0 8px 32px rgba(105, 65, 198, 0.08), 0 0 0 1px rgba(255, 255, 255, 0.5) inset !important;
+  border-radius: 1.25rem !important;
 }
 
-/* Dark mode 样式 - 使用多种选择器确保匹配 */
 :global(.dark) .input-box-container.profile-page .input-box-inner,
-:global(body:has(.dark)) .input-box-container.profile-page .input-box-inner,
-.input-box-container.profile-page .input-box-inner:global(.dark) {
-  background: rgba(17, 24, 39, 0.08) !important;
-  border-color: rgba(75, 85, 99, 0.1) !important;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
+:global(body:has(.dark)) .input-box-container.profile-page .input-box-inner {
+  background: rgba(31, 41, 55, 0.85) !important;
+  border-color: rgba(105, 65, 198, 0.2) !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.05) inset !important;
 }
 
 .input-box-container.profile-page:hover .input-box-inner {
-  background: rgba(249, 250, 251, 0.15) !important;
-  border-color: rgba(209, 213, 219, 0.2) !important;
+  border-color: rgba(105, 65, 198, 0.3) !important;
+  box-shadow: 0 8px 32px rgba(105, 65, 198, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.5) inset !important;
 }
 
 :global(.dark) .input-box-container.profile-page:hover .input-box-inner,
 :global(body:has(.dark)) .input-box-container.profile-page:hover .input-box-inner {
-  background: rgba(17, 24, 39, 0.15) !important;
-  border-color: rgba(75, 85, 99, 0.2) !important;
+  border-color: rgba(105, 65, 198, 0.35) !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.1) inset !important;
 }
 
 /* 添加动画 */

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -779,6 +779,24 @@
             }
         }
         
+        .lang-toggle {
+            background: rgba(201, 162, 39, 0.2);
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        .lang-toggle:hover {
+            background: var(--accent);
+            color: var(--primary);
+        }
+        [data-lang="en"] .lang-zh { display: none; }
+        [data-lang="zh"] .lang-en { display: none; }
+
         /* Smooth scroll */
         html {
             scroll-behavior: smooth;
@@ -797,19 +815,20 @@
         }
     </style>
 </head>
-<body>
+<body data-lang="en">
     <!-- Navigation -->
     <nav>
         <div class="nav-container">
             <a href="#" class="logo">ICSF 2026</a>
             <ul class="nav-links" id="navLinks">
-                <li><a href="#about">会议简介</a></li>
-                <li><a href="#organization">会议组织</a></li>
-                <li><a href="#cfp">征稿信息</a></li>
-                <li><a href="#keynotes">特邀嘉宾</a></li>
-                <li><a href="#registration">注册信息</a></li>
-                <li><a href="#hotel">酒店信息</a></li>
-                <li><a href="https://cbit.cuhk.edu.cn" target="_blank" style="color: var(--accent); border: 1px solid var(--accent); padding: 0.2rem 0.75rem; border-radius: 20px; font-size: 0.8rem;">Webhost: CBIT</a></li>
+                <li><a href="#about"><span class="lang-en">About</span><span class="lang-zh">会议简介</span></a></li>
+                <li><a href="#organization"><span class="lang-en">Organization</span><span class="lang-zh">会议组织</span></a></li>
+                <li><a href="#cfp"><span class="lang-en">Call for Papers</span><span class="lang-zh">征稿信息</span></a></li>
+                <li><a href="#keynotes"><span class="lang-en">Speakers</span><span class="lang-zh">特邀嘉宾</span></a></li>
+                <li><a href="#registration"><span class="lang-en">Registration</span><span class="lang-zh">注册信息</span></a></li>
+                <li><a href="#hotel"><span class="lang-en">Hotel</span><span class="lang-zh">酒店信息</span></a></li>
+                <li><button class="lang-toggle" onclick="toggleLang()">中文 / EN</button></li>
+                <li><a href="https://cbit.cuhk.edu.cn" target="_blank" style="color: var(--accent); border: 1px solid var(--accent); padding: 0.2rem 0.75rem; border-radius: 20px; font-size: 0.8rem;">CBIT</a></li>
             </ul>
             <button class="mobile-menu-btn" onclick="toggleMenu()">☰</button>
         </div>
@@ -820,28 +839,31 @@
         <div class="hero-content">
             <div class="hero-badge">The 11th International Conference</div>
             <h1>ICSF 2026</h1>
-            <p class="hero-subtitle">第11届国际智慧金融峰会</p>
+            <p class="hero-subtitle">
+                <span class="lang-en">The 11th International Conference on Smart Finance</span>
+                <span class="lang-zh">第11届国际智慧金融峰会</span>
+            </p>
             <p class="hero-theme">
-                <strong>人工智能驱动的金融决策与市场监管</strong><br>
-                AI-Enabled Financial Decisions and the Future of Market Regulation
+                <span class="lang-en"><strong>AI-Enabled Financial Decisions and the Future of Market Regulation</strong></span>
+                <span class="lang-zh"><strong>人工智能驱动的金融决策与市场监管</strong><br>AI-Enabled Financial Decisions and the Future of Market Regulation</span>
             </p>
             <div class="hero-info">
                 <div class="hero-info-item">
                     <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                    <span>2026年6月25-26日</span>
+                    <span><span class="lang-en">June 25-26, 2026</span><span class="lang-zh">2026年6月25-26日</span></span>
                 </div>
                 <div class="hero-info-item">
                     <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                    <span>深圳大学丽湖校区</span>
+                    <span><span class="lang-en">Shenzhen University, Lihu Campus</span><span class="lang-zh">深圳大学丽湖校区</span></span>
                 </div>
                 <div class="hero-info-item">
                     <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
-                    <span>深圳，中国</span>
+                    <span><span class="lang-en">Shenzhen, China</span><span class="lang-zh">深圳，中国</span></span>
                 </div>
             </div>
             <div class="hero-cta">
-                <a href="https://www.paperfox.ai/conference/icsf2026/submission" class="btn-primary" target="_blank">立即投稿</a>
-                <a href="#about" class="btn-secondary">了解更多</a>
+                <a href="https://www.paperfox.ai/conference/icsf2026/submission" class="btn-primary" target="_blank"><span class="lang-en">Submit Paper</span><span class="lang-zh">立即投稿</span></a>
+                <a href="#about" class="btn-secondary"><span class="lang-en">Learn More</span><span class="lang-zh">了解更多</span></a>
             </div>
         </div>
     </section>
@@ -851,30 +873,35 @@
         <div class="container">
             <div class="section-header fade-in">
                 <span class="section-label">About Conference</span>
-                <h2 class="section-title">会议简介</h2>
-                <p class="section-subtitle">Introduction</p>
+                <h2 class="section-title"><span class="lang-en">About ICSF</span><span class="lang-zh">会议简介</span></h2>
+                <p class="section-subtitle"><span class="lang-en">Introduction to the Conference</span><span class="lang-zh">Introduction</span></p>
             </div>
             <div class="intro-content">
                 <div class="intro-text fade-in">
-                    <p><strong>智慧金融国际会议（ICSF）</strong>创办于2016年，并隶属于信息系统协会（AIS）。多年来，ICSF 先后在香港城市大学（深圳）、中山大学、北京工业大学、香港中文大学（深圳）、香港大学、卧龙岗大学（迪拜）、中国科学技术大学、同济大学举办，推动研究人员与行业领袖之间围绕前沿议题展开深入交流与对话。</p>
-                    <p>智慧金融将金融科技与人工智能、区块链、大数据等数据驱动技术相结合，并融合数字货币、智能合约等新型金融模式。随着基础模型的快速演进，它们正推动智能金融的变革与升级，进一步拓展金融创新的边界。这些技术通过预测分析、个性化服务与风险管理等方式提升金融系统效能，但同时也带来伦理、隐私与监管等方面的挑战。</p>
-                    <p>ICSF2026 将通过主题演讲与论文分会等环节，搭建学术研究与产业实践之间的桥梁，聚焦并回应相关挑战，挖掘人工智能驱动金融创新和金融监管的机遇。</p>
+                    <span class="lang-en">
+                        <p><strong>The International Conference on Smart Finance (ICSF)</strong> was founded in 2016 and is affiliated with the Association for Information Systems (AIS). Over the years, ICSF has been hosted by City University of Hong Kong (Shenzhen), Sun Yat-sen University, Beijing University of Technology, The Chinese University of Hong Kong (Shenzhen), The University of Hong Kong, the University of Wollongong (Dubai), the University of Science and Technology of China, and Tongji University, fostering in-depth exchanges and dialogue between researchers and industry leaders on cutting-edge topics.</p>
+                        <p>Smart finance integrates financial technology with data-driven technologies such as artificial intelligence, blockchain, and big data, while also incorporating emerging financial models including digital currencies and smart contracts. As foundation models rapidly evolve, they are driving transformation and upgrades in intelligent finance, further expanding the boundaries of financial innovation.</p>
+                        <p>Through keynote speeches and paper sessions, ICSF 2026 will build a bridge between academic research and industry practice, focusing on and addressing these challenges while exploring opportunities for AI-driven financial innovation and market regulation.</p>
+                    </span>
+                    <span class="lang-zh">
+                        <p><strong>智慧金融国际会议（ICSF）</strong>创办于2016年，并隶属于信息系统协会（AIS）。多年来，ICSF 先后在香港城市大学（深圳）、中山大学、北京工业大学、香港中文大学（深圳）、香港大学、卧龙岗大学（迪拜）、中国科学技术大学、同济大学举办，推动研究人员与行业领袖之间围绕前沿议题展开深入交流与对话。</p>
+                        <p>智慧金融将金融科技与人工智能、区块链、大数据等数据驱动技术相结合，并融合数字货币、智能合约等新型金融模式。随着基础模型的快速演进，它们正推动智能金融的变革与升级，进一步拓展金融创新的边界。</p>
+                        <p>ICSF2026 将通过主题演讲与论文分会等环节，搭建学术研究与产业实践之间的桥梁，聚焦并回应相关挑战，挖掘人工智能驱动金融创新和金融监管的机遇。</p>
+                    </span>
                 </div>
                 <div class="intro-text fade-in">
-                    <p><strong>The International Conference on Smart Finance (ICSF)</strong> was founded in 2016 and is affiliated with the Association for Information Systems (AIS). Over the years, ICSF has been hosted by City University of Hong Kong (Shenzhen), Sun Yat-sen University, Beijing University of Technology, The Chinese University of Hong Kong (Shenzhen), The University of Hong Kong, the University of Wollongong (Dubai), the University of Science and Technology of China, and Tongji University, fostering in-depth exchanges and dialogue between researchers and industry leaders on cutting-edge topics.</p>
-                    <p>Smart finance integrates financial technology with data-driven technologies such as artificial intelligence, blockchain, and big data, while also incorporating emerging financial models including digital currencies and smart contracts. Through keynote speeches and paper sessions, ICSF 2026 will build a bridge between academic research and industry practice, focusing on and addressing these challenges while exploring opportunities for AI-driven financial innovation and market regulation.</p>
                     <div class="intro-stats">
                         <div class="stat-item">
                             <div class="stat-number">11th</div>
-                            <div class="stat-label">届会议</div>
+                            <div class="stat-label"><span class="lang-en">Edition</span><span class="lang-zh">届会议</span></div>
                         </div>
                         <div class="stat-item">
                             <div class="stat-number">8+</div>
-                            <div class="stat-label">举办城市</div>
+                            <div class="stat-label"><span class="lang-en">Host Cities</span><span class="lang-zh">举办城市</span></div>
                         </div>
                         <div class="stat-item">
                             <div class="stat-number">AIS</div>
-                            <div class="stat-label">隶属协会</div>
+                            <div class="stat-label"><span class="lang-en">Affiliated</span><span class="lang-zh">隶属协会</span></div>
                         </div>
                     </div>
                 </div>
@@ -887,8 +914,8 @@
         <div class="container">
             <div class="section-header fade-in">
                 <span class="section-label">Conference Organization</span>
-                <h2 class="section-title">会议组织</h2>
-                <p class="section-subtitle">Organizing Committee</p>
+                <h2 class="section-title"><span class="lang-en">Organization</span><span class="lang-zh">会议组织</span></h2>
+                <p class="section-subtitle"><span class="lang-en">Organizing Committee</span><span class="lang-zh">Organizing Committee</span></p>
             </div>
             <div class="org-grid">
                 <div class="org-card fade-in">
@@ -961,8 +988,8 @@
         <div class="container">
             <div class="section-header fade-in">
                 <span class="section-label">Call for Papers</span>
-                <h2 class="section-title">征稿信息</h2>
-                <p class="section-subtitle">本届会议设有多种类型Tracks，征稿主题围绕人工智能驱动的金融决策与市场监管</p>
+                <h2 class="section-title"><span class="lang-en">Call for Papers</span><span class="lang-zh">征稿信息</span></h2>
+                <p class="section-subtitle"><span class="lang-en">Topics of interest include but are not limited to AI-driven financial decision-making and market regulation</span><span class="lang-zh">本届会议设有多种类型Tracks，征稿主题围绕人工智能驱动的金融决策与市场监管</span></p>
             </div>
             <div class="topics-grid">
                 <div class="topic-item fade-in">
@@ -1059,16 +1086,16 @@
             </div>
             <div class="cfp-info fade-in">
                 <div class="cfp-info-item">
-                    <h4>投稿地址</h4>
+                    <h4><span class="lang-en">Submission</span><span class="lang-zh">投稿地址</span></h4>
                     <p><a href="https://www.paperfox.ai/conference/icsf2026/submission" target="_blank">PaperFox Submission</a></p>
                 </div>
                 <div class="cfp-info-item">
-                    <h4>提交截止</h4>
-                    <p>2026年5月31日</p>
+                    <h4><span class="lang-en">Deadline</span><span class="lang-zh">提交截止</span></h4>
+                    <p><span class="lang-en">May 31, 2026</span><span class="lang-zh">2026年5月31日</span></p>
                 </div>
                 <div class="cfp-info-item">
-                    <h4>论文点评</h4>
-                    <p>会议将邀请资深教授和UTD期刊编辑对入选论文进行点评</p>
+                    <h4><span class="lang-en">Paper Reviews</span><span class="lang-zh">论文点评</span></h4>
+                    <p><span class="lang-en">Senior professors and UTD journal editors will be invited to review selected papers</span><span class="lang-zh">会议将邀请资深教授和UTD期刊编辑对入选论文进行点评</span></p>
                 </div>
             </div>
         </div>
@@ -1079,7 +1106,7 @@
         <div class="container">
             <div class="section-header fade-in">
                 <span class="section-label">Keynote Speakers</span>
-                <h2 class="section-title">拟邀请嘉宾</h2>
+                <h2 class="section-title"><span class="lang-en">Keynote Speakers</span><span class="lang-zh">拟邀请嘉宾</span></h2>
                 <p class="section-subtitle">Distinguished scholars from leading institutions worldwide</p>
             </div>
             <div class="keynotes-grid">
@@ -1155,46 +1182,46 @@
         <div class="container">
             <div class="section-header fade-in">
                 <span class="section-label">Registration</span>
-                <h2 class="section-title">注册信息</h2>
-                <p class="section-subtitle">Conference Registration Fees</p>
+                <h2 class="section-title"><span class="lang-en">Registration</span><span class="lang-zh">注册信息</span></h2>
+                <p class="section-subtitle"><span class="lang-en">Conference Registration Fees</span><span class="lang-zh">Conference Registration Fees</span></p>
             </div>
             <div class="reg-content">
                 <div class="reg-card fade-in">
-                    <h3>注册费用 Registration Fees</h3>
+                    <h3><span class="lang-en">Registration Fees</span><span class="lang-zh">注册费用 Registration Fees</span></h3>
                     <div class="fee-item">
-                        <div class="fee-type">学术人员 Academic/教师 <span>Faculty</span></div>
+                        <div class="fee-type"><span class="lang-en">Academic / Faculty</span><span class="lang-zh">学术人员 Academic/教师 <span>Faculty</span></span></div>
                         <div class="fee-amount">¥1,500</div>
                     </div>
                     <div class="fee-item">
-                        <div class="fee-type">学生 Student <span>With valid ID</span></div>
+                        <div class="fee-type"><span class="lang-en">Student <span>With valid ID</span></span><span class="lang-zh">学生 Student <span>With valid ID</span></span></div>
                         <div class="fee-amount">¥1,000</div>
                     </div>
                     <div class="bank-info">
-                        <h4>收款账户 Payment Information</h4>
-                        <p><strong>户名：</strong>深圳大学</p>
-                        <p><strong>账号：</strong>753675250026</p>
-                        <p><strong>开户行：</strong>中国银行深圳深大支行</p>
-                        <p style="margin-top: 1rem; color: var(--accent);"><strong>备注：</strong>姓名+单位+"ICSF2026"</p>
+                        <h4><span class="lang-en">Payment Information</span><span class="lang-zh">收款账户 Payment Information</span></h4>
+                        <p><strong><span class="lang-en">Account Name:</span><span class="lang-zh">户名：</span></strong> <span class="lang-en">Shenzhen University</span><span class="lang-zh">深圳大学</span></p>
+                        <p><strong><span class="lang-en">Account No.:</span><span class="lang-zh">账号：</span></strong> 753675250026</p>
+                        <p><strong><span class="lang-en">Bank:</span><span class="lang-zh">开户行：</span></strong> <span class="lang-en">Bank of China, Shenzhen University Branch</span><span class="lang-zh">中国银行深圳深大支行</span></p>
+                        <p style="margin-top: 1rem; color: var(--accent);"><strong><span class="lang-en">Note:</span><span class="lang-zh">备注：</span></strong> <span class="lang-en">Name + Affiliation + "ICSF2026"</span><span class="lang-zh">姓名+单位+"ICSF2026"</span></p>
                     </div>
                 </div>
                 <div class="reg-card fade-in">
-                    <h3>注册须知 Registration Notes</h3>
+                    <h3><span class="lang-en">Registration Notes</span><span class="lang-zh">注册须知 Registration Notes</span></h3>
                     <ul style="list-style: none; line-height: 2;">
                         <li style="display: flex; align-items: flex-start; gap: 0.75rem;">
                             <svg width="20" height="20" fill="none" stroke="var(--accent)" viewBox="0 0 24 24" style="flex-shrink: 0; margin-top: 4px;"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                            <span>注册费包含会议资料、茶歇和午餐</span>
+                            <span><span class="lang-en">Registration fee includes conference materials, tea breaks, and lunch</span><span class="lang-zh">注册费包含会议资料、茶歇和午餐</span></span>
                         </li>
                         <li style="display: flex; align-items: flex-start; gap: 0.75rem;">
                             <svg width="20" height="20" fill="none" stroke="var(--accent)" viewBox="0 0 24 24" style="flex-shrink: 0; margin-top: 4px;"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                            <span>学生注册需提供有效学生证件</span>
+                            <span><span class="lang-en">Student registration requires a valid student ID</span><span class="lang-zh">学生注册需提供有效学生证件</span></span>
                         </li>
                         <li style="display: flex; align-items: flex-start; gap: 0.75rem;">
                             <svg width="20" height="20" fill="none" stroke="var(--accent)" viewBox="0 0 24 24" style="flex-shrink: 0; margin-top: 4px;"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                            <span>转账时请务必注明姓名、单位和"ICSF2026"</span>
+                            <span><span class="lang-en">Please include your name, affiliation, and "ICSF2026" in the transfer note</span><span class="lang-zh">转账时请务必注明姓名、单位和"ICSF2026"</span></span>
                         </li>
                         <li style="display: flex; align-items: flex-start; gap: 0.75rem;">
                             <svg width="20" height="20" fill="none" stroke="var(--accent)" viewBox="0 0 24 24" style="flex-shrink: 0; margin-top: 4px;"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                            <span>注册确认后我们将通过邮件发送参会凭证</span>
+                            <span><span class="lang-en">A confirmation email with your attendance pass will be sent after registration</span><span class="lang-zh">注册确认后我们将通过邮件发送参会凭证</span></span>
                         </li>
                     </ul>
                 </div>
@@ -1207,8 +1234,8 @@
         <div class="container">
             <div class="section-header fade-in">
                 <span class="section-label">Hotel Information</span>
-                <h2 class="section-title">酒店信息</h2>
-                <p class="section-subtitle">Recommended Accommodation</p>
+                <h2 class="section-title"><span class="lang-en">Accommodation</span><span class="lang-zh">酒店信息</span></h2>
+                <p class="section-subtitle"><span class="lang-en">Recommended Accommodation</span><span class="lang-zh">Recommended Accommodation</span></p>
             </div>
             <div class="hotel-content">
                 <div class="hotel-gallery fade-in">
@@ -1216,13 +1243,13 @@
                     <img src="images/image10.jpeg" alt="Hotel Interior">
                 </div>
                 <div class="hotel-info fade-in">
-                    <h3>深圳南山塘朗城君璞酒店</h3>
-                    <p class="en-name">Shenzhen Nanshan Tanglang City Junlu Hotel</p>
+                    <h3><span class="lang-en">Shenzhen Nanshan Tanglang City Junlu Hotel</span><span class="lang-zh">深圳南山塘朗城君璞酒店</span></h3>
+                    <p class="en-name"><span class="lang-zh">Shenzhen Nanshan Tanglang City Junlu Hotel</span></p>
                     <div class="hotel-detail">
                         <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
                         <div>
-                            <p>南山区留仙大道3333号塘朗城广场C座7层</p>
-                            <p style="color: var(--text-light); font-size: 0.9rem;">7th floor, C area, Tanglang City Square, 3333 Luxian Avenue, Nanshan District</p>
+                            <p><span class="lang-en">7th Floor, Block C, Tanglang City Square, 3333 Luxian Avenue, Nanshan District</span><span class="lang-zh">南山区留仙大道3333号塘朗城广场C座7层</span></p>
+                            <p style="color: var(--text-light); font-size: 0.9rem;"><span class="lang-zh">7th floor, C area, Tanglang City Square, 3333 Luxian Avenue, Nanshan District</span></p>
                         </div>
                     </div>
                     <div class="hotel-detail">
@@ -1232,7 +1259,9 @@
                         </div>
                     </div>
                     <p style="margin-top: 1.5rem; padding: 1rem; background: var(--bg-light); border-radius: 8px; font-size: 0.95rem;">
-                        <strong>温馨提示：</strong>会议期间酒店房间可能紧张，建议提前预订。预订时可说明参加ICSF2026会议，可能享受协议价格。
+                        <strong><span class="lang-en">Note:</span><span class="lang-zh">温馨提示：</span></strong>
+                        <span class="lang-en">Hotel rooms may be limited during the conference. We recommend booking in advance and mentioning ICSF2026 for potential group rates.</span>
+                        <span class="lang-zh">会议期间酒店房间可能紧张，建议提前预订。预订时可说明参加ICSF2026会议，可能享受协议价格。</span>
                     </p>
                 </div>
             </div>
@@ -1250,20 +1279,20 @@
                 AI-Enabled Financial Decisions and the Future of Market Regulation</p>
             </div>
             <div class="footer-links">
-                <h4>快速链接</h4>
+                <h4><span class="lang-en">Quick Links</span><span class="lang-zh">快速链接</span></h4>
                 <ul>
-                    <li><a href="#about">会议简介</a></li>
-                    <li><a href="#organization">会议组织</a></li>
-                    <li><a href="#cfp">征稿信息</a></li>
-                    <li><a href="#keynotes">特邀嘉宾</a></li>
+                    <li><a href="#about"><span class="lang-en">About</span><span class="lang-zh">会议简介</span></a></li>
+                    <li><a href="#organization"><span class="lang-en">Organization</span><span class="lang-zh">会议组织</span></a></li>
+                    <li><a href="#cfp"><span class="lang-en">Call for Papers</span><span class="lang-zh">征稿信息</span></a></li>
+                    <li><a href="#keynotes"><span class="lang-en">Speakers</span><span class="lang-zh">特邀嘉宾</span></a></li>
                 </ul>
             </div>
             <div class="footer-links">
-                <h4>联系我们</h4>
+                <h4><span class="lang-en">Contact</span><span class="lang-zh">联系我们</span></h4>
                 <ul>
-                    <li><a href="#registration">注册信息</a></li>
-                    <li><a href="#hotel">酒店信息</a></li>
-                    <li><a href="https://www.paperfox.ai/conference/icsf2026/submission" target="_blank">在线投稿</a></li>
+                    <li><a href="#registration"><span class="lang-en">Registration</span><span class="lang-zh">注册信息</span></a></li>
+                    <li><a href="#hotel"><span class="lang-en">Hotel</span><span class="lang-zh">酒店信息</span></a></li>
+                    <li><a href="https://www.paperfox.ai/conference/icsf2026/submission" target="_blank"><span class="lang-en">Submit Paper</span><span class="lang-zh">在线投稿</span></a></li>
                 </ul>
             </div>
         </div>
@@ -1280,6 +1309,15 @@
     </footer>
 
     <script>
+        // Language toggle
+        function toggleLang() {
+            const body = document.body;
+            const current = body.getAttribute('data-lang');
+            const next = current === 'en' ? 'zh' : 'en';
+            body.setAttribute('data-lang', next);
+            document.documentElement.lang = next === 'zh' ? 'zh-CN' : 'en';
+        }
+
         // Mobile menu toggle
         function toggleMenu() {
             document.getElementById('navLinks').classList.toggle('active');

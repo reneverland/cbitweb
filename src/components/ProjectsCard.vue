@@ -83,7 +83,7 @@ const projects = computed(() => [
     nameEn: 'GTIIT AI Smart Assistant',
     description: '为广东以色列理工学院提供的智能问答助手',
     descriptionEn: 'Intelligent Q&A assistant for GTIIT',
-    link: 'http://www.llmhi.com:9400'
+    link: 'https://gtiitscholar.com'
   },
   {
     icon: 'V',
