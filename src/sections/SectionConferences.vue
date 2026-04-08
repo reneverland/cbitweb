@@ -82,7 +82,16 @@
         </div>
       </div>
 
-      <div class="mt-16 text-center">
+      <div class="mt-12 flex justify-center">
+        <a href="/icsfconference.html"
+          class="px-8 py-4 rounded-2xl border-2 border-brand-purple/30 text-foreground hover:bg-brand-purple-light/30 dark:hover:bg-brand-purple/10 transition-all flex items-center gap-3 text-base font-medium shadow-card hover:shadow-card-hover">
+          <i class="ri-global-line text-brand-purple text-xl"></i>
+          {{ locale === 'zh' ? '查看 ICSF 全部会议详情' : 'View All ICSF Conferences' }}
+          <i class="ri-arrow-right-line text-brand-purple"></i>
+        </a>
+      </div>
+
+      <div class="mt-8 text-center">
         <div class="inline-flex flex-col sm:flex-row items-center gap-4 p-6 rounded-3xl bg-gradient-to-r from-brand-purple to-brand-blue text-white shadow-glow">
           <div class="text-left">
             <h4 class="font-display font-semibold text-lg">{{ t('conf.cfpTitle') }}</h4>

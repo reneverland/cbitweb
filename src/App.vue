@@ -48,6 +48,13 @@
           <p class="text-sm text-muted-foreground mb-4">
             {{ locale === 'zh' ? 'International Conference on Smart Finance（智能金融国际会议）' : 'International Conference on Smart Finance' }}
           </p>
+          <a
+            href="/icsfconference.html"
+            class="block mb-4 p-3 rounded-xl bg-gradient-brand text-white text-center font-semibold text-sm hover:opacity-90 transition-all shadow-glow"
+          >
+            <i class="ri-global-line mr-1.5"></i>
+            {{ locale === 'zh' ? '查看全部会议 →' : 'View All Conferences →' }}
+          </a>
           <div class="space-y-2">
             <a
               v-for="year in icsfYears"
