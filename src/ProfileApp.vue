@@ -120,9 +120,9 @@
                     </div>
                     <div class="flex-1">
                       <h3 class="font-display font-bold text-foreground text-sm">{{ locale === 'zh' ? '工作经历' : 'Work Experience' }}</h3>
-                      <p class="text-xs text-muted-foreground">CBIT · 2022 – {{ locale === 'zh' ? '至今' : 'Present' }}</p>
+                      <p class="text-xs text-muted-foreground">2017 – {{ locale === 'zh' ? '至今' : 'Present' }}</p>
                     </div>
-                    <span class="px-2 py-0.5 text-xs rounded-full bg-brand-purple-light/50 dark:bg-brand-purple/20 text-brand-purple-dark dark:text-brand-purple-light font-medium">{{ locale === 'zh' ? '助理主任 & 开发主管' : 'Asst. Director & Dev Lead' }}</span>
+                    <span class="px-2 py-0.5 text-xs rounded-full bg-brand-purple-light/50 dark:bg-brand-purple/20 text-brand-purple-dark dark:text-brand-purple-light font-medium">{{ locale === 'zh' ? '3 段经历' : '3 Roles' }}</span>
                   </div>
                   <div class="text-sm text-muted-foreground leading-relaxed space-y-2" v-html="formatWorkContent()"></div>
                 </div>
@@ -455,8 +455,7 @@ const formatWorkContent = () => {
   const cleaned = raw
     .replace(/^\*\*工作经历\*\*\n+/, '')
     .replace(/^\*\*Work Experience\*\*\n+/, '')
-    .replace(/^\*\*2022[^*]*\*\*\n+/, '')
-  return formatMd(cleaned)
+  return formatMd(cleaned).replace(/---/g, '<hr class="my-4 border-gray-200/50 dark:border-gray-700/50">')
 }
 
 const quickQuestions = computed(() => [
